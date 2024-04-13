@@ -21,11 +21,22 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { EyeOpenIcon, TrashIcon } from '@radix-ui/react-icons'
 import { Button } from '@/components/ui/button'
 
 const SitesList = ({ user }: { user: User }) => {
     const [sites, setSites] = useState<{ domain_name: string }[]>([])
+    const [updatedSiteDomain, setUpdatedSiteDomain] = useState('')
     const supabase = createClient()
     const fetchSites = async () => {
         const { data, error } = await supabase.from('site_domains').select().eq('email', user.email);
@@ -41,6 +52,21 @@ const SitesList = ({ user }: { user: User }) => {
             console.error('error deleting site:', error)
             return
         }
+        fetchSites()
+    }
+    const sanitizeDomain = (domain: string) => {
+        const withPath = domain.replace(/(^\w+:|^)\/\/(www\.)?/, '').replace(/\/$/, '')
+        const withoutPath = withPath.split('/')[0]
+        return withoutPath
+    }
+    const updateSite = async () => {
+        const domain = sanitizeDomain(updatedSiteDomain)
+        const { error } = await supabase.from('site_domains').update({ domain_name: domain }).eq('domain_name', sites[0].domain_name);
+        if (error) {
+            console.error('error updating site:', error)
+            return
+        }
+        setUpdatedSiteDomain('')
         fetchSites()
     }
     useEffect(() => {
@@ -70,9 +96,35 @@ const SitesList = ({ user }: { user: User }) => {
                                 </TableCell>
                                 <TableCell>
                                     <div className='flex space-x-2'>
-                                        <Button>
-                                            <EyeOpenIcon />
-                                        </Button>
+                                        <Dialog>
+                                            <DialogTrigger>
+                                                <Button>
+                                                    <EyeOpenIcon />
+                                                </Button>
+                                            </DialogTrigger>
+                                            <DialogContent>
+                                                <DialogHeader>
+                                                    <DialogTitle>
+                                                        {site.domain_name}
+                                                    </DialogTitle>
+                                                </DialogHeader>
+                                                <div className='flex flex-col space-y-2'>
+                                                    <span>
+                                                        <Label htmlFor="siteID">Site ID</Label>
+                                                        <Input type="text" id="siteID" value={site.website_id} readOnly disabled />
+                                                    </span>
+                                                    <span>
+                                                        <Label htmlFor="domain">Domain</Label>
+                                                        <Input type="text" id="domain" placeholder={site.domain_name} value={updatedSiteDomain} onChange={(e) => setUpdatedSiteDomain(e.target.value)} />
+                                                    </span>
+                                                    <span>
+                                                        <Button disabled={!updatedSiteDomain} onClick={updateSite}>
+                                                            Update
+                                                        </Button>
+                                                    </span>
+                                                </div>
+                                            </DialogContent>
+                                        </Dialog>
                                         <AlertDialog>
                                             <AlertDialogTrigger>
                                                 <Button>
@@ -99,7 +151,6 @@ const SitesList = ({ user }: { user: User }) => {
                     </TableBody>
                 </Table>
             )}
-
         </section>
     );
 }

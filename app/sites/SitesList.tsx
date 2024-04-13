@@ -121,14 +121,14 @@ const SitesList = ({ user }: { user: User }) => {
                                                         </span>
                                                         <span>
                                                             <Label htmlFor="tracking-code">Tracking Code</Label>
-                                                            <Input type="text" id="tracking-code" value={`<script defer src="https://supatycs.vercel.app/track.js" data-website-id="${site.website_id}"></script>`} readOnly disabled />
+                                                            <Input type="text" id="tracking-code" value={`<script defer src="${process.env.NEXT_PUBLIC_SITE_URL}/track.js" data-website-id="${site.website_id}"></script>`} readOnly disabled />
                                                         </span>
                                                         <span className='flex space-x-2'>
                                                             <Button disabled={!updatedSiteDomain} onClick={updateSite}>
                                                                 Update
                                                             </Button>
                                                             <Button onClick={() => {
-                                                                navigator.clipboard.writeText(`<script defer src="https://supatycs.vercel.app/track.js" data-website-id="${site.website_id}"></script>`)
+                                                                navigator.clipboard.writeText(`<script defer src="${process.env.NEXT_PUBLIC_SITE_URL}/track.js" data-website-id="${site.website_id}"></script>`)
                                                                 toast("Tracking code copied to clipboard.")
                                                             }}>
                                                                 Copy Tracking Code

@@ -24,7 +24,6 @@ import {
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -33,9 +32,11 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { EyeOpenIcon, TrashIcon } from '@radix-ui/react-icons'
 import { Button } from '@/components/ui/button'
+import { toast } from "sonner"
+import { Toaster } from '@/components/ui/toaster'
 
 const SitesList = ({ user }: { user: User }) => {
-    const [sites, setSites] = useState<{ domain_name: string }[]>([])
+    const [sites, setSites] = useState<{ domain_name: string, website_id: string }[]>([])
     const [updatedSiteDomain, setUpdatedSiteDomain] = useState('')
     const supabase = createClient()
     const fetchSites = async () => {
@@ -89,7 +90,7 @@ const SitesList = ({ user }: { user: User }) => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {sites.map((site: { domain_name: string }, index: number) => (
+                        {sites.map((site: { domain_name: string, website_id: string }) => (
                             <TableRow>
                                 <TableCell className="font-medium">
                                     {site.domain_name}
@@ -108,21 +109,34 @@ const SitesList = ({ user }: { user: User }) => {
                                                         {site.domain_name}
                                                     </DialogTitle>
                                                 </DialogHeader>
-                                                <div className='flex flex-col space-y-2'>
-                                                    <span>
-                                                        <Label htmlFor="siteID">Site ID</Label>
-                                                        <Input type="text" id="siteID" value={site.website_id} readOnly disabled />
-                                                    </span>
-                                                    <span>
-                                                        <Label htmlFor="domain">Domain</Label>
-                                                        <Input type="text" id="domain" placeholder={site.domain_name} value={updatedSiteDomain} onChange={(e) => setUpdatedSiteDomain(e.target.value)} />
-                                                    </span>
-                                                    <span>
-                                                        <Button disabled={!updatedSiteDomain} onClick={updateSite}>
-                                                            Update
-                                                        </Button>
-                                                    </span>
+                                                <div>
+                                                    <div className='flex flex-col space-y-2'>
+                                                        <span>
+                                                            <Label htmlFor="siteID">Site ID</Label>
+                                                            <Input type="text" id="siteID" value={site.website_id} readOnly disabled />
+                                                        </span>
+                                                        <span>
+                                                            <Label htmlFor="domain">Domain</Label>
+                                                            <Input type="text" id="domain" placeholder={site.domain_name} value={updatedSiteDomain} onChange={(e) => setUpdatedSiteDomain(e.target.value)} />
+                                                        </span>
+                                                        <span>
+                                                            <Label htmlFor="tracking-code">Tracking Code</Label>
+                                                            <Input type="text" id="tracking-code" value={`<script defer src="https://supatycs.vercel.app/track.js" data-website-id="${site.website_id}"></script>`} readOnly disabled />
+                                                        </span>
+                                                        <span className='flex space-x-2'>
+                                                            <Button disabled={!updatedSiteDomain} onClick={updateSite}>
+                                                                Update
+                                                            </Button>
+                                                            <Button onClick={() => {
+                                                                navigator.clipboard.writeText(`<script defer src="https://supatycs.vercel.app/track.js" data-website-id="${site.website_id}"></script>`)
+                                                                toast("Tracking code copied to clipboard.")
+                                                            }}>
+                                                                Copy Tracking Code
+                                                            </Button>
+                                                        </span>
+                                                    </div>
                                                 </div>
+
                                             </DialogContent>
                                         </Dialog>
                                         <AlertDialog>
@@ -151,6 +165,7 @@ const SitesList = ({ user }: { user: User }) => {
                     </TableBody>
                 </Table>
             )}
+            <Toaster />
         </section>
     );
 }

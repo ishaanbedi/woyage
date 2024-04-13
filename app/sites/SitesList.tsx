@@ -5,12 +5,22 @@ import { type User } from '@supabase/supabase-js'
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 import { EyeOpenIcon, TrashIcon } from '@radix-ui/react-icons'
 import { Button } from '@/components/ui/button'
 
@@ -24,6 +34,14 @@ const SitesList = ({ user }: { user: User }) => {
             return
         }
         setSites(data)
+    }
+    const deleteSite = async (domain: string) => {
+        const { error } = await supabase.from('site_domains').delete().eq('domain_name', domain);
+        if (error) {
+            console.error('error deleting site:', error)
+            return
+        }
+        fetchSites()
     }
     useEffect(() => {
         fetchSites()
@@ -55,9 +73,25 @@ const SitesList = ({ user }: { user: User }) => {
                                         <Button>
                                             <EyeOpenIcon />
                                         </Button>
-                                        <Button>
-                                            <TrashIcon />
-                                        </Button>
+                                        <AlertDialog>
+                                            <AlertDialogTrigger>
+                                                <Button>
+                                                    <TrashIcon />
+                                                </Button>
+                                            </AlertDialogTrigger>
+                                            <AlertDialogContent>
+                                                <AlertDialogHeader>
+                                                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                                    <AlertDialogDescription>
+                                                        This action cannot be undone. This will permanently delete the site.
+                                                    </AlertDialogDescription>
+                                                </AlertDialogHeader>
+                                                <AlertDialogFooter>
+                                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                                    <AlertDialogAction onClick={() => deleteSite(site.domain_name)}>Continue</AlertDialogAction>
+                                                </AlertDialogFooter>
+                                            </AlertDialogContent>
+                                        </AlertDialog>
                                     </div>
                                 </TableCell>
                             </TableRow>

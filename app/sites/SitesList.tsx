@@ -34,33 +34,38 @@ const SitesList = ({ user }: { user: User }) => {
         .subscribe()
     return (
         <section>
-            <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead>Domain</TableHead>
-                        <TableHead>Actions</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {sites.map((site: { domain_name: string }, index: number) => (
+            {sites.length === 0 ? (
+                <p>No sites added yet.</p>
+            ) : (
+                <Table>
+                    <TableHeader>
                         <TableRow>
-                            <TableCell className="font-medium">
-                                {site.domain_name}
-                            </TableCell>
-                            <TableCell>
-                                <div className='flex space-x-2'>
-                                    <Button>
-                                        <EyeOpenIcon />
-                                    </Button>
-                                    <Button>
-                                        <TrashIcon />
-                                    </Button>
-                                </div>
-                            </TableCell>
+                            <TableHead>Domain</TableHead>
+                            <TableHead>Actions</TableHead>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+                    </TableHeader>
+                    <TableBody>
+                        {sites.map((site: { domain_name: string }, index: number) => (
+                            <TableRow>
+                                <TableCell className="font-medium">
+                                    {site.domain_name}
+                                </TableCell>
+                                <TableCell>
+                                    <div className='flex space-x-2'>
+                                        <Button>
+                                            <EyeOpenIcon />
+                                        </Button>
+                                        <Button>
+                                            <TrashIcon />
+                                        </Button>
+                                    </div>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            )}
+
         </section>
     );
 }

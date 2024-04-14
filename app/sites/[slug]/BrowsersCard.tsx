@@ -1,21 +1,32 @@
 import { useEffect, useState } from "react";
 
-const BrowsersCard = ({
-  data,
-}: {
-  data: { browser: string; count: number }[];
-}) => {
+interface BrowserData {
+  browser: string;
+  count: number;
+}
+
+const BrowsersCard = ({ data }: { data: BrowserData[] }) => {
   const [browserCounts, setBrowserCounts] = useState<{ [key: string]: number }>(
-    {}
+    {},
   );
-  function browserMap(data: { browser: string; count: number }[]) {
-    const counts: { [key: string]: number } = {};
+
+  function browserMap(data: BrowserData[]) {
+    let browserCount: { [key: string]: number } = {};
     data.forEach((entry) => {
       const browser = entry.browser.toLowerCase();
-      counts[browser] = (counts[browser] || 0) + entry.count;
+      if (browser) {
+        browserCount[browser] = (browserCount[browser] || 0) + 1;
+      }
     });
-    setBrowserCounts(counts);
+    const browserCountTitleCase: { [key: string]: number } = Object.keys(
+      browserCount,
+    ).reduce((acc, key) => {
+      acc[key.charAt(0).toUpperCase() + key.slice(1)] = browserCount[key];
+      return acc;
+    }, {});
+    setBrowserCounts(browserCountTitleCase);
   }
+
   useEffect(() => {
     browserMap(data);
   }, [data]);

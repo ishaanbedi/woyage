@@ -59,7 +59,7 @@ const NewSiteDialog = ({ user }: { user: User }) => {
                         </div>
                     </div>
                     <DialogFooter>
-                        <Button type="submit" onClick={addSite}>
+                        <Button type="submit" onClick={addSite} disabled={domainName === ''}>
                             Add Site
                         </Button>
                     </DialogFooter>

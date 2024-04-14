@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useState } from "react";
 
 const BrowsersCard = ({
@@ -6,18 +5,16 @@ const BrowsersCard = ({
 }: {
   data: { browser: string; count: number }[];
 }) => {
-  const [browserCounts, setBrowserCounts] = useState({});
+  const [browserCounts, setBrowserCounts] = useState<{ [key: string]: number }>(
+    {}
+  );
   function browserMap(data: { browser: string; count: number }[]) {
-    const browserCounts = {};
+    const counts: { [key: string]: number } = {};
     data.forEach((entry) => {
       const browser = entry.browser.toLowerCase();
-      if (browserCounts.hasOwnProperty(browser)) {
-        browserCounts[browser]++;
-      } else {
-        browserCounts[browser] = 1;
-      }
+      counts[browser] = (counts[browser] || 0) + entry.count;
     });
-    setBrowserCounts(browserCounts);
+    setBrowserCounts(counts);
   }
   useEffect(() => {
     browserMap(data);

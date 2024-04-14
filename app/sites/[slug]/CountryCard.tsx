@@ -6,9 +6,11 @@ const CountryCard = ({
 }: {
   data: { country: string; count: number }[];
 }) => {
-  const [countryCounts, setCountryCounts] = useState({});
+  const [countryCounts, setCountryCounts] = useState<{ [key: string]: number }>(
+    {},
+  );
   function countryMap(data: { country: string; count: number }[]) {
-    const countryCounts = {};
+    const countryCounts: { [key: string]: number } = {};
     data.forEach((entry) => {
       const country = entry.country.toLowerCase();
       if (countryCounts.hasOwnProperty(country)) {

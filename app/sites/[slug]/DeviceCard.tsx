@@ -6,9 +6,11 @@ const DeviceCard = ({
 }: {
   data: { device: string; count: number }[];
 }) => {
-  const [deviceCounts, setDeviceCounts] = useState({});
+  const [deviceCounts, setDeviceCounts] = useState<{ [key: string]: number }>(
+    {},
+  );
   function deviceMap(data: { device: string; count: number }[]) {
-    const deviceCounts = {};
+    const deviceCounts: { [key: string]: number } = {};
     data.forEach((entry) => {
       const device = entry.device.toLowerCase();
       if (deviceCounts.hasOwnProperty(device)) {

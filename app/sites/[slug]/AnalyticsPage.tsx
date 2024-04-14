@@ -16,7 +16,7 @@ const AnalyticsPage = ({
   const userEmail = user.email;
   const supabase = createClient();
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<Analytics[] | null>(null);
+  const [data, setData] = useState<any[]>([]);
   const fetchRecords = async () => {
     const { data, error } = await supabase
       .from("analytics")
@@ -58,12 +58,3 @@ const AnalyticsPage = ({
 };
 
 export default AnalyticsPage;
-
-interface Analytics {
-  id: string;
-  browser: string;
-  country: string;
-  device: string;
-  os: string;
-  created_at: string;
-}

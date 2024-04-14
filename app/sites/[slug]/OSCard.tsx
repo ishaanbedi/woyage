@@ -2,9 +2,9 @@
 import { useEffect, useState } from "react";
 
 const OSCard = ({ data }: { data: { os: string; count: number }[] }) => {
-  const [osCounts, setOsCounts] = useState({});
+  const [osCounts, setOsCounts] = useState<{ [key: string]: number }>({});
   function osMap(data: { os: string; count: number }[]) {
-    const osCounts = {};
+    const osCounts: { [key: string]: number } = {};
     data.forEach((entry) => {
       const os = entry.os.toLowerCase();
       if (osCounts.hasOwnProperty(os)) {

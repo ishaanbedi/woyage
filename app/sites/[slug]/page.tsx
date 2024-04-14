@@ -14,7 +14,6 @@ export default async function SitesDynamicPage({
     return redirect("/login");
   } else {
     const email = user.email;
-    console.log(params.slug);
     const { data, error } = await supabase
       .from("site_domains")
       .select("*")

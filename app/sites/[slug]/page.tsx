@@ -21,10 +21,11 @@ export default async function SitesDynamicPage({
       .eq("website_id", params.slug)
       .single();
     if (error) {
+      console.error(error);
       return (
         <div>
-          <h1>Error</h1>
-          <pre>{JSON.stringify(error, null, 2)}</pre>
+          <h1>Not Found</h1>
+          <p>Try again later</p>
         </div>
       );
     }

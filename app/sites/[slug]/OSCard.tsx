@@ -1,40 +1,43 @@
-"use client";
-import { useEffect, useState } from "react";
-
-const OSCard = ({ data }: { data: { os: string; count: number }[] }) => {
-  const [osCounts, setOsCounts] = useState<{ [key: string]: number }>({});
-  function osMap(data: { os: string; count: number }[]) {
-    const osCounts: { [key: string]: number } = {};
-    data.forEach((entry) => {
-      const os = entry.os.toLowerCase();
-      if (osCounts.hasOwnProperty(os)) {
-        osCounts[os]++;
+import { BarList } from "@tremor/react";
+interface OSStats {
+  name: string;
+  value: number;
+}
+interface Analytics {
+  id: string;
+  path: string;
+  browser: string;
+  referrer: string;
+  os: string;
+  device: string;
+  country: string;
+  website_id: string;
+  pk: string;
+  domain: string;
+  added_time: string;
+}
+const OSCard = ({ data }: { data: Analytics[] }) => {
+  function getOSStats(logs: Analytics[]): OSStats[] {
+    const OSCounts: { [OS: string]: number } = {};
+    logs.forEach((log) => {
+      const OSName = log.os.toLowerCase();
+      if (OSCounts[OSName]) {
+        OSCounts[OSName]++;
       } else {
-        osCounts[os] = 1;
+        OSCounts[OSName] = 1;
       }
     });
-    setOsCounts(osCounts);
+    const OSStats: OSStats[] = [];
+    for (const OS in OSCounts) {
+      OSStats.push({ name: OS, value: OSCounts[OS] });
+    }
+    return OSStats;
   }
-  useEffect(() => {
-    osMap(data);
-  }, [data]);
-
   return (
-    <div className="bg-white shadow-lg rounded-lg p-4">
-      <h2 className="text-lg font-semibold">Operating Systems</h2>
-      <div className="grid grid-cols-2 gap-4">
-        {Object.keys(osCounts).map((os) => (
-          <div
-            key={os}
-            className="flex items-center justify-between p-2 bg-gray-100 rounded-lg"
-          >
-            <span>{os}</span>
-            <span>{osCounts[os]}</span>
-          </div>
-        ))}
-      </div>
+    <div className="shadow-lg rounded-lg p-4">
+      <h2 className="text-lg font-semibold">Operating System</h2>
+      <BarList data={getOSStats(data)} />
     </div>
   );
 };
-
 export default OSCard;

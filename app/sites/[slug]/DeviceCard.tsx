@@ -1,46 +1,43 @@
-"use client";
-import { useEffect, useState } from "react";
-
-const DeviceCard = ({
-  data,
-}: {
-  data: { device: string; count: number }[];
-}) => {
-  const [deviceCounts, setDeviceCounts] = useState<{ [key: string]: number }>(
-    {},
-  );
-  function deviceMap(data: { device: string; count: number }[]) {
-    const deviceCounts: { [key: string]: number } = {};
-    data.forEach((entry) => {
-      const device = entry.device.toLowerCase();
-      if (deviceCounts.hasOwnProperty(device)) {
-        deviceCounts[device]++;
+import { BarList } from "@tremor/react";
+interface DeviceStats {
+  name: string;
+  value: number;
+}
+interface Analytics {
+  id: string;
+  path: string;
+  browser: string;
+  referrer: string;
+  os: string;
+  device: string;
+  country: string;
+  website_id: string;
+  pk: string;
+  domain: string;
+  added_time: string;
+}
+const DeviceCard = ({ data }: { data: Analytics[] }) => {
+  function getDeviceStats(logs: Analytics[]): DeviceStats[] {
+    const deviceCounts: { [device: string]: number } = {};
+    logs.forEach((log) => {
+      const deviceName = log.device.toLowerCase();
+      if (deviceCounts[deviceName]) {
+        deviceCounts[deviceName]++;
       } else {
-        deviceCounts[device] = 1;
+        deviceCounts[deviceName] = 1;
       }
     });
-    setDeviceCounts(deviceCounts);
+    const deviceStats: DeviceStats[] = [];
+    for (const device in deviceCounts) {
+      deviceStats.push({ name: device, value: deviceCounts[device] });
+    }
+    return deviceStats;
   }
-  useEffect(() => {
-    deviceMap(data);
-  }, [data]);
-
   return (
-    <div className="bg-white shadow-lg rounded-lg p-4">
+    <div className="shadow-lg rounded-lg p-4">
       <h2 className="text-lg font-semibold">Devices</h2>
-      <div className="grid grid-cols-2 gap-4">
-        {Object.keys(deviceCounts).map((device) => (
-          <div
-            key={device}
-            className="flex items-center justify-between p-2 bg-gray-100 rounded-lg"
-          >
-            <span>{device}</span>
-            <span>{deviceCounts[device]}</span>
-          </div>
-        ))}
-      </div>
+      <BarList data={getDeviceStats(data)} />
     </div>
   );
 };
-
 export default DeviceCard;

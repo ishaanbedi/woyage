@@ -1,46 +1,43 @@
-"use client";
-import { useEffect, useState } from "react";
-
-const CountryCard = ({
-  data,
-}: {
-  data: { country: string; count: number }[];
-}) => {
-  const [countryCounts, setCountryCounts] = useState<{ [key: string]: number }>(
-    {},
-  );
-  function countryMap(data: { country: string; count: number }[]) {
-    const countryCounts: { [key: string]: number } = {};
-    data.forEach((entry) => {
-      const country = entry.country.toLowerCase();
-      if (countryCounts.hasOwnProperty(country)) {
-        countryCounts[country]++;
+import { BarList } from "@tremor/react";
+interface CountryStats {
+  name: string;
+  value: number;
+}
+interface Analytics {
+  id: string;
+  path: string;
+  browser: string;
+  referrer: string;
+  os: string;
+  device: string;
+  country: string;
+  website_id: string;
+  pk: string;
+  domain: string;
+  added_time: string;
+}
+const CountryCard = ({ data }: { data: Analytics[] }) => {
+  function getCountryStats(logs: Analytics[]): CountryStats[] {
+    const countryCounts: { [country: string]: number } = {};
+    logs.forEach((log) => {
+      const countryName = log.country.toLowerCase();
+      if (countryCounts[countryName]) {
+        countryCounts[countryName]++;
       } else {
-        countryCounts[country] = 1;
+        countryCounts[countryName] = 1;
       }
     });
-    setCountryCounts(countryCounts);
+    const countryStats: CountryStats[] = [];
+    for (const country in countryCounts) {
+      countryStats.push({ name: country, value: countryCounts[country] });
+    }
+    return countryStats;
   }
-  useEffect(() => {
-    countryMap(data);
-  }, [data]);
-
   return (
-    <div className="bg-white shadow-lg rounded-lg p-4">
-      <h2 className="text-lg font-semibold">Countries</h2>
-      <div className="grid grid-cols-2 gap-4">
-        {Object.keys(countryCounts).map((country) => (
-          <div
-            key={country}
-            className="flex items-center justify-between p-2 bg-gray-100 rounded-lg"
-          >
-            <span>{country}</span>
-            <span>{countryCounts[country]}</span>
-          </div>
-        ))}
-      </div>
+    <div className="shadow-lg rounded-lg p-4">
+      <h2 className="text-lg font-semibold">Country</h2>
+      <BarList data={getCountryStats(data)} />
     </div>
   );
 };
-
 export default CountryCard;

@@ -1,50 +1,42 @@
-import { useEffect, useState } from "react";
-
-interface BrowserData {
-  browser: string;
-  count: number;
+import { BarList } from "@tremor/react";
+interface BrowserStats {
+  name: string;
+  value: number;
 }
-
-const BrowsersCard = ({ data }: { data: BrowserData[] }) => {
-  const [browserCounts, setBrowserCounts] = useState<{ [key: string]: number }>(
-    {},
-  );
-
-  function browserMap(data: BrowserData[]) {
-    let browserCount: { [key: string]: number } = {};
-    data.forEach((entry) => {
-      const browser = entry.browser.toLowerCase();
-      if (browser) {
-        browserCount[browser] = (browserCount[browser] || 0) + 1;
+interface Analytics {
+  id: string;
+  path: string;
+  browser: string;
+  referrer: string;
+  os: string;
+  device: string;
+  country: string;
+  website_id: string;
+  pk: string;
+  domain: string;
+  added_time: string;
+}
+const BrowsersCard = ({ data }: { data: Analytics[] }) => {
+  function getBrowserStats(logs: Analytics[]): BrowserStats[] {
+    const browserCounts: { [browser: string]: number } = {};
+    logs.forEach((log) => {
+      const browserName = log.browser.toLowerCase();
+      if (browserCounts[browserName]) {
+        browserCounts[browserName]++;
+      } else {
+        browserCounts[browserName] = 1;
       }
     });
-    const browserCountTitleCase: { [key: string]: number } = Object.keys(
-      browserCount,
-    ).reduce((acc, key) => {
-      acc[key.charAt(0).toUpperCase() + key.slice(1)] = browserCount[key];
-      return acc;
-    }, {});
-    setBrowserCounts(browserCountTitleCase);
+    const browserStats: BrowserStats[] = [];
+    for (const browser in browserCounts) {
+      browserStats.push({ name: browser, value: browserCounts[browser] });
+    }
+    return browserStats;
   }
-
-  useEffect(() => {
-    browserMap(data);
-  }, [data]);
-
   return (
-    <div className="bg-white shadow-lg rounded-lg p-4">
+    <div className="shadow-lg rounded-lg p-4">
       <h2 className="text-lg font-semibold">Browsers</h2>
-      <div className="grid grid-cols-2 gap-4">
-        {Object.keys(browserCounts).map((browser) => (
-          <div
-            key={browser}
-            className="flex items-center justify-between p-2 bg-gray-100 rounded-lg"
-          >
-            <span>{browser}</span>
-            <span>{browserCounts[browser]}</span>
-          </div>
-        ))}
-      </div>
+      <BarList data={getBrowserStats(data)} />
     </div>
   );
 };

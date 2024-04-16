@@ -78,8 +78,8 @@ const Stack = ({ user }: { user: User | null }) => {
               <Button>Dashboard</Button>
             </Link>
           ) : (
-            <Link href="/auth/signin">
-              <Button>Sign In</Button>
+            <Link href="/login">
+              <Button>Get Started</Button>
             </Link>
           )}
           <Link

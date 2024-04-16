@@ -11,7 +11,7 @@ export default async function SitesPage() {
     return redirect("/login");
   }
   return (
-    <div>
+    <div className="p-4">
       <NewSiteDialog user={user} />
       <SitesList user={user} />
     </div>

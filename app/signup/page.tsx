@@ -1,11 +1,13 @@
 import Link from "next/link";
+import { headers } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
 import { ArrowLeft } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-export default async function Login({
+
+export default async function SignUp({
   searchParams,
 }: {
   searchParams: { message: string };
@@ -14,25 +16,28 @@ export default async function Login({
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  const signIn = async (formData: FormData) => {
+  const signUp = async (formData: FormData) => {
     "use server";
 
+    const origin = headers().get("origin");
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const supabase = createClient();
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        emailRedirectTo: `${origin}/auth/callback`,
+      },
     });
 
     if (error) {
-      return redirect(
-        "/login?message=Could not authenticate user, please try again.",
-      );
+      console.log(error);
+      return redirect("/login?message=Could not authenticate user");
     }
 
-    return redirect("/dashboard");
+    return redirect("/login?message=Check email to continue sign in process");
   };
   if (user) {
     return redirect("/dashboard");
@@ -49,7 +54,7 @@ export default async function Login({
           </Link>
 
           <form className="animate-in flex-1 flex flex-col w-full justify-center text-foreground">
-            <h1 className="text-3xl font-bold text-center mb-4">Sign In</h1>
+            <h1 className="text-3xl font-bold text-center mb-4">Sign Up</h1>
             <Label className="text-md" htmlFor="email">
               Email
             </Label>
@@ -70,16 +75,16 @@ export default async function Login({
               required
             />
             <SubmitButton
-              formAction={signIn}
+              formAction={signUp}
               className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
-              pendingText="Signing In..."
+              pendingText="Signing Up..."
             >
-              Sign In
+              Sign Me Up
             </SubmitButton>
             <p className="text-center mt-4 text-primary/80 text-sm">
-              Don't have an account?{" "}
-              <Link href="/signup" className="underline underline-offset-4">
-                Sign Up
+              Already have an account?{" "}
+              <Link href="/login" className="underline underline-offset-4">
+                Login
               </Link>
             </p>
             {searchParams?.message && (

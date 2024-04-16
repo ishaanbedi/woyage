@@ -184,7 +184,7 @@ const SitesList = ({ user }: { user: User }) => {
                         </div>
                       </DialogContent>
                     </Dialog>
-                    <Link href={`/sites/${site.website_id}`}>
+                    <Link href={`/dashboard/${site.website_id}`}>
                       <Button>
                         <BarChartIcon />
                       </Button>

@@ -439,7 +439,7 @@ async function track() {
   });
 }
 function post(a) {
-  fetch("https://supalytics.vercel.app/api/public-script", {
+  fetch("http://localhost:3000/api/public-script", {
     method: "POST",
     cache: "no-cache",
     headers: { "Content-Type": "application/json" },

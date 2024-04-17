@@ -42,13 +42,6 @@ const DeviceCard = ({ data }: { data: Analytics[] }) => {
     return deviceStats;
   }
 
-  return (
-    <Card className="mt-2 h-96 overflow-y-auto">
-      <h3 className="text-tremor-title text-tremor-content-strong dark:text-dark-tremor-content-strong font-medium">
-        Device Stats
-      </h3>
-      <BarList data={getDeviceStats(data)} />
-    </Card>
-  );
+  return <BarList data={getDeviceStats(data)} />;
 };
 export default DeviceCard;

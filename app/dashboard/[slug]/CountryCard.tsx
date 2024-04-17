@@ -1,8 +1,23 @@
-import { BarList, Card } from "@tremor/react";
+import { BarList } from "@tremor/react";
 interface CountryStats {
   name: string;
   value: number;
 }
+import {
+  Card,
+  Tab,
+  TabGroup,
+  TabList,
+  TabPanel,
+  TabPanels,
+} from "@tremor/react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 interface CountryStatsWithFlag extends CountryStats {
   icon: () => JSX.Element;
 }
@@ -66,10 +81,31 @@ const CountryCard = ({ data }: { data: Analytics[] }) => {
 
   return (
     <Card className="mt-2 h-96 overflow-y-auto">
-      <h3 className="text-tremor-title text-tremor-content-strong dark:text-dark-tremor-content-strong font-medium">
-        Country Stats
-      </h3>
-      <BarList data={getCountryStats(data)} />
+      <p className="text-tremor-metric text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
+        Countries
+      </p>
+      <TabGroup>
+        <TabList className="mt-4">
+          <Tab>Countries</Tab>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <Tab disabled className="cursor-not-allowed">
+                  Cities
+                </Tab>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Coming up soon!</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <BarList data={getCountryStats(data)} />
+          </TabPanel>
+        </TabPanels>
+      </TabGroup>
     </Card>
   );
 };

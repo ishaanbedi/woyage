@@ -44,14 +44,7 @@ const BrowsersCard = ({ data }: { data: Analytics[] }) => {
 
     return browserStats;
   }
-  return (
-    <Card className="mt-2 h-96 overflow-y-auto">
-      <h3 className="text-tremor-title text-tremor-content-strong dark:text-dark-tremor-content-strong font-medium">
-        Browsers
-      </h3>
-      <BarList data={getBrowserStats(data)} />
-    </Card>
-  );
+  return <BarList data={getBrowserStats(data)} />;
 };
 
 export default BrowsersCard;

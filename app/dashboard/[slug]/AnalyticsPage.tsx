@@ -10,6 +10,15 @@ import SelectionToggle from "./SelectionToggle";
 import ViewsBarChart from "./ViewsBarChart";
 import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
+import {
+  Card,
+  Tab,
+  TabGroup,
+  TabList,
+  TabPanel,
+  TabPanels,
+} from "@tremor/react";
+
 interface Analytics {
   id: string;
   path: string;
@@ -137,10 +146,30 @@ const AnalyticsPage = ({
       </div>
       <ViewsBarChart data={data} dateRange={dateRange} />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <BrowsersCard data={data} />
+        <Card className="mt-2 h-96 overflow-y-auto">
+          <p className="text-tremor-metric text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
+            Devices
+          </p>
+          <TabGroup>
+            <TabList className="mt-4">
+              <Tab>Browsers</Tab>
+              <Tab>Devices</Tab>
+              <Tab>Operating Systems</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                <BrowsersCard data={data} />
+              </TabPanel>
+              <TabPanel>
+                <DeviceCard data={data} />
+              </TabPanel>
+              <TabPanel>
+                <OSCard data={data} />
+              </TabPanel>
+            </TabPanels>
+          </TabGroup>
+        </Card>
         <CountryCard data={data} />
-        <DeviceCard data={data} />
-        <OSCard data={data} />
       </div>
     </section>
   );

@@ -2,22 +2,12 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { type User } from "@supabase/supabase-js";
-import BrowsersCard from "./BrowsersCard";
-import CountryCard from "./CountryCard";
-import DeviceCard from "./DeviceCard";
-import OSCard from "./OSCard";
 import SelectionToggle from "./SelectionToggle";
 import ViewsBarChart from "./ViewsBarChart";
 import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
-import {
-  Card,
-  Tab,
-  TabGroup,
-  TabList,
-  TabPanel,
-  TabPanels,
-} from "@tremor/react";
+import DevicesCard from "./DevicesCard";
+import CountryCard from "./CountryCard";
 
 interface Analytics {
   id: string;
@@ -146,29 +136,7 @@ const AnalyticsPage = ({
       </div>
       <ViewsBarChart data={data} dateRange={dateRange} />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <Card className="mt-2 h-96 overflow-y-auto">
-          <p className="text-tremor-metric text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
-            Devices
-          </p>
-          <TabGroup>
-            <TabList className="mt-4">
-              <Tab>Browsers</Tab>
-              <Tab>Devices</Tab>
-              <Tab>Operating Systems</Tab>
-            </TabList>
-            <TabPanels>
-              <TabPanel>
-                <BrowsersCard data={data} />
-              </TabPanel>
-              <TabPanel>
-                <DeviceCard data={data} />
-              </TabPanel>
-              <TabPanel>
-                <OSCard data={data} />
-              </TabPanel>
-            </TabPanels>
-          </TabGroup>
-        </Card>
+        <DevicesCard data={data} />
         <CountryCard data={data} />
       </div>
     </section>

@@ -3,6 +3,9 @@ interface BrowserStats {
   name: string;
   value: number;
 }
+interface BrowserStatsWithIcon extends BrowserStats {
+  icon: () => JSX.Element;
+}
 interface Analytics {
   id: string;
   path: string;
@@ -42,7 +45,27 @@ const BrowsersCard = ({ data }: { data: Analytics[] }) => {
       });
     }
 
-    return browserStats;
+    var deviceStatsWithIcon: BrowserStatsWithIcon[] = [];
+
+    deviceStatsWithIcon = browserStats.map((browser: BrowserStats) => {
+      return {
+        name: browser.name,
+        value: browser.value,
+        icon: function Icon() {
+          return (
+            <img
+              alt={browser.name}
+              width="20"
+              height="20"
+              data-nimg="1"
+              className="mr-2.5"
+              src={`https://uaparser.js.org/images/browsers/${browser.name.toLowerCase()}.png`}
+            />
+          );
+        },
+      };
+    });
+    return deviceStatsWithIcon;
   }
   return <BarList data={getBrowserStats(data)} />;
 };

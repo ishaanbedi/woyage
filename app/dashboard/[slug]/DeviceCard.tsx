@@ -3,6 +3,9 @@ interface DeviceStats {
   name: string;
   value: number;
 }
+interface DeviceStatsWithIcon extends DeviceStats {
+  icon: () => JSX.Element;
+}
 interface Analytics {
   id: string;
   path: string;
@@ -38,8 +41,27 @@ const DeviceCard = ({ data }: { data: Analytics[] }) => {
         value: deviceCounts[device].count,
       });
     }
+    var deviceStatsWithIcon: DeviceStatsWithIcon[] = [];
 
-    return deviceStats;
+    deviceStatsWithIcon = deviceStats.map((device: DeviceStats) => {
+      return {
+        name: device.name,
+        value: device.value,
+        icon: function Icon() {
+          return (
+            <img
+              alt={device.name}
+              width="20"
+              height="20"
+              data-nimg="1"
+              className="mr-2.5"
+              src={`https://uaparser.js.org/images/types/${device.name.toLowerCase() === "desktop" ? "default" : device.name.toLowerCase()}.png`}
+            />
+          );
+        },
+      };
+    });
+    return deviceStatsWithIcon;
   }
 
   return <BarList data={getDeviceStats(data)} />;

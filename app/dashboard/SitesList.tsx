@@ -34,9 +34,14 @@ import { BarChartIcon, TrashIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/toaster";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Tooltip,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 import Link from "next/link";
-import { ArrowRight, Settings } from "lucide-react";
+import { ArrowRight, Info, Settings } from "lucide-react";
 
 const SitesList = ({ user }: { user: User }) => {
   const [sites, setSites] = useState<
@@ -144,18 +149,53 @@ const SitesList = ({ user }: { user: User }) => {
                           <div>
                             <div className="flex flex-col space-y-2">
                               <span>
-                                <Label htmlFor="siteID">Site ID</Label>
+                                <span className="flex items-center space-x-1 mt-2">
+                                  <Label htmlFor="siteID">Site ID</Label>
+                                  <TooltipProvider>
+                                    <Tooltip>
+                                      <TooltipTrigger>
+                                        <Info size={12} />
+                                      </TooltipTrigger>
+                                      <TooltipContent>
+                                        <p className="text-center">
+                                          This is the unique identifier for your
+                                          site.
+                                          <br />
+                                          Mention this ID in support requests to
+                                          help us identify your site.
+                                        </p>
+                                      </TooltipContent>
+                                    </Tooltip>
+                                  </TooltipProvider>
+                                </span>
                                 <Input
                                   type="text"
                                   id="siteID"
                                   value={site.website_id}
                                   readOnly
                                   disabled
+                                  className="mt-2"
                                 />
                               </span>
                               <span>
-                                <Label htmlFor="domain">Domain</Label>
+                                <span className="flex items-center space-x-1 mt-2">
+                                  <Label htmlFor="domain">Domain</Label>
+                                  <TooltipProvider>
+                                    <Tooltip>
+                                      <TooltipTrigger>
+                                        <Info size={12} />
+                                      </TooltipTrigger>
+                                      <TooltipContent>
+                                        <p className="text-center">
+                                          The authorized domain name for your
+                                          site, whose traffic will be tracked.
+                                        </p>
+                                      </TooltipContent>
+                                    </Tooltip>
+                                  </TooltipProvider>
+                                </span>
                                 <Input
+                                  className="mt-2"
                                   type="text"
                                   id="domain"
                                   placeholder={site.domain_name}
@@ -166,10 +206,26 @@ const SitesList = ({ user }: { user: User }) => {
                                 />
                               </span>
                               <span>
-                                <Label htmlFor="tracking-code">
-                                  Tracking Code
-                                </Label>
+                                <span className="flex items-center space-x-1 mt-2">
+                                  <Label htmlFor="tracking-code">
+                                    Tracking Code
+                                  </Label>
+                                  <TooltipProvider>
+                                    <Tooltip>
+                                      <TooltipTrigger>
+                                        <Info size={12} />
+                                      </TooltipTrigger>
+                                      <TooltipContent>
+                                        <p className="text-center">
+                                          Copy this code and paste it in the
+                                          &lt;head&gt; section of your website.
+                                        </p>
+                                      </TooltipContent>
+                                    </Tooltip>
+                                  </TooltipProvider>
+                                </span>
                                 <Input
+                                  className="mt-2"
                                   type="text"
                                   id="tracking-code"
                                   value={`<script defer src="${process.env.NEXT_PUBLIC_SITE_URL}/track.js" data-website-id="${site.website_id}"></script>`}
@@ -177,7 +233,7 @@ const SitesList = ({ user }: { user: User }) => {
                                   disabled
                                 />
                               </span>
-                              <span className="flex space-x-2">
+                              <span className="flex space-x-2 pt-4">
                                 <Button
                                   disabled={!updatedSiteDomain}
                                   onClick={updateSite}

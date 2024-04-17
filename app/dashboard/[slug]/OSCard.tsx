@@ -18,21 +18,29 @@ interface Analytics {
 }
 const OSCard = ({ data }: { data: Analytics[] }) => {
   function getOSStats(logs: Analytics[]): OSStats[] {
-    const OSCounts: { [OS: string]: number } = {};
+    const OSCounts: { [OS: string]: { count: number; originalCase: string } } =
+      {};
     logs.forEach((log) => {
       const OSName = log.os.toLowerCase();
+      const originalCaseName = log.os;
       if (OSCounts[OSName]) {
-        OSCounts[OSName]++;
+        OSCounts[OSName].count++;
       } else {
-        OSCounts[OSName] = 1;
+        OSCounts[OSName] = { count: 1, originalCase: originalCaseName };
       }
     });
+
     const OSStats: OSStats[] = [];
     for (const OS in OSCounts) {
-      OSStats.push({ name: OS, value: OSCounts[OS] });
+      OSStats.push({
+        name: OSCounts[OS].originalCase,
+        value: OSCounts[OS].count,
+      });
     }
+
     return OSStats;
   }
+
   return (
     <Card className="mt-2 h-96 overflow-y-auto">
       <h3 className="text-tremor-title text-tremor-content-strong dark:text-dark-tremor-content-strong font-medium">

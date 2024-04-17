@@ -18,21 +18,30 @@ interface Analytics {
 }
 const DeviceCard = ({ data }: { data: Analytics[] }) => {
   function getDeviceStats(logs: Analytics[]): DeviceStats[] {
-    const deviceCounts: { [device: string]: number } = {};
+    const deviceCounts: {
+      [device: string]: { count: number; originalCase: string };
+    } = {};
     logs.forEach((log) => {
       const deviceName = log.device.toLowerCase();
+      const originalCaseName = log.device;
       if (deviceCounts[deviceName]) {
-        deviceCounts[deviceName]++;
+        deviceCounts[deviceName].count++;
       } else {
-        deviceCounts[deviceName] = 1;
+        deviceCounts[deviceName] = { count: 1, originalCase: originalCaseName };
       }
     });
+
     const deviceStats: DeviceStats[] = [];
     for (const device in deviceCounts) {
-      deviceStats.push({ name: device, value: deviceCounts[device] });
+      deviceStats.push({
+        name: deviceCounts[device].originalCase,
+        value: deviceCounts[device].count,
+      });
     }
+
     return deviceStats;
   }
+
   return (
     <Card className="mt-2 h-96 overflow-y-auto">
       <h3 className="text-tremor-title text-tremor-content-strong dark:text-dark-tremor-content-strong font-medium">

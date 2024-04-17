@@ -7,6 +7,9 @@ import CountryCard from "./CountryCard";
 import DeviceCard from "./DeviceCard";
 import OSCard from "./OSCard";
 import SelectionToggle from "./SelectionToggle";
+import ViewsBarChart from "./ViewsBarChart";
+import { LoaderCircle } from "lucide-react";
+import Link from "next/link";
 interface Analytics {
   id: string;
   path: string;
@@ -76,8 +79,10 @@ const AnalyticsPage = ({
       .filter("added_time", "gt", timeFilter);
     if (error) {
       console.error(error);
+      setLoading(false);
     } else {
       setData(data);
+      setLoading(false);
     }
   };
   supabase
@@ -90,19 +95,47 @@ const AnalyticsPage = ({
     .subscribe();
   useEffect(() => {
     fetchRecords();
-    setLoading(false);
   }, [user, params, dateRange]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <section className="container mx-auto p-4 h-[92vh]">
+        <div className="flex justify-center items-center h-[80vh]">
+          <LoaderCircle className="animate-spin" />
+        </div>
+      </section>
+    );
   }
-  if (data === null || data.length === 0) {
-    return <div>No data found</div>;
+  if ((data === null || data.length === 0) && !loading) {
+    return (
+      <section className="container mx-auto p-4 h-[92vh]">
+        <div className="flex justify-end items-center mb-4">
+          <SelectionToggle dateRange={dateRange} setDateRange={setDateRange} />
+        </div>
+        <div className="flex space-y-4 flex-col justify-center items-center h-[50vh]  max-w-2xl mx-auto">
+          <h1 className="text-2xl font-semibold">No data available</h1>
+          <p className="text-primary/50 text-sm text-wrap text-center">
+            Possible reasons might be that you have not added the tracking code,
+            there is no traffic to your website, or the date range you selected
+            has no data.
+          </p>
+          <p className="text-primary/50 text-sm text-wrap text-center">
+            If you think this is an error, please{" "}
+            <Link className="underline underline-offset-4" href="/support">
+              contact support
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
+    );
   }
   return (
-    <section>
-      <SelectionToggle dateRange={dateRange} setDateRange={setDateRange} />
-      <BarChartUsageExample data={data} dateRange={dateRange} />
+    <section className="container mx-auto p-4">
+      <div className="flex justify-end items-center mb-4">
+        <SelectionToggle dateRange={dateRange} setDateRange={setDateRange} />
+      </div>
+      <ViewsBarChart data={data} dateRange={dateRange} />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <BrowsersCard data={data} />
         <CountryCard data={data} />
@@ -114,157 +147,3 @@ const AnalyticsPage = ({
 };
 
 export default AnalyticsPage;
-
-import { BarChart } from "@tremor/react";
-function BarChartUsageExample({
-  data,
-  dateRange,
-}: {
-  data: Analytics[];
-  dateRange: string;
-}) {
-  function generateDailyViews(data: Analytics[], dateRange: string) {
-    var totalDays = 0;
-    switch (dateRange) {
-      case "0":
-        totalDays = 0;
-        break;
-      case "1":
-        totalDays = 1;
-        break;
-      case "2":
-        totalDays = 7;
-        break;
-      case "3":
-        totalDays = 30;
-        break;
-      case "4":
-        totalDays = 90;
-        break;
-      case "5":
-        totalDays = 365;
-        break;
-      case "6":
-        totalDays = -1;
-        break;
-    }
-    var array: { name: string; Views: number }[] = [];
-    if (totalDays === 0) {
-      for (let i = 0; i < 24; i++) {
-        var date = new Date();
-        date.setHours(date.getHours() - i);
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-        var hour = date.getHours();
-        var dateString = year + "-" + month + "-" + day + " " + hour + ":00";
-        var count = 0;
-        for (let j = 0; j < data.length; j++) {
-          var added_time = new Date(data[j].added_time);
-          var added_day = added_time.getDate();
-          var added_month = added_time.getMonth() + 1;
-          var added_year = added_time.getFullYear();
-          var added_hour = added_time.getHours();
-          var added_dateString =
-            added_year +
-            "-" +
-            added_month +
-            "-" +
-            added_day +
-            " " +
-            added_hour +
-            ":00";
-          if (dateString === added_dateString) {
-            count++;
-          }
-        }
-        array.push({
-          name: dateString,
-          Views: count,
-        });
-      }
-      array.sort(function (a, b) {
-        return new Date(a.name).getTime() - new Date(b.name).getTime();
-      });
-      return array;
-    }
-    if (totalDays === -1) {
-      const sortedData = data.sort((a, b) => {
-        return (
-          new Date(a.added_time).getTime() - new Date(b.added_time).getTime()
-        );
-      });
-      if (sortedData.length === 0) {
-        return [];
-      }
-      const firstYear = new Date(sortedData[0].added_time).getFullYear();
-      const currentYear = new Date().getFullYear();
-
-      const yearlyViews: { [key: string]: number } = {};
-      sortedData.forEach((record) => {
-        const year = new Date(record.added_time).getFullYear();
-        yearlyViews[year] = (yearlyViews[year] || 0) + 1;
-      });
-
-      for (let year = firstYear; year <= currentYear; year++) {
-        if (!(year in yearlyViews)) {
-          yearlyViews[year] = 0;
-        }
-      }
-
-      const array = Object.keys(yearlyViews).map((year) => ({
-        name: year,
-        Views: yearlyViews[year],
-      }));
-      array.sort((a, b) => parseInt(a.name) - parseInt(b.name));
-      return array;
-    }
-
-    for (let i = 0; i < totalDays; i++) {
-      var date = new Date();
-      date.setDate(date.getDate() - i);
-      var day = date.getDate();
-      var month = date.getMonth() + 1;
-      var year = date.getFullYear();
-      var dateString = year + "-" + month + "-" + day;
-      var count = 0;
-      for (let j = 0; j < data.length; j++) {
-        var added_time = new Date(data[j].added_time);
-        var added_day = added_time.getDate();
-        var added_month = added_time.getMonth() + 1;
-        var added_year = added_time.getFullYear();
-        var added_dateString = added_year + "-" + added_month + "-" + added_day;
-        if (dateString === added_dateString) {
-          count++;
-        }
-      }
-      array.push({
-        name: dateString,
-        Views: count,
-      });
-    }
-    array.sort(function (
-      a: { name: string; Views: number },
-      b: { name: string; Views: number },
-    ) {
-      var dateA = new Date(a.name),
-        dateB = new Date(b.name);
-      if (dateA < dateB) return -1;
-      if (dateA > dateB) return 1;
-      return 0;
-    });
-    return array;
-  }
-
-  return (
-    <>
-      <BarChart
-        className="mt-6"
-        data={generateDailyViews(data, dateRange)}
-        index="name"
-        categories={["Views"]}
-        yAxisWidth={48}
-      />
-    </>
-  );
-}

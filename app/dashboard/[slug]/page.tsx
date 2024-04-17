@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import AnalyticsPage from "./AnalyticsPage";
 import { redirect } from "next/navigation";
+import Navbar from "@/components/Navbar";
 export default async function SitesDynamicPage({
   params,
 }: {
@@ -46,6 +47,7 @@ export default async function SitesDynamicPage({
     }
     return (
       <div>
+        <Navbar user={user} />
         <AnalyticsPage user={user} params={params} />
       </div>
     );

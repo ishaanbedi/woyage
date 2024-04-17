@@ -1,4 +1,4 @@
-import { BarList } from "@tremor/react";
+import { BarList, Card } from "@tremor/react";
 interface DeviceStats {
   name: string;
   value: number;
@@ -34,10 +34,12 @@ const DeviceCard = ({ data }: { data: Analytics[] }) => {
     return deviceStats;
   }
   return (
-    <div className="shadow-lg rounded-lg p-4">
-      <h2 className="text-lg font-semibold">Devices</h2>
+    <Card className="mt-2 h-96 overflow-y-auto">
+      <h3 className="text-tremor-title text-tremor-content-strong dark:text-dark-tremor-content-strong font-medium">
+        Device Stats
+      </h3>
       <BarList data={getDeviceStats(data)} />
-    </div>
+    </Card>
   );
 };
 export default DeviceCard;

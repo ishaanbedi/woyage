@@ -1,4 +1,4 @@
-import { BarList } from "@tremor/react";
+import { BarList, Card } from "@tremor/react";
 interface BrowserStats {
   name: string;
   value: number;
@@ -34,10 +34,12 @@ const BrowsersCard = ({ data }: { data: Analytics[] }) => {
     return browserStats;
   }
   return (
-    <div className="shadow-lg rounded-lg p-4">
-      <h2 className="text-lg font-semibold">Browsers</h2>
+    <Card className="mt-2 h-96 overflow-y-auto">
+      <h3 className="text-tremor-title text-tremor-content-strong dark:text-dark-tremor-content-strong font-medium">
+        Browsers
+      </h3>
       <BarList data={getBrowserStats(data)} />
-    </div>
+    </Card>
   );
 };
 

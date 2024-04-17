@@ -1,4 +1,4 @@
-import { BarList } from "@tremor/react";
+import { BarList, Card } from "@tremor/react";
 interface OSStats {
   name: string;
   value: number;
@@ -34,10 +34,12 @@ const OSCard = ({ data }: { data: Analytics[] }) => {
     return OSStats;
   }
   return (
-    <div className="shadow-lg rounded-lg p-4">
-      <h2 className="text-lg font-semibold">Operating System</h2>
+    <Card className="mt-2 h-96 overflow-y-auto">
+      <h3 className="text-tremor-title text-tremor-content-strong dark:text-dark-tremor-content-strong font-medium">
+        Operating System
+      </h3>
       <BarList data={getOSStats(data)} />
-    </div>
+    </Card>
   );
 };
 export default OSCard;

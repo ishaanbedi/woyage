@@ -3,6 +3,9 @@ interface OSStats {
   name: string;
   value: number;
 }
+interface OSStatsWithIcon extends OSStats {
+  icon: () => JSX.Element;
+}
 interface Analytics {
   id: string;
   path: string;
@@ -18,29 +21,53 @@ interface Analytics {
 }
 const OSCard = ({ data }: { data: Analytics[] }) => {
   function getOSStats(logs: Analytics[]): OSStats[] {
-    const OSCounts: { [OS: string]: { count: number; originalCase: string } } =
-      {};
+    const osCounts: {
+      [os: string]: { count: number; originalCase: string };
+    } = {};
     logs.forEach((log) => {
-      const OSName = log.os.toLowerCase();
+      const osName = log.os.toLowerCase();
       const originalCaseName = log.os;
-      if (OSCounts[OSName]) {
-        OSCounts[OSName].count++;
+      if (osCounts[osName]) {
+        osCounts[osName].count++;
       } else {
-        OSCounts[OSName] = { count: 1, originalCase: originalCaseName };
+        osCounts[osName] = {
+          count: 1,
+          originalCase: originalCaseName,
+        };
       }
     });
 
     const OSStats: OSStats[] = [];
-    for (const OS in OSCounts) {
+    for (const os in osCounts) {
       OSStats.push({
-        name: OSCounts[OS].originalCase,
-        value: OSCounts[OS].count,
+        name: osCounts[os].originalCase,
+        value: osCounts[os].count,
       });
     }
 
-    return OSStats;
-  }
+    var deviceStatsWithIcon: OSStatsWithIcon[] = [];
 
+    deviceStatsWithIcon = OSStats.map((os: OSStats) => {
+      return {
+        name: os.name,
+        value: os.value,
+        icon: function Icon() {
+          return (
+            <img
+              alt={os.name}
+              width="20"
+              height="20"
+              data-nimg="1"
+              className="mr-2.5"
+              src={`https://uaparser.js.org/images/os/${os.name.toLowerCase()}.png`}
+            />
+          );
+        },
+      };
+    });
+    return deviceStatsWithIcon;
+  }
   return <BarList data={getOSStats(data)} />;
 };
+
 export default OSCard;

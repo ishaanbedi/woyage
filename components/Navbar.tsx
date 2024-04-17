@@ -1,14 +1,20 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { type User } from "@supabase/supabase-js";
-
+import { Pacifico } from "next/font/google";
+const pacifico = Pacifico({
+  subsets: ["latin"],
+  weight: ["400"],
+});
 const Navbar = ({ user }: { user: User | null }) => {
   return (
     <header className="px-4 lg:px-6 h-14 mt-2 flex items-center">
-      <Link className="flex items-center justify-center" href="#">
-        <Image src="/icons/supatycs.png" alt="Logo" width={100} height={100} />
+      <Link
+        className={`flex items-center justify-center text-xl ${pacifico.className}`}
+        href="#"
+      >
+        {process.env.NEXT_PUBLIC_SITE_NAME}
       </Link>
       <nav className="ml-auto flex items-center gap-4 sm:gap-6">
         <Link

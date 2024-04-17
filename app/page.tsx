@@ -40,7 +40,7 @@ export default async function Component() {
                     </Link>
                   )}
                   <Link
-                    href="https://www.github.com/ishaanbedi/supatycs"
+                    href="https://www.github.com/ishaanbedi/supalytics"
                     target="_blank"
                   >
                     <Button variant="outline">

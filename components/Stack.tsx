@@ -83,7 +83,7 @@ const Stack = ({ user }: { user: User | null }) => {
             </Link>
           )}
           <Link
-            href="https://www.github.com/ishaanbedi/supatycs"
+            href="https://www.github.com/ishaanbedi/supalytics"
             target="_blank"
           >
             <Button variant="outline">

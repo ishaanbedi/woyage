@@ -51,6 +51,10 @@ const SitesList = ({ user }: { user: User }) => {
   >([]);
   const [updatedSiteDomain, setUpdatedSiteDomain] = useState("");
   const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
+  const [selectedSiteSettings, setSelectedSiteSettings] = useState<{
+    domain_name: string;
+    website_id: string;
+  } | null>(null);
   const supabase = createClient();
   const fetchSites = async () => {
     const { data, error } = await supabase
@@ -104,8 +108,8 @@ const SitesList = ({ user }: { user: User }) => {
     }
     const { error } = await supabase
       .from("site_domains")
-      .update({ domain_name: domain })
-      .eq("domain_name", sites[0].domain_name);
+      .update({ domain_name: updatedSiteDomain })
+      .eq("domain_name", selectedSiteSettings?.domain_name);
     if (error) {
       console.error("error updating site:", error);
       return;
@@ -117,6 +121,9 @@ const SitesList = ({ user }: { user: User }) => {
   useEffect(() => {
     fetchSites();
   }, [user]);
+  useEffect(() => {
+    setUpdatedSiteDomain(selectedSiteSettings?.domain_name || "");
+  }, [selectedSiteSettings]);
   supabase
     .channel("site_domains")
     .on(
@@ -154,9 +161,16 @@ const SitesList = ({ user }: { user: User }) => {
                   </TableCell>
                   <TableCell>
                     <div className="flex space-x-2">
-                      <Dialog>
+                      <Dialog
+                        open={settingsDialogOpen}
+                        onOpenChange={setSettingsDialogOpen}
+                      >
                         <DialogTrigger>
-                          <Button>
+                          <Button
+                            onClick={() => {
+                              setSelectedSiteSettings(site);
+                            }}
+                          >
                             <Settings size={16} />
                           </Button>
                         </DialogTrigger>

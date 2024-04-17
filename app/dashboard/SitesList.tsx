@@ -1,4 +1,5 @@
 "use client";
+const isValidDomain = require("is-valid-domain");
 import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { type User } from "@supabase/supabase-js";
@@ -36,6 +37,7 @@ import { toast } from "sonner";
 import { Toaster } from "@/components/ui/toaster";
 import {
   Tooltip,
+  TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
@@ -80,7 +82,26 @@ const SitesList = ({ user }: { user: User }) => {
     return withoutPath;
   };
   const updateSite = async () => {
+    // this is temporary to allow localhost for testing, you may comment this block if you want
+    if (updatedSiteDomain.includes("localhost")) {
+      const { error } = await supabase
+        .from("site_domains")
+        .update({ domain_name: updatedSiteDomain })
+        .eq("domain_name", sites[0].domain_name);
+      if (error) {
+        console.error("error updating site:", error);
+        return;
+      }
+      setUpdatedSiteDomain("");
+      setSettingsDialogOpen(false);
+      fetchSites();
+      return;
+    }
     const domain = sanitizeDomain(updatedSiteDomain);
+    if (!isValidDomain(domain)) {
+      toast.error("Invalid domain name");
+      return;
+    }
     const { error } = await supabase
       .from("site_domains")
       .update({ domain_name: domain })

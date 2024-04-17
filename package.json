@@ -49,6 +49,7 @@
     "embla-carousel-react": "^8.0.2",
     "geist": "^1.2.1",
     "input-otp": "^1.2.4",
+    "is-valid-domain": "^0.1.6",
     "lucide-react": "^0.368.0",
     "moment-timezone": "^0.5.45",
     "next": "latest",

@@ -154,10 +154,7 @@ const SitesList = ({ user }: { user: User }) => {
                   </TableCell>
                   <TableCell>
                     <div className="flex space-x-2">
-                      <Dialog
-                        open={settingsDialogOpen}
-                        onOpenChange={setSettingsDialogOpen}
-                      >
+                      <Dialog>
                         <DialogTrigger>
                           <Button>
                             <Settings size={16} />

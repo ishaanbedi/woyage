@@ -30,18 +30,20 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { BarChartIcon, EyeOpenIcon, TrashIcon } from "@radix-ui/react-icons";
+import { BarChartIcon, TrashIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
+import { ArrowRight, Settings } from "lucide-react";
 
 const SitesList = ({ user }: { user: User }) => {
   const [sites, setSites] = useState<
     { domain_name: string; website_id: string }[]
   >([]);
   const [updatedSiteDomain, setUpdatedSiteDomain] = useState("");
+  const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
   const supabase = createClient();
   const fetchSites = async () => {
     const { data, error } = await supabase
@@ -83,6 +85,7 @@ const SitesList = ({ user }: { user: User }) => {
       return;
     }
     setUpdatedSiteDomain("");
+    setSettingsDialogOpen(false);
     fetchSites();
   };
   useEffect(() => {
@@ -97,128 +100,143 @@ const SitesList = ({ user }: { user: User }) => {
     )
     .subscribe();
   return (
-    <section>
+    <section className="max-w-4xl mx-auto">
       {sites.length === 0 ? (
         <p>No sites added yet.</p>
       ) : (
         <Table>
           <TableHeader>
             <TableRow>
+              <TableHead>S No.</TableHead>
               <TableHead>Domain</TableHead>
               <TableHead>Actions</TableHead>
+              <TableHead>Stats</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {sites.map((site: { domain_name: string; website_id: string }) => (
-              <TableRow>
-                <TableCell className="font-medium">
-                  {site.domain_name}
-                </TableCell>
-                <TableCell>
-                  <div className="flex space-x-2">
-                    <Dialog>
-                      <DialogTrigger>
-                        <Button>
-                          <EyeOpenIcon />
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>{site.domain_name}</DialogTitle>
-                        </DialogHeader>
-                        <div>
-                          <div className="flex flex-col space-y-2">
-                            <span>
-                              <Label htmlFor="siteID">Site ID</Label>
-                              <Input
-                                type="text"
-                                id="siteID"
-                                value={site.website_id}
-                                readOnly
-                                disabled
-                              />
-                            </span>
-                            <span>
-                              <Label htmlFor="domain">Domain</Label>
-                              <Input
-                                type="text"
-                                id="domain"
-                                placeholder={site.domain_name}
-                                value={updatedSiteDomain}
-                                onChange={(e) =>
-                                  setUpdatedSiteDomain(e.target.value)
-                                }
-                              />
-                            </span>
-                            <span>
-                              <Label htmlFor="tracking-code">
-                                Tracking Code
-                              </Label>
-                              <Input
-                                type="text"
-                                id="tracking-code"
-                                value={`<script defer src="${process.env.NEXT_PUBLIC_SITE_URL}/track.js" data-website-id="${site.website_id}"></script>`}
-                                readOnly
-                                disabled
-                              />
-                            </span>
-                            <span className="flex space-x-2">
-                              <Button
-                                disabled={!updatedSiteDomain}
-                                onClick={updateSite}
-                              >
-                                Update
-                              </Button>
-                              <Button
-                                onClick={() => {
-                                  navigator.clipboard.writeText(
-                                    `<script defer src="${process.env.NEXT_PUBLIC_SITE_URL}/track.js" data-website-id="${site.website_id}"></script>`,
-                                  );
-                                  toast("Tracking code copied to clipboard.");
-                                }}
-                              >
-                                Copy Tracking Code
-                              </Button>
-                            </span>
+            {sites.map(
+              (
+                site: { domain_name: string; website_id: string },
+                index: number,
+              ) => (
+                <TableRow>
+                  <TableCell className="font-medium">{index + 1}</TableCell>
+                  <TableCell className="font-medium ">
+                    {site.domain_name.length > 30
+                      ? `${site.domain_name.slice(0, 30)}...`
+                      : site.domain_name}
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex space-x-2">
+                      <Dialog
+                        open={settingsDialogOpen}
+                        onOpenChange={setSettingsDialogOpen}
+                      >
+                        <DialogTrigger>
+                          <Button>
+                            <Settings size={16} />
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>{site.domain_name}</DialogTitle>
+                          </DialogHeader>
+                          <div>
+                            <div className="flex flex-col space-y-2">
+                              <span>
+                                <Label htmlFor="siteID">Site ID</Label>
+                                <Input
+                                  type="text"
+                                  id="siteID"
+                                  value={site.website_id}
+                                  readOnly
+                                  disabled
+                                />
+                              </span>
+                              <span>
+                                <Label htmlFor="domain">Domain</Label>
+                                <Input
+                                  type="text"
+                                  id="domain"
+                                  placeholder={site.domain_name}
+                                  value={updatedSiteDomain}
+                                  onChange={(e) =>
+                                    setUpdatedSiteDomain(e.target.value)
+                                  }
+                                />
+                              </span>
+                              <span>
+                                <Label htmlFor="tracking-code">
+                                  Tracking Code
+                                </Label>
+                                <Input
+                                  type="text"
+                                  id="tracking-code"
+                                  value={`<script defer src="${process.env.NEXT_PUBLIC_SITE_URL}/track.js" data-website-id="${site.website_id}"></script>`}
+                                  readOnly
+                                  disabled
+                                />
+                              </span>
+                              <span className="flex space-x-2">
+                                <Button
+                                  disabled={!updatedSiteDomain}
+                                  onClick={updateSite}
+                                >
+                                  Update
+                                </Button>
+                                <Button
+                                  onClick={() => {
+                                    navigator.clipboard.writeText(
+                                      `<script defer src="${process.env.NEXT_PUBLIC_SITE_URL}/track.js" data-website-id="${site.website_id}"></script>`,
+                                    );
+                                    toast("Tracking code copied to clipboard.");
+                                  }}
+                                >
+                                  Copy Tracking Code
+                                </Button>
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
+                        </DialogContent>
+                      </Dialog>
+                      <AlertDialog>
+                        <AlertDialogTrigger>
+                          <Button variant={"destructive"}>
+                            <TrashIcon />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>
+                              Are you absolutely sure?
+                            </AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone. This will
+                              permanently delete the site.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => deleteSite(site.domain_name)}
+                            >
+                              Continue
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </div>
+                  </TableCell>
+                  <TableCell>
                     <Link href={`/dashboard/${site.website_id}`}>
                       <Button>
-                        <BarChartIcon />
+                        View Now <ArrowRight size={16} />
                       </Button>
                     </Link>
-                    <AlertDialog>
-                      <AlertDialogTrigger>
-                        <Button>
-                          <TrashIcon />
-                        </Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>
-                            Are you absolutely sure?
-                          </AlertDialogTitle>
-                          <AlertDialogDescription>
-                            This action cannot be undone. This will permanently
-                            delete the site.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction
-                            onClick={() => deleteSite(site.domain_name)}
-                          >
-                            Continue
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
-                  </div>
-                </TableCell>
-              </TableRow>
-            ))}
+                  </TableCell>
+                </TableRow>
+              ),
+            )}
           </TableBody>
         </Table>
       )}

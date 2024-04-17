@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import SitesList from "./SitesList";
 import NewSiteDialog from "./NewSiteDialog";
+import Navbar from "@/components/Navbar";
 export default async function SitesPage() {
   const supabase = createClient();
   const {
@@ -11,9 +12,12 @@ export default async function SitesPage() {
     return redirect("/login");
   }
   return (
-    <div className="p-4">
-      <NewSiteDialog user={user} />
-      <SitesList user={user} />
-    </div>
+    <section>
+      <Navbar user={user} />
+      <div className="p-4 h-[92vh]">
+        <NewSiteDialog user={user} />
+        <SitesList user={user} />
+      </div>
+    </section>
   );
 }

@@ -9,10 +9,10 @@ const pacifico = Pacifico({
 });
 const Navbar = ({ user }: { user: User | null }) => {
   return (
-    <header className="px-4 lg:px-6 h-14 mt-2 flex items-center">
+    <header className="px-4 lg:px-6 h-14 flex items-center">
       <Link
         className={`flex items-center justify-center text-xl ${pacifico.className}`}
-        href="#"
+        href="/"
       >
         {process.env.NEXT_PUBLIC_SITE_NAME}
       </Link>

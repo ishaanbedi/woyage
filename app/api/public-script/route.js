@@ -1,15 +1,15 @@
-var uap = require("ua-parser-js");
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import { UAParser } from "ua-parser-js";
+import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-export async function POST(request: Request) {
+export async function POST(request) {
   const cookieStore = cookies();
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     {
       cookies: {
-        get(name: string) {
+        get(name) {
           return cookieStore.get(name)?.value;
         },
       },
@@ -17,7 +17,7 @@ export async function POST(request: Request) {
   );
   const data = await request.json();
   const { userAgents, country, id, path } = data;
-  var ua = uap(userAgents);
+  const ua = UAParser(userAgents);
   const browser = ua.browser.name;
   const os = ua.os.name;
   const device = ua.device.type || "desktop";

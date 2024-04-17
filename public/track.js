@@ -423,76 +423,19 @@ function detect_website_id() {
   let a = document.querySelector("script[data-website-id]");
   return a ? a.getAttribute("data-website-id") : "Unknown";
 }
-function checkBrowser() {
-  let a = navigator.userAgent,
-    i = a.indexOf("Chrome") > -1,
-    e = a.indexOf("MSIE") > -1 || a.indexOf("rv:") > -1,
-    r = a.indexOf("Firefox") > -1,
-    n = a.indexOf("Safari") > -1;
-  i && n && (n = !1);
-  let t = a.indexOf("OP") > -1;
-  switch ((i && t && (i = !1), !0)) {
-    case i:
-      return "Chrome";
-    case e:
-      return "Internet Explorer";
-    case r:
-      return "Firefox";
-    case n:
-      return "Safari";
-    case t:
-      return "Opera";
-    default:
-      return "Other";
-  }
-}
-function currentPath() {
-  return window.location.href;
-}
-function checkReferrer() {
-  return document.referrer;
-}
-function checkOS() {
-  let a = navigator.userAgent,
-    i = navigator.platform;
-  return -1 !== ["Win32", "Win64", "Windows", "WinCE"].indexOf(i)
-    ? "Windows"
-    : -1 !== ["Mac68K", "MacPPC", "Macintosh", "MacIntel"].indexOf(i)
-      ? "Mac"
-      : -1 !== ["iPhone", "iPad", "iPod"].indexOf(i)
-        ? "iOS"
-        : /Android/.test(a)
-          ? "Android"
-          : /Linux/.test(i)
-            ? "Linux"
-            : "Other";
-}
-function checkDevice() {
-  let a = navigator.userAgent;
-  return /Mobile|mini|Fennec|Android|iP(od|hone)/.test(a)
-    ? "Mobile"
-    : /Tablet|iPad/.test(a)
-      ? "Tablet"
-      : /smartTV/.test(a)
-        ? "Smart TV"
-        : "Desktop";
-}
+
 function checkCountry() {
   let a = Intl.DateTimeFormat().resolvedOptions().timeZone;
   return countryList[a] || "Unknown";
 }
 async function track() {
   let a = detect_website_id();
-  var i = checkBrowser();
+  var userAgents = navigator.userAgent;
   post({
-    id: a,
-    path: currentPath(),
-    browser: i,
-    referrer: checkReferrer(),
-    os: checkOS(),
-    device: checkDevice(),
     country: checkCountry(),
-    website_id: a,
+    userAgents: userAgents,
+    id: a,
+    path: window.location.href,
   });
 }
 function post(a) {

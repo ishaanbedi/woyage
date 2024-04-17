@@ -34,7 +34,7 @@ const DeviceCard = ({ data }: { data: Analytics[] }) => {
     const deviceStats: DeviceStats[] = [];
     for (const device in deviceCounts) {
       deviceStats.push({
-        name: deviceCounts[device].originalCase,
+        name: device.charAt(0).toUpperCase() + device.slice(1),
         value: deviceCounts[device].count,
       });
     }

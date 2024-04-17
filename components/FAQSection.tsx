@@ -37,7 +37,7 @@ const FAQSection = () => {
       <h1 className="text-3xl font-bold text-center text-gray-900 md:text-4xl lg:text-5xl">
         Frequently Asked Questions
       </h1>
-      <div className="max-w-2xl mx-auto mt-8">
+      <div className="max-w-3xl mx-auto mt-8">
         <Accordion type="single" collapsible className="w-full">
           {FAQs.map((faq, index) => (
             <AccordionItem value={`item-${index}`} key={index}>

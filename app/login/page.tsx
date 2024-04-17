@@ -5,6 +5,7 @@ import { SubmitButton } from "./submit-button";
 import { ArrowLeft } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+
 export default async function Login({
   searchParams,
 }: {
@@ -27,9 +28,8 @@ export default async function Login({
     });
 
     if (error) {
-      return redirect(
-        "/login?message=Could not authenticate user, please try again.",
-      );
+      const message = error.message;
+      return redirect(`/login?message=${encodeURIComponent(message)}`);
     }
 
     return redirect("/dashboard");

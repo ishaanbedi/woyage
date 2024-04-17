@@ -33,11 +33,11 @@ export default async function SignUp({
     });
 
     if (error) {
-      console.log(error);
-      return redirect("/login?message=Could not authenticate user");
+      const message = error.message;
+      return redirect(`/signup?message=${encodeURIComponent(message)}`);
     }
 
-    return redirect("/login?message=Check email to continue sign in process");
+    return redirect("/signup?message=Check email to continue sign in process");
   };
   if (user) {
     return redirect("/dashboard");

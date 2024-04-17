@@ -79,12 +79,11 @@ const SitesList = ({ user }: { user: User }) => {
     fetchSites();
   };
   const sanitizeDomain = (domain: string) => {
-    const withPath = domain
-      .replace(/(^\w+:|^)\/\/(www\.)?/, "")
-      .replace(/\/$/, "");
+    const withPath = domain.replace(/(^\w+:|^)\/\//, "").replace(/\/$/, "");
     const withoutPath = withPath.split("/")[0];
     return withoutPath;
   };
+
   const updateSite = async () => {
     // this is temporary to allow localhost for testing, you may comment this block if you want
     if (updatedSiteDomain.includes("localhost")) {
@@ -203,7 +202,7 @@ const SitesList = ({ user }: { user: User }) => {
                                 <Input
                                   type="text"
                                   id="siteID"
-                                  value={site.website_id}
+                                  value={selectedSiteSettings?.website_id}
                                   readOnly
                                   disabled
                                   className="mt-2"

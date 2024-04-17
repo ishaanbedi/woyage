@@ -21,26 +21,12 @@ const NewSiteDialog = ({ user }: { user: User }) => {
   const [domainName, setDomainName] = useState("");
   const supabase = createClient();
   const sanitizeDomain = (domain: string) => {
-    const withPath = domain
-      .replace(/(^\w+:|^)\/\/(www\.)?/, "")
-      .replace(/\/$/, "");
+    const withPath = domain.replace(/(^\w+:|^)\/\//, "").replace(/\/$/, "");
     const withoutPath = withPath.split("/")[0];
     return withoutPath;
   };
+
   const addSite = async () => {
-    // this is temporary to allow localhost for testing, you may comment this block if you want
-    if (domainName.includes("localhost")) {
-      const { error } = await supabase
-        .from("site_domains")
-        .insert([{ email: user.email, domain_name: domainName }]);
-      if (error) {
-        console.error("error adding site:", error);
-        return;
-      }
-      setIsOpen(false);
-      setDomainName("");
-      return;
-    }
     const domain = sanitizeDomain(domainName);
     if (!isValidDomain(domain)) {
       toast.error("Invalid domain name");

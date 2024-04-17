@@ -27,7 +27,6 @@ export async function POST(request) {
     .select("*")
     .eq("domain_name", path.split("/")[2]);
   if (!website || website.length === 0) {
-    console.error("Website not found");
     return NextResponse.json({ error: "Website not found" }, { status: 404 });
   }
   var found = false;

@@ -56,7 +56,7 @@ const OSCard = ({ data }: { data: Analytics[] }) => {
             <img
               alt={os.name}
               width="20"
-              height="20"
+              height="16"
               data-nimg="1"
               className="mr-2.5"
               src={`https://uaparser.js.org/images/os/${os.name.toLowerCase()}.png`}

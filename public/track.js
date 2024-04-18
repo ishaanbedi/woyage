@@ -52,7 +52,7 @@ function post(a) {
 
 (() => {
   "use strict";
-  track();
+
   const handleRouteChange = () => {
     track();
   };

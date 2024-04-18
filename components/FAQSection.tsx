@@ -6,30 +6,32 @@ import {
 } from "@/components/ui/accordion";
 
 const FAQSection = () => {
+  const appName = process.env.NEXT_PUBLIC_SITE_NAME || "Supalytics";
   const FAQs: { question: string; answer: string }[] = [
     {
-      question: "Question 1",
-      answer: "Yes. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      question: `Will ${appName} collect any personal data from my visitors?`,
+      answer: `While ${appName} does collect information such as user's browser, device, operating system, and country, we do not collect any personal data such as name, email, or IP address or any kind of information that can be used to identify an individual. So ${appName} is privacy-friendly and completely safe to use.`,
     },
     {
-      question: "Question 2",
-      answer: "No. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      question: `What kind of data does ${appName} collect?`,
+      answer: `We have a lightweight script that runs on the visitor's browser and collects information, namely, country, user agent, path, language, referrer, title, and domain. Some information is parsed from the user agent string, on the server-side, to provide more insights. No kind of personal data is collected.`,
     },
     {
-      question: "Question 3",
-      answer: "Yes. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      question: "Do you store cookies?",
+      answer: `No, we do not store any cookies on your visitor's computer. Authentication related cookies (that too via Supabase) are stored on your (the website owner's) computer to keep you logged in when you use this site. If you have never created an account, then no cookies are stored on your computer, and the tracking script does not store any cookies on your visitor's computer.`,
     },
     {
-      question: "Question 4",
-      answer: "No. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      question:
+        "I have some issue reports and feature requests. Where can I submit them?",
+      answer: `You can submit your issue reports and feature requests on our GitHub repository. If the issue is related to some serious bug or security vulnerability, please reach out to me at hey@ishaanbedi.com.`,
     },
     {
-      question: "Question 5",
-      answer: "Yes. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      question: "Is Supalytics free to use?",
+      answer: `Currently, all features of Supalytics is offered for free as we're in the early stages of development. However, in future, there may be pricing plans tailored to different user needs..`,
     },
     {
-      question: "Question 6",
-      answer: "No. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      question: "Does Supalytics support tracking custom events?",
+      answer: `At this stage, Supalytics does not support tracking custom events. However, it will, for sure, soon.`,
     },
   ];
   return (
@@ -41,8 +43,14 @@ const FAQSection = () => {
         <Accordion type="single" collapsible className="w-full">
           {FAQs.map((faq, index) => (
             <AccordionItem value={`item-${index}`} key={index}>
-              <AccordionTrigger>{faq.question}</AccordionTrigger>
-              <AccordionContent>{faq.answer}</AccordionContent>
+              <AccordionTrigger>
+                <p className="text-lg font-semibold text-gray-800">
+                  {faq.question}
+                </p>
+              </AccordionTrigger>
+              <AccordionContent>
+                <p className="text-sm">{faq.answer}</p>
+              </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

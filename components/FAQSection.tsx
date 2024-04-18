@@ -49,7 +49,9 @@ const FAQSection = () => {
                 </p>
               </AccordionTrigger>
               <AccordionContent>
-                <p className="text-sm">{faq.answer}</p>
+                <p className="text-sm lg:md:sm:text-left text-center">
+                  {faq.answer}
+                </p>
               </AccordionContent>
             </AccordionItem>
           ))}

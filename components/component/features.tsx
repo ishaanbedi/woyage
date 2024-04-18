@@ -1,24 +1,18 @@
 import { StopwatchIcon } from "@radix-ui/react-icons";
 import {
-  BarChart2,
-  Eye,
-  FilterIcon,
   LanguagesIcon,
   MonitorSmartphoneIcon,
   PinIcon,
   TrafficCone,
-  TrendingUp,
   UsersRound,
 } from "lucide-react";
 import { Card } from "../ui/card";
 export function Features() {
-  const features: [
-    {
-      title: string;
-      description: string;
-      icon: React.ReactNode;
-    },
-  ] = [
+  const features: {
+    title: string;
+    description: string;
+    icon: React.ReactNode;
+  }[] = [
     {
       title: "Visitors",
       description:

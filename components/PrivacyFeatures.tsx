@@ -50,7 +50,7 @@ export function PrivacyFeatures() {
             </p>
           </div>
         </div>
-        <div className="mx-auto grid max-w-3xl items-start min-[600px]:grid-cols-3 py-12 md:max-w-5xl lg:grid-cols-3 grid-cols-2 gap-2 lg:max-w-6xl">
+        <div className="mx-auto grid max-w-3xl items-start min-[600px]:grid-cols-3 py-12 md:max-w-5xl lg:grid-cols-3 grid-cols-1 gap-2 lg:max-w-6xl">
           {features.map((feature, index) => (
             <Card
               key={index}

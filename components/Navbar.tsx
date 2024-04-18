@@ -122,8 +122,8 @@ const Navbar = ({ user }: { user: User | null }) => {
                 </div>
               </div>
             </div>
-            <nav className="flex flex-col gap-4 mt-4 w-full">
-              <div className="flex space-x-2 mt-4 w-full">
+            <nav className="flex items-center flex-col gap-4 mt-4 w-full">
+              <div className="flex justify-between items-center space-x-2 mt-4 w-full">
                 <Link
                   className="font-medium hover:underline hover:underline-offset-4 w-full"
                   href="/terms"

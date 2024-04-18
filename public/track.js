@@ -35,7 +35,6 @@ async function track() {
     title: title,
     domain: domain,
   };
-  console.log(object);
   post(object);
 }
 function post(a) {

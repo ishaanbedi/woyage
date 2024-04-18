@@ -27,7 +27,6 @@ function getPathStats(logs: Analytics[]): PathStats[] {
     [path: string]: { count: number; originalCase: string };
   } = {};
   logs.forEach((log) => {
-    console.log(log);
     const pathName = log.path.toLowerCase();
     const originalCaseName = log.path;
     if (pathCounts[pathName]) {

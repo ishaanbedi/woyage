@@ -10,7 +10,7 @@ const HeroSection = ({ user }: { user: User | null }) => {
       <div className="px-4 md:px-6 space-y-10 xl:space-y-16">
         <div className="flex flex-col justify-center items-center">
           <div>
-            <h1 className="lg:leading-tighter text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl xl:text-[3.5rem] 2xl:text-[4rem] max-w-3xl text-center">
+            <h1 className="lg:leading-tighter text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl xl:text-[3.5rem] 2xl:text-[4rem] text-center">
               Analytics for the web. <br />
               Supa-Fast & Supa-Reliable
             </h1>
@@ -47,7 +47,7 @@ const HeroSection = ({ user }: { user: User | null }) => {
         </div>
         <Image
           alt="Hero"
-          className="mx-auto aspect-video object-cover border p-2"
+          className="mx-auto lg:md:sm:aspect-video aspect-[3/2]  object-cover border p-2"
           height="300"
           src="/screenshots/dashboard-screenshot.png"
           width="1270"

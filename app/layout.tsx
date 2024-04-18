@@ -5,7 +5,6 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/components/Footer";
-import { ThemeProvider } from "@/components/theme-provider"
 const bricolage_grotesque = Bricolage_Grotesque({
   subsets: ["latin"],
   display: "swap",
@@ -34,16 +33,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={GeistSans.className}>
       <body className={bricolage_grotesque.variable + comfortaa.variable}>
-      <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
         <main>{children}</main>
         <Footer />
         <Toaster />
-        </ThemeProvider>
       </body>
     </html>
   );

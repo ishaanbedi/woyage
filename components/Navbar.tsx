@@ -8,18 +8,8 @@ const pacifico = Pacifico({
   weight: ["400"],
 });
 import { SheetTrigger, SheetContent, Sheet } from "@/components/ui/sheet";
-import { useTheme } from "next-themes";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Divide, Menu, Moon, Sun } from "lucide-react";
-import { Divider } from "@tremor/react";
-
+import { Menu } from "lucide-react";
 const Navbar = ({ user }: { user: User | null }) => {
-  const { setTheme } = useTheme();
   return (
     <header className="flex h-16 w-full items-center justify-between bg-white px-4 shadow-sm dark:bg-gray-950 md:px-6">
       <div>

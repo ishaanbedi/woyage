@@ -38,7 +38,7 @@ const Stack = ({ user }: { user: User | null }) => {
     {
       name: "Resend",
       logo: "/icons/resend.svg",
-      url: "/",
+      url: "https://resend.com/",
       description: "For sending authentication-related emails.",
     },
   ];
@@ -75,7 +75,7 @@ const Stack = ({ user }: { user: User | null }) => {
         <div className="flex justify-center space-x-4 mt-8">
           {user ? (
             <Link href="/dashboard">
-              <Button>Dashboard</Button>
+              <Button>Go to Dashboard</Button>
             </Link>
           ) : (
             <Link href="/login">

@@ -1,14 +1,14 @@
 "use client";
 import { Card, CardContent } from "./ui/card";
-import { Plus, FileCode2, PartyPopper } from "lucide-react";
+import { FileCode2, PartyPopper } from "lucide-react";
 import { type User } from "@supabase/supabase-js";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import { GitHubLogoIcon, PlusCircledIcon } from "@radix-ui/react-icons";
 const Steps = ({ user }: { user: User | null }) => {
   const steps: { icon: any; title: string; description: string }[] = [
     {
-      icon: Plus,
+      icon: PlusCircledIcon,
       title: "Add your first site",
       description: "In dashboard, click on 'Add Site' and add the domain name.",
     },
@@ -56,7 +56,7 @@ const Steps = ({ user }: { user: User | null }) => {
         <div className="flex justify-center">
           {user ? (
             <Link href="/dashboard">
-              <Button>Go to Dashboard</Button>
+              <Button>Go to Dashboard &rarr;</Button>
             </Link>
           ) : (
             <Link href="/login">

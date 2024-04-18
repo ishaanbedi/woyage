@@ -134,7 +134,16 @@ const SitesList = ({ user }: { user: User }) => {
   return (
     <section className="max-w-4xl mx-auto">
       {sites.length === 0 ? (
-        <p>No sites added yet.</p>
+
+        <div>
+          <h1 className="text-xl text-center">Add your first site to get started now!</h1>
+          <div className="h-96 rounded flex flex-row justify-center border-dotted border-4 border-black mt-5">
+            <div className=" h-full flex  align-middle">
+              <img src="https://static.vecteezy.com/system/resources/previews/010/160/090/original/add-icon-sign-symbol-design-free-png.png" className="h-40 my-auto" alt="" />
+            </div>
+            {/* <img src="https://illustrations.popsy.co/white/keynote-presentation.svg" className="w-80 h-80 my-auto" alt="" /> */}
+          </div>
+        </div>
       ) : (
         <Table>
           <TableHeader>

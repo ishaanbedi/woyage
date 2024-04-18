@@ -47,9 +47,9 @@ const HeroSection = ({ user }: { user: User | null }) => {
         </div>
         <Image
           alt="Hero"
-          className="mx-auto aspect-[3/1] overflow-hidden rounded-t-xl object-cover"
+          className="mx-auto aspect-video object-cover border p-2"
           height="300"
-          src="https://cdn.sanity.io/images/tlr8oxjg/production/fdf314615dab9455b1e163ae8ab698abde8453c8-1456x816.png?w=3840&q=100&fit=clip&auto=format"
+          src="/screenshots/dashboard-screenshot.png"
           width="1270"
         />
       </div>

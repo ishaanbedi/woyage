@@ -91,6 +91,14 @@ const Stack = ({ user }: { user: User | null }) => {
             </Button>
           </Link>
         </div>
+        <Link
+          href="https://www.github.com/ishaanbedi/supalytics"
+          target="_blank"
+        >
+          <Button variant="ghost" className="underline underline-offset-4">
+            You can also self-host this project &rarr;
+          </Button>
+        </Link>
       </div>
     </section>
   );

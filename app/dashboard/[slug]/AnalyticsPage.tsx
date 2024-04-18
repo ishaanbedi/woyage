@@ -9,6 +9,7 @@ import Link from "next/link";
 import DevicesCard from "./DevicesCard";
 import CountryCard from "./CountryCard";
 import PathsCard from "./PathsCard";
+import ReferrersCard from "./ReferrersCard";
 
 interface Analytics {
   id: string;
@@ -140,7 +141,7 @@ const AnalyticsPage = ({
         <DevicesCard data={data} />
         <CountryCard data={data} />
         <PathsCard data={data} />
-        <CountryCard data={data} />
+        <ReferrersCard data={data} />
       </div>
     </section>
   );

@@ -51,15 +51,9 @@ function post(a) {
 
 (() => {
   "use strict";
-  var initalTrack = 0;
-
   const handleRouteChange = () => {
     track();
-    initalTrack++;
   };
-  if (initalTrack === 0) {
-    track();
-  }
 
   const originalPushState = history.pushState;
   const originalReplaceState = history.replaceState;

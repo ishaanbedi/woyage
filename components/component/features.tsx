@@ -28,7 +28,7 @@ export function Features() {
     {
       title: "Languages",
       description:
-        "Analyze the languages your visitors speak, and tailor your content.",
+        "Analyze the languages your visitors speak, to tailor your content.",
       icon: <LanguagesIcon className="w-12 h-12" />,
     },
     {
@@ -63,17 +63,23 @@ export function Features() {
             </p>
           </div>
         </div>
-        <div className="mx-auto grid max-w-3xl items-start gap-6 min-[600px]:grid-cols-3 py-12 md:gap-10 md:max-w-5xl lg:grid-cols-3 grid-cols-2 lg:gap-8 lg:max-w-6xl">
+        <div className="mx-auto grid max-w-3xl items-start min-[600px]:grid-cols-3 py-12 md:max-w-5xl lg:grid-cols-3 grid-cols-2 gap-2 lg:max-w-6xl">
           {features.map((feature, index) => (
             <Card
               key={index}
-              className="flex flex-col items-center justify-center space-y-2 p-3 min-h-64 shadow-none hover:border hover:shadow"
+              className="flex flex-col items-center lg:md:sm:justify-center justify-normal space-y-2 p-3 min-h-52 shadow-none hover:border hover:shadow"
             >
-              <div className="flex items-center justify-center w-16 h-16 p-4 text-white bg-primary rounded-full">
-                {feature.icon}
+              <div className="flex justify-center items-center flex-col">
+                <div className="flex items-center justify-center w-16 h-16 p-4 text-white bg-primary rounded-full">
+                  {feature.icon}
+                </div>
+                <h2 className="lg:md:sm:text-xl font-bold text-center">
+                  {feature.title}
+                </h2>
               </div>
-              <h2 className="text-xl font-bold text-center">{feature.title}</h2>
-              <p className="text-gray-500 text-center">{feature.description}</p>
+              <p className="text-primary/50 lg:md:sm:text-[1rem] text-sm text-center">
+                {feature.description}
+              </p>
             </Card>
           ))}
         </div>

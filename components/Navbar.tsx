@@ -9,9 +9,7 @@ const pacifico = Pacifico({
 });
 import { SheetTrigger, SheetContent, Sheet } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import { useRouter } from "next/navigation";
 const Navbar = ({ user }: { user: User | null }) => {
-  const router = useRouter();
   return (
     <header className="flex h-16 w-full items-center justify-between bg-white px-4 shadow-sm dark:bg-gray-950 md:px-6">
       <div>
@@ -24,14 +22,12 @@ const Navbar = ({ user }: { user: User | null }) => {
       </div>
       <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
         <div className="flex items-center gap-4">
-          <button
+          <Link
             className="hover:underline hover:underline-offset-4"
-            onClick={() => {
-              router.push("/#features");
-            }}
+            href="/features"
           >
             Features
-          </button>
+          </Link>
           <Link
             className="hover:underline hover:underline-offset-4"
             href="/support"

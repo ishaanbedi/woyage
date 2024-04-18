@@ -6,8 +6,10 @@ import {
   TrafficCone,
   UsersRound,
 } from "lucide-react";
-import { Card } from "../ui/card";
-export function Features() {
+import { Card } from "./ui/card";
+import { Button } from "./ui/button";
+import Link from "next/link";
+export function Features({ home }: { home: boolean }) {
   const features: {
     title: string;
     description: string;
@@ -63,7 +65,7 @@ export function Features() {
             </p>
           </div>
         </div>
-        <div className="mx-auto grid max-w-3xl items-start min-[600px]:grid-cols-3 py-12 md:max-w-5xl lg:grid-cols-3 grid-cols-2 gap-2 lg:max-w-6xl">
+        <div className="mx-auto grid max-w-3xl items-start min-[600px]:grid-cols-3 pt-12 md:max-w-5xl lg:grid-cols-3 grid-cols-2 gap-2 lg:max-w-6xl">
           {features.map((feature, index) => (
             <Card
               key={index}
@@ -83,6 +85,11 @@ export function Features() {
             </Card>
           ))}
         </div>
+        {home && (
+          <Link href="/features" className="flex justify-center items-center">
+            <Button className="mt-4">View all features &rarr;</Button>
+          </Link>
+        )}
       </div>
     </section>
   );

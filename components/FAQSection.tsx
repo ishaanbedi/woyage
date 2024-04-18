@@ -35,7 +35,10 @@ const FAQSection = () => {
     },
   ];
   return (
-    <section className="w-full pb-12 md:pb-24 lg:pb-24 mx-auto lg:md:sm:px-0 px-3">
+    <section
+      id="faq"
+      className="w-full pb-12 md:pb-24 lg:pb-24 mx-auto lg:md:sm:px-0 px-3"
+    >
       <h1 className="text-3xl font-bold text-center text-gray-900 md:text-4xl lg:text-5xl">
         Frequently Asked Questions
       </h1>

@@ -50,7 +50,7 @@ export function Features() {
     },
   ];
   return (
-    <section className="w-full py-6">
+    <section className="w-full py-6" id="features">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-2 text-center">
           <div className="space-y-2 flex flex-col justify-center items-center">

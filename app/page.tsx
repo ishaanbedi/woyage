@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import { createClient } from "@/utils/supabase/server";
 import { Features } from "@/components/component/features";
 import HeroSection from "@/components/HeroSection";
+import Steps from "@/components/Steps";
 import { Divider } from "@tremor/react";
 
 export default async function Component() {
@@ -17,9 +18,11 @@ export default async function Component() {
         <Navbar user={user} />
         <HeroSection user={user} />
         <Divider />
-        <Stack user={user} />
-        <Divider />
         <Features />
+        <Divider />
+        <Steps user={user} />
+        <Divider />
+        <Stack user={user} />
         <Divider />
         <FAQSection />
       </main>

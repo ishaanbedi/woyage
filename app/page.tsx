@@ -6,6 +6,7 @@ import Stack from "@/components/Stack";
 import Navbar from "@/components/Navbar";
 import { createClient } from "@/utils/supabase/server";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import { Features } from "@/components/component/features"; 
 
 export default async function Component() {
   const supabase = createClient();
@@ -61,6 +62,7 @@ export default async function Component() {
             </div>
           </div>
         </section>
+        <Features/>
         <Stack user={user} />
         <FAQSection />
       </main>

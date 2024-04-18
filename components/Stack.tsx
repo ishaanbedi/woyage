@@ -79,7 +79,7 @@ const Stack = ({ user }: { user: User | null }) => {
             </Link>
           ) : (
             <Link href="/login">
-              <Button>Get Started</Button>
+              <Button>Get Started Now</Button>
             </Link>
           )}
           <Link
@@ -96,7 +96,7 @@ const Stack = ({ user }: { user: User | null }) => {
           target="_blank"
         >
           <Button variant="ghost" className="underline underline-offset-4">
-            You can also self-host this project &rarr;
+            You can also self-host this project &#8599;
           </Button>
         </Link>
       </div>

@@ -60,7 +60,7 @@ const Steps = ({ user }: { user: User | null }) => {
             </Link>
           ) : (
             <Link href="/login">
-              <Button>Get Started, it's Free</Button>
+              <Button>Get Started, it's Free &rarr;</Button>
             </Link>
           )}
         </div>

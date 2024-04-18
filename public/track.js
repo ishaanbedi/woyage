@@ -29,12 +29,11 @@ async function track() {
     country: await checkCountry(),
     userAgents: userAgents,
     id: a,
-    path: window.location.href,
+    path: window.location.pathname + window.location.search,
     language: language,
     referrer: referrer,
     title: title,
     domain: domain,
-    path: path,
   };
   console.log(object);
   post(object);
@@ -52,10 +51,16 @@ function post(a) {
 
 (() => {
   "use strict";
+  var initalTrack = 0;
 
   const handleRouteChange = () => {
     track();
+    initalTrack++;
   };
+  if (initalTrack === 0) {
+    track();
+  }
+
   const originalPushState = history.pushState;
   const originalReplaceState = history.replaceState;
   history.pushState = function (...args) {

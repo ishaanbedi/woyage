@@ -274,7 +274,7 @@ const SitesList = ({ user }: { user: User }) => {
                                 <Button
                                   onClick={() => {
                                     navigator.clipboard.writeText(
-                                      `<script defer src="${process.env.NEXT_PUBLIC_SITE_URL}/track.js" data-website-id="${site.website_id}"></script>`,
+                                      `<script defer src="${process.env.NEXT_PUBLIC_SITE_URL}/track.js" data-website-id="${selectedSiteSettings?.website_id}"></script>`,
                                     );
                                     toast("Tracking code copied to clipboard.");
                                   }}

@@ -16,7 +16,7 @@ export async function POST(request) {
     },
   );
   const data = await request.json();
-  const { userAgents, country, id, path } = data;
+  const { userAgents, country, id } = data;
   const ua = UAParser(userAgents);
   const browser = ua.browser.name;
   const os = ua.os.name;
@@ -46,7 +46,7 @@ export async function POST(request) {
     referrer: data.referrer,
     os: os,
     device: device,
-    country: data.country,
+    country: country,
     website_id: data.id,
     domain: data.domain,
     language: data.language,

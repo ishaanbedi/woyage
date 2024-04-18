@@ -8,6 +8,8 @@ import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
 import DevicesCard from "./DevicesCard";
 import CountryCard from "./CountryCard";
+import PathsCard from "./PathsCard";
+import ReferrersCard from "./ReferrersCard";
 
 interface Analytics {
   id: string;
@@ -135,9 +137,11 @@ const AnalyticsPage = ({
         <SelectionToggle dateRange={dateRange} setDateRange={setDateRange} />
       </div>
       <ViewsBarChart data={data} dateRange={dateRange} />
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         <DevicesCard data={data} />
         <CountryCard data={data} />
+        <PathsCard data={data} />
+        <ReferrersCard data={data} />
       </div>
     </section>
   );

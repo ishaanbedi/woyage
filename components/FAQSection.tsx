@@ -26,7 +26,7 @@ const FAQSection = () => {
       answer: `You can submit your issue reports and feature requests on our GitHub repository. If the issue is related to some serious bug or security vulnerability, please reach out to me at hey@ishaanbedi.com.`,
     },
     {
-      question: "Is Supalytics actually free to use? How and why?",
+      question: "Is Supalytics free to use?",
       answer: `Currently, all features of Supalytics is offered for free as we're in the early stages of development. However, in future, there may be pricing plans tailored to different user needs..`,
     },
     {
@@ -44,14 +44,12 @@ const FAQSection = () => {
           {FAQs.map((faq, index) => (
             <AccordionItem value={`item-${index}`} key={index}>
               <AccordionTrigger>
-                <p className="text-lg text-center font-semibold text-gray-800">
+                <p className="text-lg font-semibold text-gray-800">
                   {faq.question}
                 </p>
               </AccordionTrigger>
               <AccordionContent>
-                <p className="text-sm lg:md:sm:text-left text-center">
-                  {faq.answer}
-                </p>
+                <p className="text-[1rem]">{faq.answer}</p>
               </AccordionContent>
             </AccordionItem>
           ))}

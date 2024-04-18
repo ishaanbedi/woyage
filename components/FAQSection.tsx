@@ -17,7 +17,7 @@ const FAQSection = () => {
       answer: `We have a lightweight script that runs on the visitor's browser and collects information, namely, country, user agent, path, language, referrer, title, and domain. Some information is parsed from the user agent string, on the server-side, to provide more insights. No kind of personal data is collected.`,
     },
     {
-      question: "Do you store cookies?",
+      question: `Do you store any cookies on my visitor's computer?`,
       answer: `No, we do not store any cookies on your visitor's computer. Authentication related cookies (that too via Supabase) are stored on your (the website owner's) computer to keep you logged in when you use this site. If you have never created an account, then no cookies are stored on your computer, and the tracking script does not store any cookies on your visitor's computer.`,
     },
     {
@@ -26,7 +26,7 @@ const FAQSection = () => {
       answer: `You can submit your issue reports and feature requests on our GitHub repository. If the issue is related to some serious bug or security vulnerability, please reach out to me at hey@ishaanbedi.com.`,
     },
     {
-      question: "Is Supalytics free to use?",
+      question: "Is Supalytics actually free to use? How and why?",
       answer: `Currently, all features of Supalytics is offered for free as we're in the early stages of development. However, in future, there may be pricing plans tailored to different user needs..`,
     },
     {
@@ -44,7 +44,7 @@ const FAQSection = () => {
           {FAQs.map((faq, index) => (
             <AccordionItem value={`item-${index}`} key={index}>
               <AccordionTrigger>
-                <p className="text-lg font-semibold text-gray-800">
+                <p className="text-lg text-center font-semibold text-gray-800">
                   {faq.question}
                 </p>
               </AccordionTrigger>

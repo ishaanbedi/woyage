@@ -10,15 +10,34 @@ async function checkCountry() {
 async function track() {
   let a = detect_website_id();
   if (a === "Unknown" || !a || a === "") {
+    console.error("Website ID not found");
     return;
   }
+  let language =
+    navigator.language ||
+    navigator.userLanguage ||
+    navigator.browserLanguage ||
+    navigator.systemLanguage ||
+    "Unknown";
+  let referrer = document.referrer || "";
+  let title = document.title || "Unknown";
+  let url = window.location.href;
+  let domain = url.split("/")[2];
+  let path = url.split("/")[3] ? `/${url.split("/")[3]}` : "/";
   var userAgents = navigator.userAgent;
-  post({
+  var object = {
     country: await checkCountry(),
     userAgents: userAgents,
     id: a,
     path: window.location.href,
-  });
+    language: language,
+    referrer: referrer,
+    title: title,
+    domain: domain,
+    path: path,
+  };
+  console.log(object);
+  post(object);
 }
 function post(a) {
   fetch("https://supalytics.vercel.app/api/public-script", {
@@ -30,8 +49,10 @@ function post(a) {
     console.error("Error:", a);
   });
 }
+
 (() => {
   "use strict";
+  track();
   const handleRouteChange = () => {
     track();
   };

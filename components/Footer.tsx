@@ -3,7 +3,14 @@ const Footer = () => {
   return (
     <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
       <p className="text-xs text-gray-500 dark:text-gray-400">
-        {process.env.NEXT_PUBLIC_SITE_NAME} | &copy; {new Date().getFullYear()}
+        {process.env.NEXT_PUBLIC_SITE_NAME} | &copy; {new Date().getFullYear()}{" "}
+        <Link
+          href="https://www.ishaanbedi.com"
+          target="_blank"
+          className="underline underline-offset-4"
+        >
+          Ishaan Bedi
+        </Link>
       </p>
       <nav className="sm:ml-auto flex gap-4 sm:gap-6">
         <Link

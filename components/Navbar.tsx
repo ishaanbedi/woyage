@@ -71,44 +71,53 @@ const Navbar = ({ user }: { user: User | null }) => {
                   {process.env.NEXT_PUBLIC_SITE_NAME}
                 </span>
               </Link>
-              <div className="justify-between flex flex-col">
-                <div className="flex flex-col gap-4 mt-4 w-full">
+              <div className="justify-center text-center items-center flex flex-col">
+                <div className="flex flex-col gap-4 mt-12 w-full">
                   <Link
                     className="font-medium hover:underline hover:underline-offset-4 w-full"
                     href="/features"
                   >
-                    <Button className="w-full" variant={"outline"}>
-                      Features
-                    </Button>
+                    Features
                   </Link>
 
                   <Link
                     className="font-medium hover:underline hover:underline-offset-4 w-full"
                     href="/support"
                   >
-                    <Button className="w-full" variant={"outline"}>
-                      Support
-                    </Button>
+                    Support
                   </Link>
-                </div>
-                <div className="flex space-x-2 mt-4 w-full">
-                  <Link
-                    className="font-medium hover:underline hover:underline-offset-4 w-full"
-                    href="/dashboard"
-                  >
-                    <Button className="w-full" variant={"outline"}>
-                      Dashboard
-                    </Button>
-                  </Link>
+                  {user ? (
+                    <>
+                      <Link
+                        className="font-medium hover:underline hover:underline-offset-4 w-full"
+                        href="/dashboard"
+                      >
+                        Dashboard
+                      </Link>
 
-                  <Link
-                    className="font-medium hover:underline hover:underline-offset-4 w-full"
-                    href="/logout"
-                  >
-                    <Button className="w-full" variant={"destructive"}>
-                      Logout
-                    </Button>
-                  </Link>
+                      <Link
+                        className="font-medium hover:underline hover:underline-offset-4 w-full"
+                        href="/logout"
+                      >
+                        Logout
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        className="font-medium hover:underline hover:underline-offset-4 w-full"
+                        href="/signup"
+                      >
+                        Get Started
+                      </Link>
+                      <Link
+                        className="font-medium hover:underline hover:underline-offset-4 w-full"
+                        href="https://www.github.com/ishaanbedi/supalytics"
+                      >
+                        Source Code
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

@@ -50,11 +50,11 @@ function getPathStats(logs: Analytics[]): PathStats[] {
 }
 const PathsCard = ({ data }: { data: Analytics[] }) => {
   return (
-    <Card className="mt-2 h-96 overflow-y-auto">
+    <Card className="mt-2 h-96">
       <p className="text-tremor-metric text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
         Paths
       </p>
-      <div className="mt-3">
+      <div className="mt-3 h-72 overflow-y-auto">
         <BarList data={getPathStats(data)} />
       </div>
     </Card>

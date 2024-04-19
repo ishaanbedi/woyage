@@ -6,6 +6,8 @@ import { Features } from "@/components/features";
 import HeroSection from "@/components/HeroSection";
 import Steps from "@/components/Steps";
 import { Divider } from "@tremor/react";
+import { OpenSourced } from "@/components/OpenSource";
+import HackathonBanner from "@/components/HackathonBanner";
 
 export default async function Component() {
   const supabase = createClient();
@@ -25,6 +27,7 @@ export default async function Component() {
         <Stack user={user} />
         <Divider />
         <FAQSection />
+        <HackathonBanner />
       </main>
     </div>
   );

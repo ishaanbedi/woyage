@@ -26,7 +26,7 @@ interface Analytics {
 }
 const DevicesCard = ({ data }: { data: Analytics[] }) => {
   return (
-    <Card className="mt-2 h-96 overflow-y-auto">
+    <Card className="mt-2 h-96">
       <p className="text-tremor-metric text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
         Devices
       </p>
@@ -38,13 +38,19 @@ const DevicesCard = ({ data }: { data: Analytics[] }) => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <BrowsersCard data={data} />
+            <div className="mt-3 h-60 overflow-y-auto">
+              <BrowsersCard data={data} />
+            </div>
           </TabPanel>
           <TabPanel>
-            <DeviceCard data={data} />
+            <div className="mt-3 h-60 overflow-y-auto">
+              <DeviceCard data={data} />
+            </div>
           </TabPanel>
           <TabPanel>
-            <OSCard data={data} />
+            <div className="mt-3 h-60 overflow-y-auto">
+              <OSCard data={data} />
+            </div>
           </TabPanel>
         </TabPanels>
       </TabGroup>

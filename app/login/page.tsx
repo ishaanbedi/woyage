@@ -5,7 +5,20 @@ import { SubmitButton } from "./submit-button";
 import { ArrowLeft } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { ArrowLeftIcon } from "@radix-ui/react-icons";
 export default async function Login({
   searchParams,
 }: {
@@ -101,3 +114,10 @@ export default async function Login({
     );
   }
 }
+
+const BackButton = () => (
+  <Link href="/" className="absolute left-8 top-8 flex items-center gap-2">
+    <ArrowLeftIcon className="w-5 h-5" />
+    <Label>Home</Label>
+  </Link>
+);

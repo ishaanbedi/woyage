@@ -23,13 +23,16 @@ interface Analytics {
   pk: string;
   domain: string;
   added_time: string;
+  language: string;
 }
 const AnalyticsPage = ({
   user,
   params,
+  domain,
 }: {
   user: User;
   params: { slug: string };
+  domain: string;
 }) => {
   const userEmail = user.email;
   const supabase = createClient();
@@ -133,7 +136,9 @@ const AnalyticsPage = ({
   }
   return (
     <section className="container mx-auto p-4">
-      <div className="flex justify-end items-center mb-4">
+      <div className="flex justify-between items-center mb-4">
+        {domain && <h1 className="text-2xl font-semibold">{domain}</h1>}
+
         <SelectionToggle dateRange={dateRange} setDateRange={setDateRange} />
       </div>
       <ViewsBarChart data={data} dateRange={dateRange} />

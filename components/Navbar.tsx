@@ -13,13 +13,16 @@ const Navbar = ({ user }: { user: User | null }) => {
   return (
     <header className="flex h-16 w-full items-center justify-between bg-white px-4 shadow-sm dark:bg-gray-950 md:px-6">
       <div>
-        <Link
-          className={`flex items-center justify-center text-xl ${pacifico.className}`}
-          href="/"
-        >
-          {process.env.NEXT_PUBLIC_SITE_NAME}
-        </Link>
+        <a href="/">
+          <Button
+            variant={"ghost"}
+            className={`flex items-center p-0.5 justify-center text-xl ${pacifico.className}`}
+          >
+            {process.env.NEXT_PUBLIC_SITE_NAME}
+          </Button>
+        </a>
       </div>
+
       <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
         <div className="flex items-center gap-4">
           <Link
@@ -49,7 +52,7 @@ const Navbar = ({ user }: { user: User | null }) => {
               </Link>
             </div>
           ) : (
-            <Link href={`/login`}>
+            <Link href={`/signup`}>
               <Button size={"sm"}>Get Started Now</Button>
             </Link>
           )}
@@ -71,44 +74,53 @@ const Navbar = ({ user }: { user: User | null }) => {
                   {process.env.NEXT_PUBLIC_SITE_NAME}
                 </span>
               </Link>
-              <div className="justify-between flex flex-col">
-                <div className="flex flex-col gap-4 mt-4 w-full">
+              <div className="justify-center text-center items-center flex flex-col">
+                <div className="flex flex-col gap-4 mt-12 w-full">
                   <Link
                     className="font-medium hover:underline hover:underline-offset-4 w-full"
                     href="/features"
                   >
-                    <Button className="w-full" variant={"outline"}>
-                      Features
-                    </Button>
+                    Features
                   </Link>
 
                   <Link
                     className="font-medium hover:underline hover:underline-offset-4 w-full"
                     href="/support"
                   >
-                    <Button className="w-full" variant={"outline"}>
-                      Support
-                    </Button>
+                    Support
                   </Link>
-                </div>
-                <div className="flex space-x-2 mt-4 w-full">
-                  <Link
-                    className="font-medium hover:underline hover:underline-offset-4 w-full"
-                    href="/dashboard"
-                  >
-                    <Button className="w-full" variant={"outline"}>
-                      Dashboard
-                    </Button>
-                  </Link>
+                  {user ? (
+                    <>
+                      <Link
+                        className="font-medium hover:underline hover:underline-offset-4 w-full"
+                        href="/dashboard"
+                      >
+                        Dashboard
+                      </Link>
 
-                  <Link
-                    className="font-medium hover:underline hover:underline-offset-4 w-full"
-                    href="/logout"
-                  >
-                    <Button className="w-full" variant={"destructive"}>
-                      Logout
-                    </Button>
-                  </Link>
+                      <Link
+                        className="font-medium hover:underline hover:underline-offset-4 w-full"
+                        href="/logout"
+                      >
+                        Logout
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        className="font-medium hover:underline hover:underline-offset-4 w-full"
+                        href="/signup"
+                      >
+                        Get Started
+                      </Link>
+                      <Link
+                        className="font-medium hover:underline hover:underline-offset-4 w-full"
+                        href="https://www.github.com/ishaanbedi/supalytics"
+                      >
+                        Source Code
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -116,13 +128,13 @@ const Navbar = ({ user }: { user: User | null }) => {
               <div className="flex justify-between items-center space-x-2 mt-4 w-full">
                 <Link
                   className="font-medium hover:underline hover:underline-offset-4 w-full"
-                  href="/terms"
+                  href="/"
                 >
                   Terms
                 </Link>
                 <Link
                   className="font-medium hover:underline hover:underline-offset-4 w-full"
-                  href="/privacy"
+                  href="/"
                 >
                   Privacy
                 </Link>

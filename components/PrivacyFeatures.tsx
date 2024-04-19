@@ -36,7 +36,7 @@ export function PrivacyFeatures() {
     },
   ];
   return (
-    <section className="w-full">
+    <section className="w-full my-16">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-2 text-center">
           <div className="space-y-2 flex flex-col justify-center items-center">

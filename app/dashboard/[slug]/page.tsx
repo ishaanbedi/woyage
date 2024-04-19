@@ -2,6 +2,9 @@ import { createClient } from "@/utils/supabase/server";
 import AnalyticsPage from "./AnalyticsPage";
 import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Footer from "@/components/Footer";
 export default async function SitesDynamicPage({
   params,
 }: {
@@ -21,11 +24,16 @@ export default async function SitesDynamicPage({
       .eq("website_id", params.slug)
       .single();
     if (error) {
-      console.error(error);
       return (
-        <div>
-          <h1>Not Found</h1>
-          <p>Try again later</p>
+        <div className="h-[92vh] flex flex-col space-y-3 items-center justify-center">
+          <h1 className="text-3xl font-bold">Site Not Found</h1>
+          <p className="max-w-[400px] text-center">
+            Possible reasons could be that the site does not exist or you do not
+            have access to it.
+          </p>
+          <Link href="/dashboard">
+            <Button>Go back to dashboard</Button>
+          </Link>
         </div>
       );
     }
@@ -48,7 +56,8 @@ export default async function SitesDynamicPage({
     return (
       <div>
         <Navbar user={user} />
-        <AnalyticsPage user={user} params={params} />
+
+        <AnalyticsPage domain={data.domain_name} user={user} params={params} />
       </div>
     );
   }

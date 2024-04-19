@@ -33,6 +33,7 @@ interface Analytics {
   pk: string;
   domain: string;
   added_time: string;
+  language: string;
 }
 const CountryCard = ({ data }: { data: Analytics[] }) => {
   function getCountryStats(logs: Analytics[]): CountryStats[] {
@@ -78,15 +79,43 @@ const CountryCard = ({ data }: { data: Analytics[] }) => {
 
     return countryStatsWithFlag;
   }
+  function getLanguageStats(logs: Analytics[]): CountryStats[] {
+    const languageCounts: {
+      [country: string]: { count: number; originalCase: string };
+    } = {};
+    logs.forEach((log) => {
+      const countryName = log.language.toLowerCase();
+      const originalCaseName = log.language;
+      if (languageCounts[countryName]) {
+        languageCounts[countryName].count++;
+      } else {
+        languageCounts[countryName] = {
+          count: 1,
+          originalCase: originalCaseName,
+        };
+      }
+    });
+
+    var countryStats: CountryStats[] = [];
+    for (const country in languageCounts) {
+      countryStats.push({
+        name: languageCounts[country].originalCase,
+        value: languageCounts[country].count,
+      });
+    }
+
+    return countryStats;
+  }
 
   return (
     <Card className="mt-2 h-96 overflow-y-auto">
       <p className="text-tremor-metric text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
-        Countries
+        Countries & Languages
       </p>
       <TabGroup>
         <TabList className="mt-4">
           <Tab>Countries</Tab>
+          <Tab>Languages</Tab>
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
@@ -103,6 +132,9 @@ const CountryCard = ({ data }: { data: Analytics[] }) => {
         <TabPanels>
           <TabPanel>
             <BarList data={getCountryStats(data)} />
+          </TabPanel>
+          <TabPanel>
+            <BarList data={getLanguageStats(data)} />
           </TabPanel>
         </TabPanels>
       </TabGroup>

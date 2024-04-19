@@ -128,13 +128,13 @@ const Navbar = ({ user }: { user: User | null }) => {
               <div className="flex justify-between items-center space-x-2 mt-4 w-full">
                 <Link
                   className="font-medium hover:underline hover:underline-offset-4 w-full"
-                  href="/"
+                  href="/terms"
                 >
                   Terms
                 </Link>
                 <Link
                   className="font-medium hover:underline hover:underline-offset-4 w-full"
-                  href="/"
+                  href="/privacy"
                 >
                   Privacy
                 </Link>

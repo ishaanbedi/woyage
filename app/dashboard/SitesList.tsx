@@ -100,8 +100,12 @@ const SitesList = ({ user }: { user: User }) => {
       .update({ domain_name: updatedSiteDomain })
       .eq("domain_name", selectedSiteSettings?.domain_name);
     if (error) {
+      if (error.code === "23505") {
+        toast.error("Site already exists.");
+      } else {
+        toast.error("Failed to add site");
+      }
       setLoading(false);
-      console.error("error updating site:", error);
       return;
     }
     setLoading(false);

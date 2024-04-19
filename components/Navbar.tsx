@@ -13,13 +13,16 @@ const Navbar = ({ user }: { user: User | null }) => {
   return (
     <header className="flex h-16 w-full items-center justify-between bg-white px-4 shadow-sm dark:bg-gray-950 md:px-6">
       <div>
-        <Link
-          className={`flex items-center justify-center text-xl ${pacifico.className}`}
-          href="/"
-        >
-          {process.env.NEXT_PUBLIC_SITE_NAME}
-        </Link>
+        <a href="/">
+          <Button
+            variant={"ghost"}
+            className={`flex items-center p-0.5 justify-center text-xl ${pacifico.className}`}
+          >
+            {process.env.NEXT_PUBLIC_SITE_NAME}
+          </Button>
+        </a>
       </div>
+
       <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
         <div className="flex items-center gap-4">
           <Link

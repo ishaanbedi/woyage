@@ -10,27 +10,29 @@ const HackathonBanner = () => {
         <div className="grid grid-cols-1 lg:h-[75vh] lg:grid-cols-2">
           <div className="relative z-10 lg:py-16">
             <div className="relative h-64 sm:h-80 lg:h-full">
-              <Image
-                alt="Hero"
-                className="mx-auto lg:md:sm:aspect-video  object-cover border p-2"
-                height="300"
-                src="/screenshots/supabase.png"
-                width="1270"
-              />
+              <Link href="https://www.supabase.com" target="_blank">
+                <Image
+                  alt="Hero"
+                  className="mx-auto lg:md:sm:aspect-video  object-cover border p-2"
+                  height="300"
+                  src="/screenshots/supabase.png"
+                  width="1270"
+                />
+              </Link>
             </div>
           </div>
 
           <div className="relative flex items-center bg-secondary">
             <span className="hidden lg:absolute lg:inset-y-0 lg:-start-16 lg:block lg:w-16 lg:bg-secondary"></span>
             <div className="p-8 sm:p-16 lg:p-24">
-              <h2 className="text-2xl font-bold sm:text-3xl">
+              <h2 className="text-2xl text-center font-bold sm:text-3xl">
                 Built during the Supabase Open Source Hackathon 2024
               </h2>
 
-              <p className="mt-4 text-gray-600">
+              <p className="mt-4 text-gray-600 text-center">
                 {`${process.env.NEXT_PUBLIC_SITE_NAME} was built during the Supabase Open Source Hackathon 2024. The hackathon was a great opportunity to learn new technologies and build something cool.`}
               </p>
-              <div className="mt-8">
+              <div className="mt-8 flex justify-center items-center">
                 <Link
                   href="https://www.github.com/ishaanbedi/supalytics"
                   target="_blank"

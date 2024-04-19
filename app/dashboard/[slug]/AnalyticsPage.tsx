@@ -136,8 +136,12 @@ const AnalyticsPage = ({
   }
   return (
     <section className="container mx-auto p-4">
-      <div className="flex justify-between items-center mb-4">
-        {domain && <h1 className="text-2xl font-semibold">{domain}</h1>}
+      <div className="flex lg:md:sm:justify-between justify-end items-center mb-4">
+        {domain && (
+          <h1 className="text-2xl font-semibold lg:md:sm:block hidden">
+            {domain}
+          </h1>
+        )}
 
         <SelectionToggle dateRange={dateRange} setDateRange={setDateRange} />
       </div>

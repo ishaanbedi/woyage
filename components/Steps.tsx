@@ -83,7 +83,7 @@ const Steps = ({ user }: { user: User | null }) => {
               <Button>Go to Dashboard &rarr;</Button>
             </Link>
           ) : (
-            <Link href="/login">
+            <Link href="/signup">
               <Button>Get Started, it's Free &rarr;</Button>
             </Link>
           )}

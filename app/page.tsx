@@ -27,7 +27,6 @@ export default async function Component() {
         <Stack user={user} />
         <Divider />
         <FAQSection />
-        <Divider />
         <HackathonBanner />
       </main>
     </div>

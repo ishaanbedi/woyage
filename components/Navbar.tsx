@@ -49,7 +49,7 @@ const Navbar = ({ user }: { user: User | null }) => {
               </Link>
             </div>
           ) : (
-            <Link href={`/login`}>
+            <Link href={`/signup`}>
               <Button size={"sm"}>Get Started Now</Button>
             </Link>
           )}

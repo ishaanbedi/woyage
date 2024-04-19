@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+const isValidDomain = require("is-valid-domain");
 import {
   Dialog,
   DialogContent,
@@ -13,7 +14,6 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { type User } from "@supabase/supabase-js";
-const isValidDomain = require("is-valid-domain");
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/toaster";
 const NewSiteDialog = ({ user }: { user: User }) => {
@@ -36,7 +36,11 @@ const NewSiteDialog = ({ user }: { user: User }) => {
       .from("site_domains")
       .insert([{ email: user.email, domain_name: domain }]);
     if (error) {
-      console.error("error adding site:", error);
+      if (error.code === "23505") {
+        toast.error("Site already exists.");
+      } else {
+        toast.error("Failed to add site");
+      }
       return;
     }
     setIsOpen(false);
@@ -44,7 +48,9 @@ const NewSiteDialog = ({ user }: { user: User }) => {
   };
   return (
     <div>
-      <Button onClick={() => setIsOpen(true)}>New Site +</Button>
+      <Button size={"lg"} onClick={() => setIsOpen(true)}>
+        New Site +
+      </Button>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -64,6 +70,10 @@ const NewSiteDialog = ({ user }: { user: User }) => {
                 onChange={(e) => setDomainName(e.target.value)}
               />
             </div>
+            <span className="text-[0.7rem] flex justify-center items-center pt-2 text-center text-primary/50">
+              Make sure to add your domain without the protocol (http:// or
+              https://) and without any path (e.g. /about).
+            </span>
           </div>
           <DialogFooter>
             <Button

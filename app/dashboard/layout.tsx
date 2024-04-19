@@ -35,6 +35,7 @@ export default function RootLayout({
       </Head>
       <body className={bricolage_grotesque.variable + comfortaa.variable}>
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

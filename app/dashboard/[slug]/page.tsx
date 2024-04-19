@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 export default async function SitesDynamicPage({
   params,
 }: {
@@ -55,7 +56,8 @@ export default async function SitesDynamicPage({
     return (
       <div>
         <Navbar user={user} />
-        <AnalyticsPage user={user} params={params} />
+
+        <AnalyticsPage domain={data.domain_name} user={user} params={params} />
       </div>
     );
   }

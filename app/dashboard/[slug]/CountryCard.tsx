@@ -108,7 +108,7 @@ const CountryCard = ({ data }: { data: Analytics[] }) => {
   }
 
   return (
-    <Card className="mt-2 h-96 overflow-y-auto">
+    <Card className="mt-2 h-96">
       <p className="text-tremor-metric text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
         Countries & Languages
       </p>
@@ -131,10 +131,14 @@ const CountryCard = ({ data }: { data: Analytics[] }) => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <BarList data={getCountryStats(data)} />
+            <div className="mt-3 h-60 overflow-y-auto">
+              <BarList data={getCountryStats(data)} />
+            </div>
           </TabPanel>
           <TabPanel>
-            <BarList data={getLanguageStats(data)} />
+            <div className="mt-3 h-60 overflow-y-auto">
+              <BarList data={getLanguageStats(data)} />
+            </div>
           </TabPanel>
         </TabPanels>
       </TabGroup>

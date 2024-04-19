@@ -19,6 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
+
 export default async function Login({
   searchParams,
 }: {
@@ -53,13 +54,7 @@ export default async function Login({
     return (
       <section className="flex h-screen items-center justify-center bg-background">
         <div className="w-full max-w-md">
-          <Link
-            href="/"
-            className="absolute top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm sm:left-8"
-          >
-            <ArrowLeft size={16} className="mr-2" />
-            Back
-          </Link>
+          <BackButton />
           <h1 className="text-3xl font-bold text-center mb-4">Sign In</h1>
           <div className="p-4 rounded-lg border bg-card text-card-foreground shadow-sm">
             <div className="flex flex-col space-y-1.5 pt-6 pb-9">
@@ -116,7 +111,7 @@ export default async function Login({
 }
 
 const BackButton = () => (
-  <Link href="/" className="absolute left-8 top-8 flex items-center gap-2">
+  <Link href="/" className="absolute top-8 left-8 flex items-center gap-2">
     <ArrowLeftIcon className="w-5 h-5" />
     <Label>Home</Label>
   </Link>

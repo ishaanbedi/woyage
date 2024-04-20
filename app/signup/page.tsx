@@ -7,7 +7,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
-
+import { type Metadata } from "next";
+export const metadata: Metadata = {
+  title: 'Sign Up',
+};
 export default async function SignUp({
   searchParams,
 }: {

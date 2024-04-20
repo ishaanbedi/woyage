@@ -8,7 +8,10 @@ import { Input } from "@/components/ui/input";
 import Navbar from "@/components/Navbar";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import ForgotPassword from "@/components/ForgotPassword";
-
+import { type Metadata } from "next";
+export const metadata: Metadata = {
+  title: 'Login',
+};
 export default async function Login({
   searchParams,
 }: {

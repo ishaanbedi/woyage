@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Bricolage_Grotesque } from "next/font/google";
 import { Comfortaa } from "next/font/google";
 import "./styles.css";
@@ -6,6 +7,32 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/components/Footer";
 import Head from "next/head";
+export const metadata: Metadata = {
+  metadataBase: new URL(`https://supalytics.io`),
+  title: {
+    default: 'Supalytics',
+    template: 'Supalytics | %s',
+  },
+  description: 'An open-sourced & privacy-focused analytics platform for your website.',
+  openGraph: {
+    title: 'Supalytics',
+    description: 'An open-sourced & privacy-focused analytics platform for your website.',
+    url: 'https://supalytics.io',
+    siteName: 'Supalytics',
+    locale: 'en_US',
+    type: "website",
+    images: [
+      {
+        url: "https://www.supalytics.co/og.png",
+      }
+    ],
+  },
+  twitter: {
+    title: 'Supalytics',
+    card: "summary_large_image",
+  },
+};
+
 const bricolage_grotesque = Bricolage_Grotesque({
   subsets: ["latin"],
   display: "swap",
@@ -16,16 +43,6 @@ const comfortaa = Comfortaa({
   display: "swap",
   variable: "--font-comfortaa",
 });
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
-
-export const metadata = {
-  metadataBase: new URL(defaultUrl),
-  title: process.env.NEXT_PUBLIC_SITE_NAME,
-  description: `${process.env.NEXT_PUBLIC_SITE_NAME} is a free and open-source platform for tracking analytics on your website.`,
-};
-
 export default function RootLayout({
   children,
 }: {
@@ -44,3 +61,4 @@ export default function RootLayout({
     </html>
   );
 }
+

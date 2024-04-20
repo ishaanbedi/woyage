@@ -4,9 +4,12 @@ import { createClient } from "@/utils/supabase/server";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { type Metadata } from "next";
+export const metadata: Metadata = {
+  title: 'Logout',
+};
 export default async function AuthButton() {
   const supabase = createClient();
-
   const {
     data: { user },
   } = await supabase.auth.getUser();

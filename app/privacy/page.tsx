@@ -1,6 +1,11 @@
+import { type Metadata } from "next";
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+};
 const Privacy = () => {
   const lastUpdated = "19 April 2024";
   const appName = process.env.NEXT_PUBLIC_SITE_NAME;
+  
   return (
     <div className="terms-page prose max-w-xl px-2 mx-auto py-3">
       <h1>{appName} Privacy Policy</h1>

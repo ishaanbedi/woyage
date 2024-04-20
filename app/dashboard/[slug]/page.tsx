@@ -4,7 +4,10 @@ import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Footer from "@/components/Footer";
+import { type Metadata } from "next";
+export const metadata: Metadata = {
+  title: 'Analytics',
+};
 export default async function SitesDynamicPage({
   params,
 }: {

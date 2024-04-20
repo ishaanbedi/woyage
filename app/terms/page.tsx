@@ -1,3 +1,11 @@
+const defaultUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}/terms`
+  : "http://localhost:3000/terms";
+
+import { type Metadata } from "next";
+export const metadata: Metadata = {
+  title: 'Terms of Service',
+};
 const Terms = () => {
   const lastUpdated = "19 April 2024";
   const appName = process.env.NEXT_PUBLIC_SITE_NAME;

@@ -1,68 +1,59 @@
 function detect_website_id() {
-  let a = document.querySelector("script[data-website-id]");
-  return a ? a.getAttribute("data-website-id") : "Unknown";
+  let t = document.querySelector("script[data-website-id]");
+  return t ? t.getAttribute("data-website-id") : "Unknown";
 }
 async function checkCountry() {
-  const response = await fetch("https://ipapi.co/json/");
-  const data = await response.json();
-  return data.country_name;
+  const t = await fetch("https://ipapi.co/json/");
+  return (await t.json()).country_name;
 }
 async function track() {
-  let a = detect_website_id();
-  if (a === "Unknown" || !a || a === "") {
-    console.error("Website ID not found");
-    return;
-  }
-  let language =
-    navigator.language ||
-    navigator.userLanguage ||
-    navigator.browserLanguage ||
-    navigator.systemLanguage ||
-    "Unknown";
-  let referrer = document.referrer || "";
-  let title = document.title || "Unknown";
-  let url = window.location.href;
-  let domain = url.split("/")[2];
-  let path = url.split("/")[3] ? `/${url.split("/")[3]}` : "/";
-  var userAgents = navigator.userAgent;
-  var object = {
+  let t = detect_website_id();
+  if ("Unknown" === t || !t || "" === t)
+    return void console.error("Website ID not found");
+  let e =
+      navigator.language ||
+      navigator.userLanguage ||
+      navigator.browserLanguage ||
+      navigator.systemLanguage ||
+      "Unknown",
+    n = document.referrer || "",
+    o = document.title || "Unknown",
+    a = window.location.href,
+    r = a.split("/")[2];
+  a.split("/")[3] && a.split("/")[3];
+  var i = navigator.userAgent;
+  post({
     country: await checkCountry(),
-    userAgents: userAgents,
-    id: a,
+    userAgents: i,
+    id: t,
     path: window.location.pathname + window.location.search,
-    language: language,
-    referrer: referrer,
-    title: title,
-    domain: domain,
-  };
-  post(object);
+    language: e,
+    referrer: n,
+    title: o,
+    domain: r,
+  });
 }
-function post(a) {
+function post(t) {
   fetch("https://supalytics.vercel.app/api/public-script", {
     method: "POST",
     cache: "no-cache",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(a),
-  }).catch((a) => {
-    console.error("Error:", a);
+    body: JSON.stringify(t),
+  }).catch((t) => {
+    console.error("Error:", t);
   });
 }
-
 (() => {
-  "use strict";
-  const handleRouteChange = () => {
-    track();
-  };
-
-  const originalPushState = history.pushState;
-  const originalReplaceState = history.replaceState;
-  history.pushState = function (...args) {
-    originalPushState.apply(history, args);
-    handleRouteChange();
-  };
-  history.replaceState = function (...args) {
-    originalReplaceState.apply(history, args);
-    handleRouteChange();
-  };
-  window.addEventListener("popstate", handleRouteChange);
+  const t = () => {
+      track();
+    },
+    e = history.pushState,
+    n = history.replaceState;
+  (history.pushState = function (...n) {
+    e.apply(history, n), t();
+  }),
+    (history.replaceState = function (...e) {
+      n.apply(history, e), t();
+    }),
+    window.addEventListener("popstate", t);
 })();

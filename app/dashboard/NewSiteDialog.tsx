@@ -72,6 +72,8 @@ const NewSiteDialog = ({ user }: { user: User }) => {
               />
             </div>
             <span className="text-[0.7rem] flex justify-center items-center pt-2 text-center text-primary/50">
+              Be as specific as possible when adding your site.
+              <br />
               Make sure to add your domain without the protocol (http:// or
               https://) and without any path (e.g. /about).
             </span>

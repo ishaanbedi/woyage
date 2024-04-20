@@ -11,11 +11,11 @@ async function track() {
   if ("Unknown" === t || !t || "" === t)
     return void console.error("Website ID not found");
   let e =
-      navigator.language ||
-      navigator.userLanguage ||
-      navigator.browserLanguage ||
-      navigator.systemLanguage ||
-      "Unknown",
+    navigator.language ||
+    navigator.userLanguage ||
+    navigator.browserLanguage ||
+    navigator.systemLanguage ||
+    "Unknown",
     n = document.referrer || "",
     o = document.title || "Unknown",
     a = window.location.href,
@@ -44,9 +44,11 @@ function post(t) {
   });
 }
 (() => {
+  var initialTracked = 0
   const t = () => {
-      track();
-    },
+    initialTracked++
+    track();
+  },
     e = history.pushState,
     n = history.replaceState;
   (history.pushState = function (...n) {
@@ -56,4 +58,10 @@ function post(t) {
       n.apply(history, e), t();
     }),
     window.addEventListener("popstate", t);
+  window.addEventListener("load", () => {
+    if (initialTracked === 0) {
+      t()
+    }
+  }
+  );
 })();

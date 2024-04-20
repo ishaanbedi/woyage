@@ -89,7 +89,6 @@ const NewSiteDialog = ({ user }: { user: User }) => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      <Toaster />
     </div>
   );
 };

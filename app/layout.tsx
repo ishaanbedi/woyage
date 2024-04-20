@@ -56,7 +56,7 @@ export default function RootLayout({
       <body className={bricolage_grotesque.variable + comfortaa.variable}>
         <main>{children}</main>
         <Footer />
-        <Toaster />
+        <Toaster position='top-center' richColors />
       </body>
     </html>
   );

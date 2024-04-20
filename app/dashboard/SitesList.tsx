@@ -383,8 +383,6 @@ const SitesList = ({ user }: { user: User }) => {
           )}
         </div>
       )}
-
-      <Toaster />
     </section>
   );
 };

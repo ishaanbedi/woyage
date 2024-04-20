@@ -76,6 +76,7 @@ export default function SupportForm() {
                   placeholder="Enter your name"
                   onChange={(e) => setName(e.target.value)}
                   value={name}
+                  required
                 />
               </div>
               <div className="space-y-2">

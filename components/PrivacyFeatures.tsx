@@ -45,8 +45,9 @@ export function PrivacyFeatures() {
               <HeartHandshake className="w-12 h-12 inline-block" /> Privacy
             </h1>
             <p className="max-w-[700px] text-gray-500 md:text-xl/relaxed dark:text-gray-400 text-center">
-              When you use Supalytics, you can trust that your data is safe, and
-              information about your visitors is kept private.
+              When you use {process.env.NEXT_PUBLIC_SITE_NAME}, you can trust
+              that your data is safe, and information about your visitors is
+              kept private.
             </p>
           </div>
         </div>

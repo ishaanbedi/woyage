@@ -1,12 +1,13 @@
 const Privacy = () => {
   const lastUpdated = "19 April 2024";
+  const appName = process.env.NEXT_PUBLIC_SITE_NAME;
   return (
     <div className="terms-page prose max-w-xl px-2 mx-auto py-3">
-      <h1>Supalytics Privacy Policy</h1>
+      <h1>{appName} Privacy Policy</h1>
 
       <h2>1. Introduction</h2>
       <p>
-        At Supalytics, we are committed to protecting your privacy and ensuring
+        At {appName}, we are committed to protecting your privacy and ensuring
         the security of your personal information. This Privacy Policy explains
         how we collect, use, disclose, and protect your information when you use
         our website and services.
@@ -15,7 +16,7 @@ const Privacy = () => {
 
       <h2>2. Information We Collect</h2>
       <p>
-        As the intent of Supalytics is to provide analytics services, we have to
+        As the intent of {appName} is to provide analytics services, we have to
         collect some information from you and your website. This information may
         include:
         <ul>

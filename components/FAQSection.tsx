@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/accordion";
 
 const FAQSection = () => {
-  const appName = process.env.NEXT_PUBLIC_SITE_NAME || "Supalytics";
+  const appName = process.env.NEXT_PUBLIC_SITE_NAME;
   const FAQs: { question: string; answer: string }[] = [
     {
       question: `Will ${appName} collect any personal data from my visitors?`,
@@ -26,12 +26,12 @@ const FAQSection = () => {
       answer: `You can submit your issue reports and feature requests on our GitHub repository. If the issue is related to some serious bug or security vulnerability, please reach out to me at hey@ishaanbedi.com.`,
     },
     {
-      question: "Is Supalytics free to use?",
-      answer: `Currently, all features of Supalytics is offered for free as we're in the early stages of development. However, in future, there may be pricing plans tailored to different user needs..`,
+      question: `Is ${appName} free to use?`,
+      answer: `Currently, all features of ${appName} is offered for free as we're in the early stages of development. However, in future, there may be pricing plans tailored to different user needs..`,
     },
     {
-      question: "Does Supalytics support tracking custom events?",
-      answer: `At this stage, Supalytics does not support tracking custom events. However, it will, for sure, soon.`,
+      question: `Does ${appName} support tracking custom events?`,
+      answer: `At this stage, ${appName} does not support tracking custom events. However, it will, for sure, soon.`,
     },
   ];
   return (

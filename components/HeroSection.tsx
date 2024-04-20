@@ -18,8 +18,8 @@ const HeroSection = ({ user }: { user: User | null }) => {
           </div>
           <div className="flex flex-col items-center space-y-4 text-center mt-4">
             <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-              Supalytics is a free and open-source analytics tool that helps you
-              track your website traffic.
+              {process.env.NEXT_PUBLIC_SITE_NAME} is a free and open-source
+              analytics tool that helps you track your website traffic.
             </p>
             <div className="space-x-4 flex">
               {user ? (

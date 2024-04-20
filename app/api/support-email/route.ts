@@ -19,8 +19,8 @@ export async function POST(request: NextRequest) {
       <p>Message: ${data.record.message}</p>
     `;
     await resend.emails.send({
-      from: "support@supalytics.co",
-      to: "hey@ishaanbedi.com",
+      from: `${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`,
+      to: `${process.env.SUPPORT_RECIPIENT}`,
       subject: "New Support Request",
       html: html,
     });

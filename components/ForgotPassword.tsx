@@ -9,12 +9,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
 import Link from "next/link";
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
   return (
     <div>
       <Dialog>
@@ -26,8 +23,11 @@ const ForgotPassword = () => {
           </DialogHeader>
           <div className=" text-center">
             Just email us at{" "}
-            <Link href="mailto:support@supalytics.co" className="underline">
-              support@supalytics.co
+            <Link
+              href={`mailto:${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`}
+              className="underline"
+            >
+              {process.env.NEXT_PUBLIC_SUPPORT_EMAIL}
             </Link>{" "}
             and we'll help you reset your password.
             {/* <Label htmlFor="email">Email</Label>

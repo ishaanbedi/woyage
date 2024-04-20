@@ -7,12 +7,9 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
+import { toast } from "sonner";
 
-export default async function SignUp({
-  searchParams,
-}: {
-  searchParams: { message: string };
-}) {
+export default async function SignUp() {
   const supabase = createClient();
   const {
     data: { user },
@@ -35,10 +32,9 @@ export default async function SignUp({
 
     if (error) {
       const message = error.message;
-      return redirect(`/signup?message=${encodeURIComponent(message)}`);
+      toast.error(message);
     }
-
-    return redirect("/signup?message=Check email to continue sign in process");
+    toast.success("Check your email for the confirmation link");
   };
 
   if (user) {
@@ -92,11 +88,6 @@ export default async function SignUp({
                     Login
                   </Link>
                 </div>
-                {searchParams?.message && (
-                  <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
-                    {searchParams.message}
-                  </p>
-                )}
               </CardContent>
             </form>
           </Card>

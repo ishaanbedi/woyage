@@ -16,6 +16,12 @@ export async function POST(request) {
     },
   );
   const data = await request.json();
+  if (!data.userAgents || !data.country || !data.id || !data.domain) {
+    return NextResponse.json({ error: "Missing data" }, { status: 400 });
+  }
+  if (data.userAgents.length === 0) {
+    return NextResponse.json({ error: "No user agents" }, { status: 400 });
+  }
   const { userAgents, country, id } = data;
   const ua = UAParser(userAgents);
   const browser = ua.browser.name;

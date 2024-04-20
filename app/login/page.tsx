@@ -8,9 +8,12 @@ import { Input } from "@/components/ui/input";
 import Navbar from "@/components/Navbar";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import ForgotPassword from "@/components/ForgotPassword";
-import { toast } from "sonner";
 
-export default async function Login() {
+export default async function Login({
+  searchParams,
+}: {
+  searchParams: { message: string };
+}) {
   const supabase = createClient();
   const {
     data: { user },
@@ -29,7 +32,7 @@ export default async function Login() {
 
     if (error) {
       const message = error.message;
-      toast.error(message);
+      return redirect(`/login?message=${encodeURIComponent(message)}`);
     }
 
     return redirect("/dashboard");
@@ -89,6 +92,11 @@ export default async function Login() {
                     Sign up
                   </Link>
                 </div>
+                {searchParams?.message && (
+                  <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
+                    {searchParams.message}
+                  </p>
+                )}
               </CardContent>
             </form>
           </Card>

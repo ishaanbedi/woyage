@@ -11,7 +11,7 @@ export default async function Component() {
   return (
     <section>
       <Navbar user={user} />
-      <div className="h-[90vh] flex items-center justify-center bg-gray-100 px-2">
+      <div className="h-[85vh] flex items-center justify-center bg-gray-100 px-2">
         <SupportForm />
       </div>
     </section>

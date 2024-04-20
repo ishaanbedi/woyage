@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import Navbar from "@/components/Navbar";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import ForgotPassword from "@/components/ForgotPassword";
 
 export default async function Login({
   searchParams,
@@ -74,6 +75,9 @@ export default async function Login({
                       required
                     />
                   </div>
+                  <div className="flex justify-end">
+                    <ForgotPassword />
+                  </div>
                   <SubmitButton
                     formAction={signIn}
                     className="w-full inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
@@ -101,10 +105,3 @@ export default async function Login({
     );
   }
 }
-
-const BackButton = () => (
-  <Link href="/" className="absolute top-8 left-8 flex items-center gap-2">
-    <ArrowLeftIcon className="w-5 h-5" />
-    <Label>Home</Label>
-  </Link>
-);

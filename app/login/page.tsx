@@ -2,23 +2,9 @@ import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { ArrowLeftIcon } from "@radix-ui/react-icons";
 
 export default async function Login({
   searchParams,
@@ -53,6 +39,9 @@ export default async function Login({
   } else {
     return (
       <section className="flex h-screen items-center justify-center bg-background">
+        <div className="hidden sm:block mr-40">
+          <img src="https://illustrations.popsy.co/white/keynote-presentation.svg" className="w-96 h-96" alt="" />
+        </div>
         <div className="w-full max-w-md">
           <BackButton />
           <h1 className="text-3xl font-bold text-center mb-4">Sign In</h1>

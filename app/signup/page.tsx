@@ -45,14 +45,13 @@ export default async function SignUp({
   } else {
     return (
       <section className="flex h-screen items-center justify-center bg-background">
+        <div className="ml-32 hidden sm:block mr-8">
+          <img src="https://illustrations.popsy.co/white/keynote-presentation.svg" className="w-96 h-96 " alt="" />
+        </div>
         <div className="flex-1 flex flex-col justify-center gap-2">
-          <Link
-            href="/"
-            className="absolute top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
-          >
-            <ArrowLeft size={16} className="mr-2" />
-            Back
-          </Link>
+          <div className="absolute top-8 left-8">
+            <BackButton />
+          </div>
           <h1 className="text-3xl font-bold text-center mb-4">Sign Up</h1>
           <div className="p-4 rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-md mx-auto">
             <div className="flex flex-col space-y-1.5 pt-6 pb-9">
@@ -104,3 +103,10 @@ export default async function SignUp({
     );
   }
 }
+
+const BackButton = () => (
+  <Link href="/" className="py-1 px-2 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm">
+    <ArrowLeft size={16} className="mr-2" />
+    Back
+  </Link>
+);

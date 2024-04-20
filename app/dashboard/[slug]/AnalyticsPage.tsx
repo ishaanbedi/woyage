@@ -103,8 +103,8 @@ const AnalyticsPage = ({
 
   if (loading) {
     return (
-      <section className="container mx-auto p-4 h-[92vh]">
-        <div className="flex justify-center items-center h-[80vh]">
+      <section className="container mx-auto p-4 min-h-[92vh]">
+        <div className="flex justify-center items-center min-h-[80vh]">
           <LoaderCircle className="animate-spin" />
         </div>
       </section>
@@ -112,11 +112,11 @@ const AnalyticsPage = ({
   }
   if ((data === null || data.length === 0) && !loading) {
     return (
-      <section className="container mx-auto p-4 h-[92vh]">
+      <section className="container mx-auto p-4 min-h-[92vh]">
         <div className="flex justify-end items-center mb-4">
           <SelectionToggle dateRange={dateRange} setDateRange={setDateRange} />
         </div>
-        <div className="flex space-y-4 flex-col justify-center items-center h-[50vh]  max-w-2xl mx-auto">
+        <div className="flex space-y-4 flex-col justify-center items-center min-h-[50vh]  max-w-2xl mx-auto">
           <h1 className="text-2xl font-semibold">No data available</h1>
           <p className="text-primary/50 text-sm text-wrap text-center">
             Possible reasons might be that you have not added the tracking code,

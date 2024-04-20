@@ -128,10 +128,10 @@ const SitesList = ({ user }: { user: User }) => {
     )
     .subscribe();
   return (
-    <section className="p-4 h-[85vh]">
+    <section className="p-4 min-h-[85vh]">
       {loading ? (
-        <section className="container mx-auto p-4 h-[92vh]">
-          <div className="flex justify-center items-center h-[80vh]">
+        <section className="container mx-auto p-4">
+          <div className="flex justify-center items-center min-h-[80vh]">
             <LoaderCircle className="animate-spin" />
           </div>
         </section>

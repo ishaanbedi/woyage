@@ -45,7 +45,7 @@ export default async function Login({
   } else {
     console.log(user);
     return (
-      <section className="h-[92vh] bg-secondary">
+      <section className="min-h-[92dvh] bg-secondary">
         <Navbar user={user} />
         <div className="flex flex-col justify-center items-center pt-24 px-2">
           <Card className="max-w-lg w-full">

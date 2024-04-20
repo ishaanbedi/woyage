@@ -28,7 +28,7 @@ export default async function SitesDynamicPage({
       .single();
     if (error) {
       return (
-        <div className="h-[92vh] flex flex-col space-y-3 items-center justify-center">
+        <div className="min-h-[92vh] flex flex-col space-y-3 items-center justify-center">
           <h1 className="text-3xl font-bold">Site Not Found</h1>
           <p className="max-w-[400px] text-center">
             Possible reasons could be that the site does not exist or you do not

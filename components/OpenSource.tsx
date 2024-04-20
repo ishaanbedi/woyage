@@ -5,7 +5,7 @@ import { Heart } from "lucide-react";
 
 export function OpenSourced() {
   return (
-    <section className="w-full lg:md:sm:h-[60vh] h-[35vh] flex flex-col justify-center items-center">
+    <section className="w-full lg:md:sm:min-h-[60vh] min-h-[35vh] flex flex-col justify-center items-center">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-2 text-center">
           <div className="space-y-2 flex flex-col justify-center items-center">

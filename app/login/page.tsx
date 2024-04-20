@@ -5,6 +5,8 @@ import { SubmitButton } from "./submit-button";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import Navbar from "@/components/Navbar";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 export default async function Login({
   searchParams,
@@ -38,61 +40,61 @@ export default async function Login({
     return redirect("/dashboard");
   } else {
     return (
-      <section className="flex h-screen items-center justify-center bg-background">
-        <div className="hidden sm:block mr-40">
-          <img src="https://illustrations.popsy.co/white/keynote-presentation.svg" className="w-96 h-96" alt="" />
-        </div>
-        <div className="w-full max-w-md">
-          <BackButton />
-          <h1 className="text-3xl font-bold text-center mb-4">Sign In</h1>
-          <div className="p-4 rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div className="flex flex-col space-y-1.5 pt-6 pb-9">
-              <h3 className="whitespace-nowrap font-semibold leading-none tracking-tight text-2xl __className_335c89 mb-2">Supalytics</h3>
-              <p className="text-sm text-muted-foreground">Welcome Back! Enter your login details</p>
-            </div>
-            <form className="animate-in flex-1 flex flex-col w-full justify-center text-foreground">
-              <Label className="text-md" htmlFor="email">
-                Email
-              </Label>
-              <Input
-                className="rounded-md px-4 py-2 bg-inherit border mb-6"
-                name="email"
-                placeholder="you@example.com"
-                required
-              />
-              <Label className="text-md" htmlFor="password">
-                Password
-              </Label>
-              <Input
-                className="rounded-md px-4 py-2 bg-inherit border"
-                type="password"
-                name="password"
-                placeholder="••••••••"
-                required
-              />
-              <div className="text-sm text-muted-foreground flex justify-end mt-2 mb-7">
-                <Link href="/forgotpassword" className="text-center">Forgot Password?</Link>
-              </div>
-              <SubmitButton
-                formAction={signIn}
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
-                pendingText="Signing In..."
-              >
-                Sign In
-              </SubmitButton>
-              <p className="text-center mt-4 text-primary/80 text-sm">
-                Don't have an account?{" "}
-                <Link href="/signup" className="underline underline-offset-4">
-                  Sign Up
-                </Link>
+      <section className="h-[92vh] bg-secondary">
+        <Navbar user={user} />
+        <div className="flex flex-col justify-center items-center pt-24 px-2">
+          <Card className="max-w-lg w-full">
+            <CardHeader className="text-center">
+              <h2 className="text-2xl font-bold">Sign In</h2>
+              <p className="text-gray-500">
+                Welcome back! Sign in to continue.
               </p>
-              {searchParams?.message && (
-                <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
-                  {searchParams.message}
-                </p>
-              )}
+            </CardHeader>
+            <form className="animate-in flex-1 flex flex-col w-full justify-center text-foreground">
+              <CardContent className="space-y-6">
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      className="rounded-md px-4 py-2 bg-inherit border mb-6"
+                      name="email"
+                      placeholder="you@example.com"
+                      required
+                      type="email"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="password">Password</Label>
+                    <Input
+                      className="rounded-md px-4 py-2 bg-inherit border mb-6"
+                      type="password"
+                      name="password"
+                      placeholder="••••••••"
+                      required
+                    />
+                  </div>
+                  <SubmitButton
+                    formAction={signIn}
+                    className="w-full inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
+                    pendingText="Logging you in..."
+                  >
+                    Sign In
+                  </SubmitButton>
+                </div>
+                <div className="text-center text-sm">
+                  Don't have an account?{" "}
+                  <Link className="underline" href="/signup">
+                    Sign up
+                  </Link>
+                </div>
+                {searchParams?.message && (
+                  <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
+                    {searchParams.message}
+                  </p>
+                )}
+              </CardContent>
             </form>
-          </div>
+          </Card>
         </div>
       </section>
     );

@@ -3,11 +3,9 @@ import { headers } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
-import { ArrowLeft } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 
 export default async function SignUp({
@@ -104,63 +102,6 @@ export default async function SignUp({
           </Card>
         </div>
       </section>
-
-      // <section className="flex h-screen items-center justify-center bg-background">
-      //   <div className="ml-32 hidden sm:block mr-8">
-      //     <img
-      //       src="https://illustrations.popsy.co/white/keynote-presentation.svg"
-      //       className="w-96 h-96 "
-      //       alt=""
-      //     />
-      //   </div>
-      //   <div className="flex-1 flex flex-col justify-center gap-2">
-      //     <div className="absolute top-8 left-8">
-      //       <BackButton />
-      //     </div>
-      //     <h1 className="text-3xl font-bold text-center mb-4">Sign Up</h1>
-      //     <div className="p-4 rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-md mx-auto">
-      //       <form className="animate-in flex-1 flex flex-col w-full justify-center text-foreground">
-      //         <Label className="text-md" htmlFor="email">
-      //           Email
-      //         </Label>
-      //         <Input
-      //           className="rounded-md px-4 py-2 bg-inherit border mb-6"
-      //           name="email"
-      //           placeholder="you@example.com"
-      //           required
-      //         />
-      //         <Label className="text-md" htmlFor="password">
-      //           Password
-      //         </Label>
-      //         <Input
-      //           className="rounded-md px-4 py-2 bg-inherit border mb-6"
-      //           type="password"
-      //           name="password"
-      //           placeholder="••••••••"
-      //           required
-      //         />
-
-      //         <p className="text-center mt-4 text-primary/80 text-sm">
-      //           Already have an account?{" "}
-      //           <Link href="/login" className="underline underline-offset-4">
-      //             Login
-      //           </Link>
-      //         </p>
-
-      //       </form>
-      //     </div>
-      //   </div>
-      // </section>
     );
   }
 }
-
-const BackButton = () => (
-  <Link
-    href="/"
-    className="py-1 px-2 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
-  >
-    <ArrowLeft size={16} className="mr-2" />
-    Back
-  </Link>
-);

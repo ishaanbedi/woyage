@@ -68,6 +68,7 @@ const NewSiteDialog = ({ user }: { user: User }) => {
                 id="site_domain"
                 value={domainName}
                 onChange={(e) => setDomainName(e.target.value)}
+                required
               />
             </div>
             <span className="text-[0.7rem] flex justify-center items-center pt-2 text-center text-primary/50">

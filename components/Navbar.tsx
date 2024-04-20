@@ -2,11 +2,7 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { type User } from "@supabase/supabase-js";
-import { Pacifico } from "next/font/google";
-const pacifico = Pacifico({
-  subsets: ["latin"],
-  weight: ["400"],
-});
+import { Fira_Sans_Extra_Condensed } from "next/font/google";
 import { SheetTrigger, SheetContent, Sheet } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 const Navbar = ({ user }: { user: User | null }) => {
@@ -16,7 +12,7 @@ const Navbar = ({ user }: { user: User | null }) => {
         <Link href="/">
           <Button
             variant={"ghost"}
-            className={`flex items-center p-0.5 justify-center text-xl ${pacifico.className}`}
+            className={`flex items-center p-0.5 justify-center text-xl`}
           >
             {process.env.NEXT_PUBLIC_SITE_NAME}
           </Button>
@@ -69,7 +65,7 @@ const Navbar = ({ user }: { user: User | null }) => {
             <div>
               <Link className="" href="/">
                 <span
-                  className={`flex items-center justify-center text-center text-3xl ${pacifico.className}`}
+                  className={`flex items-center justify-center text-center text-3xl`}
                 >
                   {process.env.NEXT_PUBLIC_SITE_NAME}
                 </span>

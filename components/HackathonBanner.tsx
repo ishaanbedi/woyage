@@ -30,7 +30,7 @@ const HackathonBanner = () => {
               </h2>
 
               <p className="mt-4 text-gray-600 text-center">
-                {`${process.env.NEXT_PUBLIC_SITE_NAME} was built during the Supabase Open Source Hackathon 2024. The hackathon was a great opportunity to learn new technologies and build something cool.`}
+                {`${process.env.NEXT_PUBLIC_SITE_NAME} is built during the Supabase Open Source Hackathon 2024. The hackathon was a great opportunity to learn new technologies and build something cool.`}
               </p>
               <div className="mt-8 flex justify-center items-center">
                 <Link

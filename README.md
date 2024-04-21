@@ -64,6 +64,13 @@ Supalytics is an open-sourced website analytics tool designed to track websites.
 - **Auth**: Supabase Auth is used for user authentication.
 - **Webhooks**: Supabase Webhooks are used to send emails to the admin when a new support request is created.
 
+## Check Out a Demo Video
+
+
+https://github.com/ishaanbedi/supalytics/assets/39641326/eba7193f-4773-4f69-ba2d-3b7c0daf603e
+
+
+
 ## Using Supalytics.co
 The easiest way to use Supalytics is to use the already deployed version at [supalytics.co](https://supalytics.co/). 
 

@@ -47,6 +47,7 @@ const HeroSection = ({ user }: { user: User | null }) => {
           </div>
         </div>
         <Image
+          draggable="false"
           alt="Hero"
           className="mx-auto lg:md:sm:aspect-video aspect-[3/2]  object-cover border p-2"
           height="300"

@@ -120,7 +120,9 @@ export default function SupportForm() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={loading}>
+              Submit
+            </Button>
           </CardFooter>
         </form>
       </Card>

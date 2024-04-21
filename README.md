@@ -17,34 +17,25 @@ Supalytics is an open-sourced website analytics tool designed to track websites.
 
 <table>
   <tr>
-    <td> <img width="697" alt="Screenshot 1" src="https://github.com/ishaanbedi/supalytics/assets/39641326/3e69c00a-990c-473b-ae8c-9563654009f7"></td>
-    <td><img width="695" alt="Screenshot 2" src="https://github.com/ishaanbedi/supalytics/assets/39641326/c7b75e80-82e2-4656-91d5-30667975df8a"> </td>
-    <td><img width="695" alt="Screenshot 3" src="https://github.com/ishaanbedi/supalytics/assets/39641326/f2e47722-7658-4921-ac10-700986a6fd71"></td>
+    <td> <img width="697" alt="Screenshot" src="https://sdkjkskyuwkatrfdiwsx.supabase.co/storage/v1/object/public/assets/repo/1.png"></td>
+    <td> <img width="697" alt="Screenshot" src="https://sdkjkskyuwkatrfdiwsx.supabase.co/storage/v1/object/public/assets/repo/2.png"></td>
+    <td> <img width="697" alt="Screenshot" src="https://sdkjkskyuwkatrfdiwsx.supabase.co/storage/v1/object/public/assets/repo/3.png"></td>
   </tr>
 </table>
 
 
 <table>
   <tr>
-    <td>
-     <img width="693" alt="Screenshot 2024-04-20 at 8 18 40 PM" src="https://github.com/ishaanbedi/supalytics/assets/39641326/6e1c00b8-a82d-46f9-ad19-383c29b3f4a9">
-   </td>
-   <td>
-    <img width="701" alt="Screenshot 2024-04-20 at 8 18 52 PM" src="https://github.com/ishaanbedi/supalytics/assets/39641326/6100171a-fea6-44fa-9f19-1e38fa540ee6">
-    </td>
+     <td> <img width="697" alt="Screenshot" src="https://sdkjkskyuwkatrfdiwsx.supabase.co/storage/v1/object/public/assets/repo/4.png"></td>
+    <td> <img width="697" alt="Screenshot" src="https://sdkjkskyuwkatrfdiwsx.supabase.co/storage/v1/object/public/assets/repo/5.png"></td>
   </tr>
 </table>
 
 
 <table>
   <tr>
-    <td>
-<img width="693" alt="Screenshot 2024-04-20 at 8 20 17 PM" src="https://github.com/ishaanbedi/supalytics/assets/39641326/b628b97d-11dd-480c-b86f-e788aae83486">
-
-   </td>
-   <td>
-<img width="697" alt="Screenshot 2024-04-20 at 8 20 27 PM" src="https://github.com/ishaanbedi/supalytics/assets/39641326/718addf5-9d7c-4816-a24e-ffff70a7f7a2">
-    </td>
+<td> <img width="697" alt="Screenshot" src="https://sdkjkskyuwkatrfdiwsx.supabase.co/storage/v1/object/public/assets/repo/6.png"></td>
+   <td> <img width="697" alt="Screenshot" src="https://sdkjkskyuwkatrfdiwsx.supabase.co/storage/v1/object/public/assets/repo/7.png"></td>
   </tr>
 </table>
 
@@ -77,7 +68,7 @@ The easiest way to use Supalytics is to use the already deployed version at [sup
 When you visit the website, you can sign up for an account and add your website to start tracking your visitors. You will be provided with a tracking code that you can add to your website to start tracking visitors.
 
 ## Running Supalytics Locally
-If you want to self-host Supalytics, you can follow the steps below:
+If you want to run Supalytics locally, you can follow the steps below:
 
 Before you start, you need to setup a Supabase project. You can sign up for a free account at [Supabase](https://supabase.com/).
 
@@ -217,9 +208,27 @@ pnpm dev
 5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Deploying Supalytics
-You can deploy Supalytics to Vercel by clicking the button below:
+
+Deploying Supalytics is easy, just follow the steps mentioned in the [Running Supalytics Locally](#running-supalytics-locally) section to set up the Supabase database and environment variables.
+
+After that, you can easily deploy Supalytics to Vercel by clicking the button below:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fishaanbedi%2Fsupalytics%2F&env=NEXT_PUBLIC_SITE_NAME,NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_STAGE,NEXT_PUBLIC_SUPABASE_ANON_KEY,NEXT_PUBLIC_SUPABASE_URL,RESEND_EMAIL,NEXT_PUBLIC_SUPPORT_EMAIL,SUPABASE_WEBHOOK_HEADER_KEY,SUPPORT_RECIPIENT&project-name=supalytics&repository-name=supalytics)
+
+## Support Mechanism
+
+Supalytics has a built-in support mechanism that allows visitors to send support requests to the admin. The support requests are stored in the `contacts` table in the Supabase database, and the admin is notified via email whenever a new support request is created.
+
+Here's how the support mechanism works:
+
+1. The visitor fills out the support form on the website.
+2. Using Supabase JavaScript SDK, the support request is added to the `contacts` table in the Supabase database.
+3. Based on the insert operation in the `contacts` table, a Supabase webhook is triggered.
+4. The Supabase webhook sends a POST request to the `/api/support-email` endpoint in the application.
+5. The webhook is configured with a header key that is used to verify the request, in order to prevent unauthorized requests to the endpoint.
+6. The `/api/support-email` further triggers the Resend API to send an email to the admin with the details of the support request.
+
+This ensures that the admin is notified whenever a new support request is created, and can respond to the visitor accordingly.
 
 ## Open Source License
 Supalytics is open-sourced under the MIT License. You can use it for personal or commercial projects.

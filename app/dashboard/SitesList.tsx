@@ -195,7 +195,7 @@ const SitesList = ({ user }: { user: User }) => {
                           </td>
                           <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                             <div className="space-x-2">
-                              <Dialog
+                              <Dialog 
                                 open={settingsDialogOpen}
                                 onOpenChange={setSettingsDialogOpen}
                               >
@@ -209,7 +209,7 @@ const SitesList = ({ user }: { user: User }) => {
                                     <Settings size={16} />
                                   </Button>
                                 </DialogTrigger>
-                                <DialogContent>
+                                <DialogContent onOpenAutoFocus={(e) => e.preventDefault()}>
                                   <DialogHeader>
                                     <DialogTitle>
                                       {site.domain_name}

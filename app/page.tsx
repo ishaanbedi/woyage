@@ -9,6 +9,7 @@ import { Divider } from "@tremor/react";
 import { OpenSourced } from "@/components/OpenSource";
 import HackathonBanner from "@/components/HackathonBanner";
 import Script from "next/script";
+import DemoSection from "@/components/DemoSection";
 
 export default async function Component() {
   const supabase = createClient();
@@ -24,6 +25,8 @@ export default async function Component() {
         <Features home />
         <Divider />
         <Steps user={user} />
+        <Divider />
+        <DemoSection />
         <Divider />
         <Stack user={user} />
         <Divider />

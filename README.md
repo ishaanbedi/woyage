@@ -56,7 +56,7 @@ Supalytics is an open-sourced website analytics tool designed to track websites.
 - **Styling & UI**: Built with amazing components from [shadcn/ui](https://ui.shadcn.com/), styled with [TailwindCSS](https://tailwindcss.com/) & [HyperUI](https://hyperui.dev/).
 - **[Vercel](https://vercel.com/)**: Supalytics is deployed on Vercel ▲
 - **[Tremor](https://tremor.so/)**: React components powering charts and dashboard on Supalytics
-- **[Resend](https://resend.com/)**: For sending and managin authentication & support related emails.
+- **[Resend](https://resend.com/)**: For sending and managing authentication & support related emails.
 
 ## Supabase Offerings Used:
 - **Realtime**: Supabase Realtime is used to track and update visitor data in real-time.

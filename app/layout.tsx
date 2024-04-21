@@ -52,6 +52,7 @@ export default function RootLayout({
     <html lang="en" className={GeistSans.className}>
       <Head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <script defer src="https://supalytics.co/track.js" data-website-id="187fcd8e-96dc-42b5-9fa0-a17243a7bbd8"></script>
       </Head>
       <body className={bricolage_grotesque.variable + comfortaa.variable}>
         <main>{children}</main>

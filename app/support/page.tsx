@@ -19,7 +19,7 @@ export default async function Component() {
     <section>
       <Navbar user={user} />
       <div className="min-h-[85vh] flex items-center justify-center bg-gray-100 px-2">
-        <SupportForm />
+        <SupportForm user={user} />
       </div>
     </section>
   );

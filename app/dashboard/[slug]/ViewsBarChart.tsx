@@ -75,6 +75,17 @@ function ViewsBarChart({
       }
       return array;
     }
+    if (totalDays === -1) {
+      var count = 0;
+      for (let j = 0; j < data.length; j++) {
+        count++;
+      }
+      array.push({
+        name: "All Time",
+        Views: count,
+      });
+      return array;
+    }
 
     for (let i = 0; i < totalDays; i++) {
       var date = new Date();

@@ -40,8 +40,6 @@ const AnalyticsPage = ({
   const [dateRange, setDateRange] = useState("today");
 
   const fetchRecords = async () => {
-    var timeFilter;
-    // sampleDate = "2024-04-24T20:19:03+00:00"
     var floorDate;
     var ceilDate;
     switch (dateRange) {

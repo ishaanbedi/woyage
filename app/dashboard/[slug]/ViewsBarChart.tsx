@@ -10,97 +10,69 @@ function ViewsBarChart({
   function generateDailyViews(data: Analytics[], dateRange: string) {
     var totalDays = 0;
     switch (dateRange) {
-      case "0":
+      case "today":
         totalDays = 0;
         break;
-      case "1":
+      case "yesterday":
         totalDays = 1;
         break;
-      case "2":
+      case "7":
         totalDays = 7;
         break;
-      case "3":
+      case "30":
         totalDays = 30;
         break;
-      case "4":
+      case "90":
         totalDays = 90;
         break;
-      case "5":
+      case "365":
         totalDays = 365;
         break;
-      case "6":
+      case "all":
         totalDays = -1;
         break;
     }
     var array: { name: string; Views: number }[] = [];
     if (totalDays === 0) {
-      for (let i = 0; i < 24; i++) {
-        var date = new Date();
-        date.setHours(date.getHours() - i);
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-        var hour = date.getHours();
-        var dateString = year + "-" + month + "-" + day + " " + hour + ":00";
+      var currentTime = new Date();
+      for (let i = 0; i <= currentTime.getHours() + 1; i++) {
         var count = 0;
         for (let j = 0; j < data.length; j++) {
           var added_time = new Date(data[j].added_time);
-          var added_day = added_time.getDate();
-          var added_month = added_time.getMonth() + 1;
-          var added_year = added_time.getFullYear();
           var added_hour = added_time.getHours();
-          var added_dateString =
-            added_year +
-            "-" +
-            added_month +
-            "-" +
-            added_day +
-            " " +
-            added_hour +
-            ":00";
-          if (dateString === added_dateString) {
+          if (added_hour === i) {
             count++;
           }
         }
         array.push({
-          name: dateString,
+          name: i === 0 ? "12 AM" : i === 12 ? "12 PM" : i > 12 ? i - 12 + " PM" : i + " AM",
           Views: count,
         });
       }
-      array.sort(function (a, b) {
-        return new Date(a.name).getTime() - new Date(b.name).getTime();
-      });
       return array;
     }
-    if (totalDays === -1) {
-      const sortedData = data.sort((a, b) => {
-        return (
-          new Date(a.added_time).getTime() - new Date(b.added_time).getTime()
-        );
-      });
-      if (sortedData.length === 0) {
-        return [];
-      }
-      const firstYear = new Date(sortedData[0].added_time).getFullYear();
-      const currentYear = new Date().getFullYear();
 
-      const yearlyViews: { [key: string]: number } = {};
-      sortedData.forEach((record) => {
-        const year = new Date(record.added_time).getFullYear();
-        yearlyViews[year] = (yearlyViews[year] || 0) + 1;
-      });
-
-      for (let year = firstYear; year <= currentYear; year++) {
-        if (!(year in yearlyViews)) {
-          yearlyViews[year] = 0;
+    if (totalDays === 1) {
+      var yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      var yesterdayStartHour = new Date(yesterday.setHours(0, 0, 0, 0));
+      var yesterdayEndHour = new Date(yesterday.setHours(23, 59, 59, 999));
+      for (let i = 0; i <= 24; i++) {
+        var count = 0;
+        for (let j = 0; j < data.length; j++) {
+          var added_time = new Date(data[j].added_time);
+          if (added_time >= yesterdayStartHour && added_time <= yesterdayEndHour) {
+            var added_hour = added_time.getHours();
+            if (added_hour === i) {
+              count++;
+            }
+          }
         }
+        array.push({
+          name: i === 0 ? "12 AM" : i === 12 ? "12 PM" : i > 12 ? i - 12 + " PM" : i + " AM",
+          Views: count,
+        });
       }
-
-      const array = Object.keys(yearlyViews).map((year) => ({
-        name: year,
-        Views: yearlyViews[year],
-      }));
-      array.sort((a, b) => parseInt(a.name) - parseInt(b.name));
       return array;
     }
 
@@ -123,20 +95,16 @@ function ViewsBarChart({
         }
       }
       array.push({
-        name: dateString,
+        name: dateString.split("-").reverse().join("-"),
         Views: count,
       });
     }
-    array.sort(function (
-      a: { name: string; Views: number },
-      b: { name: string; Views: number },
-    ) {
-      var dateA = new Date(a.name),
-        dateB = new Date(b.name);
-      if (dateA < dateB) return -1;
-      if (dateA > dateB) return 1;
-      return 0;
+    array.sort((a, b) => {
+      var dateA = new Date(a.name);
+      var dateB = new Date(b.name);
+      return dateA.getTime() - dateB.getTime();
     });
+    array.reverse();
     return array;
   }
 
@@ -144,10 +112,10 @@ function ViewsBarChart({
     <>
       <Card>
         <BarChart
-          className="mt-6 px-3"
           data={generateDailyViews(data, dateRange)}
           index="name"
-          categories={["Views"]}
+          categories={['Views']}
+          colors={['blue']}
           yAxisWidth={48}
         />
       </Card>
@@ -170,3 +138,37 @@ interface Analytics {
 }
 
 export default ViewsBarChart;
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+const SelectionToggle = ({
+  dateRange,
+  setDateRange,
+}: {
+  dateRange: string;
+  setDateRange: (value: string) => void;
+}) => {
+  return (
+    <div>
+      <Select value={dateRange} onValueChange={setDateRange}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Last 7 days" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="today">Today</SelectItem>
+          <SelectItem value="yesterday">Yesterday</SelectItem>
+          <SelectItem value="7">Last 7 days</SelectItem>
+          <SelectItem value="30">Last 30 days</SelectItem>
+          <SelectItem value="90">Last 90 days</SelectItem>
+          <SelectItem value="365">Last 365 days</SelectItem>
+          <SelectItem value="all">All time</SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
+  );
+};

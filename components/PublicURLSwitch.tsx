@@ -41,7 +41,7 @@ const PublicURLSwitch = ({ site }: {
             <div>
                 {isChecked ? (
                     <Button variant={"ghost"} size={"icon"} onClick={() => {
-                        navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_SITE_URL}shared/${site!.website_id}`);
+                        navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_SITE_URL}/shared/${site!.website_id}`);
                         toast.success("Public URL copied to clipboard");
                     }}>
                         <CopyIcon />

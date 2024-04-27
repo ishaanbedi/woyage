@@ -164,7 +164,7 @@ const AnalyticsPage = ({
         <div className="flex items-center space-x-2">
           {public_url ? (
             <Button variant={"outline"} size={"icon"} onClick={() => {
-              navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_SITE_URL}shared/${params.slug}`);
+              navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_SITE_URL}/shared/${params.slug}`);
               toast.success("Public URL copied to clipboard");
             }}>
               <CopyIcon />

@@ -43,7 +43,6 @@ export default async function Login({
   if (user) {
     return redirect("/dashboard");
   } else {
-    console.log(user);
     return (
       <section className="min-h-[92dvh] bg-secondary">
         <Navbar user={user} />

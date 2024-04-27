@@ -38,18 +38,16 @@ import Link from "next/link";
 import { ArrowRight, Info, LoaderCircle, Settings } from "lucide-react";
 import Image from "next/image";
 import NewSiteDialog from "./NewSiteDialog";
+import PublicURLSwitch from "@/components/PublicURLSwitch";
 
 const SitesList = ({ user }: { user: User }) => {
   const [sites, setSites] = useState<
-    { domain_name: string; website_id: string; added: string }[]
+    { domain_name: string; website_id: string; added: string; public_url: boolean }[]
   >([]);
   const [loading, setLoading] = useState(true);
   const [updatedSiteDomain, setUpdatedSiteDomain] = useState("");
   const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
-  const [selectedSiteSettings, setSelectedSiteSettings] = useState<{
-    domain_name: string;
-    website_id: string;
-  } | null>(null);
+  const [selectedSiteSettings, setSelectedSiteSettings] = useState<{ domain_name: string; website_id: string; added: string; public_url: boolean } | null>(null);
   const supabase = createClient();
   const fetchSites = async () => {
     setLoading(true);
@@ -119,14 +117,11 @@ const SitesList = ({ user }: { user: User }) => {
   useEffect(() => {
     setUpdatedSiteDomain(selectedSiteSettings?.domain_name || "");
   }, [selectedSiteSettings]);
-  supabase
-    .channel("site_domains")
-    .on(
-      "postgres_changes",
-      { event: "*", schema: "public", table: "site_domains" },
-      fetchSites,
-    )
-    .subscribe();
+  useEffect(() => {
+    if (settingsDialogOpen === false) {
+      fetchSites();
+    }
+  }, [settingsDialogOpen]);
   return (
     <section className="p-4 min-h-[85vh]">
       {loading ? (
@@ -155,11 +150,6 @@ const SitesList = ({ user }: { user: User }) => {
               <div className="flex justify-end">
                 <NewSiteDialog user={user} />
               </div>
-              {/*
-                Heads up! 👋
-
-                This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
-              */}
               <div>
                 <div className="overflow-x-auto">
                   <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
@@ -195,7 +185,7 @@ const SitesList = ({ user }: { user: User }) => {
                           </td>
                           <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                             <div className="space-x-2">
-                              <Dialog 
+                              <Dialog
                                 open={settingsDialogOpen}
                                 onOpenChange={setSettingsDialogOpen}
                               >
@@ -255,20 +245,6 @@ const SitesList = ({ user }: { user: User }) => {
                                       <span>
                                         <span className="flex items-center space-x-1 mt-2">
                                           <Label htmlFor="domain">Domain</Label>
-                                          <TooltipProvider>
-                                            <Tooltip>
-                                              <TooltipTrigger>
-                                                <Info size={12} />
-                                              </TooltipTrigger>
-                                              <TooltipContent>
-                                                <p className="text-center">
-                                                  The authorized domain name for
-                                                  your site, whose traffic will
-                                                  be tracked.
-                                                </p>
-                                              </TooltipContent>
-                                            </Tooltip>
-                                          </TooltipProvider>
                                         </span>
                                         <Input
                                           className="mt-2"
@@ -309,6 +285,26 @@ const SitesList = ({ user }: { user: User }) => {
                                           readOnly
                                           disabled
                                         />
+                                      </span>
+                                      <span className="flex justify-between items-center">
+                                        <span className="flex items-center space-x-1 mt-2">
+                                          <Label htmlFor="tracking-code">
+                                            Enable Public URL
+                                          </Label>
+                                          <TooltipProvider>
+                                            <Tooltip>
+                                              <TooltipTrigger>
+                                                <Info size={12} />
+                                              </TooltipTrigger>
+                                              <TooltipContent>
+                                                <p className="text-center">
+                                                  Anyone with the public URL can view your site's analytics.
+                                                </p>
+                                              </TooltipContent>
+                                            </Tooltip>
+                                          </TooltipProvider>
+                                        </span>
+                                        <PublicURLSwitch site={selectedSiteSettings} />
                                       </span>
                                       <span className="flex space-x-2 pt-4">
                                         <Button

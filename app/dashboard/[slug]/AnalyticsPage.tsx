@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
-import { type User } from "@supabase/supabase-js";
 import ViewsBarChart from "./ViewsBarChart";
 import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
@@ -9,6 +8,12 @@ import DevicesCard from "./DevicesCard";
 import CountryCard from "./CountryCard";
 import PathsCard from "./PathsCard";
 import ReferrersCard from "./ReferrersCard";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 interface Analytics {
   id: string;
@@ -25,20 +30,18 @@ interface Analytics {
   language: string;
 }
 const AnalyticsPage = ({
-  user,
   params,
   domain,
+  public_url
 }: {
-  user: User;
   params: { slug: string };
   domain: string;
+  public_url: boolean;
 }) => {
-  const userEmail = user.email;
   const supabase = createClient();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<Analytics[]>([]);
   const [dateRange, setDateRange] = useState("today");
-
   const fetchRecords = async () => {
     var floorDate;
     var ceilDate;
@@ -115,7 +118,7 @@ const AnalyticsPage = ({
     .subscribe();
   useEffect(() => {
     fetchRecords();
-  }, [user, params, dateRange]);
+  }, [params, dateRange]);
 
   if (loading) {
     return (
@@ -158,8 +161,34 @@ const AnalyticsPage = ({
             {domain}
           </h1>
         )}
+        <div className="flex items-center space-x-2">
+          {public_url ? (
+            <Button variant={"outline"} size={"icon"} onClick={() => {
+              navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_SITE_URL}shared/${params.slug}`);
+              toast.success("Public URL copied to clipboard");
+            }}>
+              <CopyIcon />
+            </Button>
+          ) : (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger className="cursor-not-allowed">
+                  <Button variant={"outline"} size={"icon"} disabled>
+                    <CopyIcon />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent className="text-center">
+                  Public URL Sharing is disabled
+                  <br />
+                  Enable it in settings from the dashboard
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
 
-        <SelectionToggle dateRange={dateRange} setDateRange={setDateRange} />
+          )}
+          <SelectionToggle dateRange={dateRange} setDateRange={setDateRange} />
+
+        </div>
       </div>
       <ViewsBarChart data={data} dateRange={dateRange} />
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -182,6 +211,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { CopyIcon } from "@radix-ui/react-icons";
+import { toast } from "sonner";
 const SelectionToggle = ({
   dateRange,
   setDateRange,

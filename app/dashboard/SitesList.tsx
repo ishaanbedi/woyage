@@ -143,12 +143,12 @@ const SitesList = ({ user }: { user: User }) => {
               <h1 className="text-xl text-center">
                 It's lonely here, add a site to get started!
               </h1>
-              <NewSiteDialog user={user} />
+              <NewSiteDialog user={user} fetchSites={fetchSites} />
             </div>
           ) : (
             <div>
               <div className="flex justify-end">
-                <NewSiteDialog user={user} />
+                <NewSiteDialog user={user} fetchSites={fetchSites} />
               </div>
               <div>
                 <div className="overflow-x-auto">

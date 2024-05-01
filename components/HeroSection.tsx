@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import { type User } from "@supabase/supabase-js";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
+import { Badge } from "@tremor/react";
 const HeroSection = ({ user }: { user: User | null }) => {
   return (
     <section className="w-full pt-24">

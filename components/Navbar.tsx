@@ -5,6 +5,7 @@ import { type User } from "@supabase/supabase-js";
 import { Fira_Sans_Extra_Condensed } from "next/font/google";
 import { SheetTrigger, SheetContent, Sheet } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import { Badge } from "@tremor/react";
 const Navbar = ({ user }: { user: User | null }) => {
   return (
     <header className="flex h-16 w-full items-center justify-between bg-white px-4 shadow-sm dark:bg-gray-950 md:px-6">
@@ -14,7 +15,14 @@ const Navbar = ({ user }: { user: User | null }) => {
             variant={"ghost"}
             className={`flex items-center p-0.5 justify-center tracking-tight text-xl`}
           >
-            {process.env.NEXT_PUBLIC_SITE_NAME}
+            <span className="flex items-center space-x-2">
+              <span>
+                {process.env.NEXT_PUBLIC_SITE_NAME}
+              </span>
+              <Badge className="mt-0.5">
+                BETA
+              </Badge>
+            </span>
           </Button>
         </Link>
       </div>
@@ -63,12 +71,13 @@ const Navbar = ({ user }: { user: User | null }) => {
         <SheetContent side="right">
           <div className="p-6 flex flex-col justify-between items-center w-full  h-full">
             <div>
-              <Link className="" href="/">
-                <span
-                  className={`flex items-center justify-center text-center text-3xl`}
-                >
+              <Link className=" flex flex-col items-center" href="/">
+                <span>
                   {process.env.NEXT_PUBLIC_SITE_NAME}
                 </span>
+                <Badge className="mt-0.5">
+                  BETA
+                </Badge>
               </Link>
               <div className="justify-center text-center items-center flex flex-col">
                 <div className="flex flex-col gap-4 mt-12 w-full">
@@ -146,7 +155,7 @@ const Navbar = ({ user }: { user: User | null }) => {
           </div>
         </SheetContent>
       </Sheet>
-    </header>
+    </header >
   );
 };
 

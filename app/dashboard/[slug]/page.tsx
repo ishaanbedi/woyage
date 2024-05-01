@@ -1,5 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
-import AnalyticsPage from "./AnalyticsPage";
+import AnalyticsPage from "../../../components/AnalyticsPage";
 import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";

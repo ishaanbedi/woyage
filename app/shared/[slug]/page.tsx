@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { type Metadata } from "next";
-import AnalyticsPage from "@/app/dashboard/[slug]/AnalyticsPage";
+import AnalyticsPage from "@/components/AnalyticsPage";
 export const metadata: Metadata = {
     title: 'Analytics',
 };

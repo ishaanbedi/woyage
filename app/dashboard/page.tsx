@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import SitesList from "./SitesList";
+import SitesList from "../../components/SitesList";
 import Navbar from "@/components/Navbar";
 import { type Metadata } from "next";
 export const metadata: Metadata = {

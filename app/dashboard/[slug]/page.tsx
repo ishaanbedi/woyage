@@ -59,8 +59,7 @@ export default async function SitesDynamicPage({
     return (
       <div>
         <Navbar user={user} />
-
-        <AnalyticsPage domain={data.domain_name} user={user} params={params} />
+        <AnalyticsPage domain={data.domain_name} params={params} public_url={data.public_url} />  
       </div>
     );
   }

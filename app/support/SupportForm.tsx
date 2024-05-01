@@ -1,4 +1,16 @@
 "use client";
+import { type User } from "@supabase/supabase-js";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 import {
   CardTitle,
   CardDescription,
@@ -20,18 +32,29 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/utils/supabase/client";
 import { toast } from "sonner";
-import { useState } from "react";
-export default function SupportForm() {
+import { useEffect, useRef, useState } from "react";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
+
+
+export default function SupportForm({ user }: { user: User | null }) {
+
   const supabase = createClient();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [query_type, setQueryType] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showCaptcha, setShowCaptcha] = useState(false);
+
   const submitForm = async () => {
     setLoading(true);
     if (!name || !email || !query_type || !message) {
       toast.error("Please fill out all fields");
+      setLoading(false);
+      return;
+    }
+    if (!user) {
+      setShowCaptcha(true);
       setLoading(false);
       return;
     }
@@ -40,6 +63,7 @@ export default function SupportForm() {
       .insert([{ name, email, query_type, message }]);
     if (error) {
       setLoading(false);
+      console.error(error);
       toast.error("An error occurred while submitting the form");
       return;
     }
@@ -50,6 +74,26 @@ export default function SupportForm() {
     setMessage("");
     setLoading(false);
   };
+  const handleVerificationSuccess = async (token: string, ekey: string) => {
+    if (token && ekey) {
+      const { error } = await supabase
+        .from("contacts")
+        .insert([{ name, email, query_type, message }]);
+      if (error) {
+        setLoading(false);
+        console.error(error);
+        toast.error("An error occurred while submitting the form");
+        return;
+      }
+      toast.success("Form submitted successfully");
+      setName("");
+      setEmail("");
+      setQueryType("");
+      setMessage("");
+      setLoading(false);
+      setShowCaptcha(false);
+    }
+  }
   return (
     <div className="w-full max-w-md mx-auto">
       <Card>
@@ -120,12 +164,33 @@ export default function SupportForm() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button type="submit" disabled={loading}>
+            <Button
+              type="submit"
+              disabled={loading}
+            >
               Submit
             </Button>
           </CardFooter>
         </form>
       </Card>
+      <AlertDialog open={showCaptcha} onOpenChange={() => { setShowCaptcha(!showCaptcha); }}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              Are you a robot?
+            </AlertDialogTitle>
+          </AlertDialogHeader>
+          <HCaptcha
+            sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY!}
+            onVerify={(token, ekey) => handleVerificationSuccess(token, ekey)}
+          />
+
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
     </div>
   );
 }

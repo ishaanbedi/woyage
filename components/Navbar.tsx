@@ -12,7 +12,7 @@ const Navbar = ({ user }: { user: User | null }) => {
         <Link href="/">
           <Button
             variant={"ghost"}
-            className={`flex items-center p-0.5 justify-center text-xl`}
+            className={`flex items-center p-0.5 justify-center tracking-tight text-xl`}
           >
             {process.env.NEXT_PUBLIC_SITE_NAME}
           </Button>

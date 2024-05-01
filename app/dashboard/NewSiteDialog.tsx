@@ -16,7 +16,7 @@ import { createClient } from "@/utils/supabase/client";
 import { type User } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/toaster";
-const NewSiteDialog = ({ user }: { user: User }) => {
+const NewSiteDialog = ({ user, fetchSites } : { user: User, fetchSites: () => void }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [domainName, setDomainName] = useState("");
   const supabase = createClient();
@@ -44,6 +44,7 @@ const NewSiteDialog = ({ user }: { user: User }) => {
       return;
     }
     setIsOpen(false);
+    fetchSites();
     setDomainName("");
   };
   return (

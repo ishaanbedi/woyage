@@ -1,8 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
-import { type User } from "@supabase/supabase-js";
-import SelectionToggle from "./SelectionToggle";
 import ViewsBarChart from "./ViewsBarChart";
 import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
@@ -10,6 +8,12 @@ import DevicesCard from "./DevicesCard";
 import CountryCard from "./CountryCard";
 import PathsCard from "./PathsCard";
 import ReferrersCard from "./ReferrersCard";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 interface Analytics {
   id: string;
@@ -26,61 +30,76 @@ interface Analytics {
   language: string;
 }
 const AnalyticsPage = ({
-  user,
   params,
   domain,
+  public_url
 }: {
-  user: User;
   params: { slug: string };
   domain: string;
+  public_url: boolean;
 }) => {
-  const userEmail = user.email;
   const supabase = createClient();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<Analytics[]>([]);
-  const [dateRange, setDateRange] = useState("2");
+  const [dateRange, setDateRange] = useState("today");
   const fetchRecords = async () => {
-    var timeFilter;
+    var floorDate;
+    var ceilDate;
     switch (dateRange) {
-      case "0":
-        timeFilter = new Date(
-          new Date().setHours(new Date().getHours() - 1),
-        ).toISOString();
+      case "today":
+        floorDate = new Date();
+        floorDate.setHours(0, 0, 0, 0);
+        ceilDate = new Date();
+        ceilDate.setHours(23, 59, 59, 999);
         break;
-      case "1":
-        timeFilter = new Date(
-          new Date().setDate(new Date().getDate() - 1),
-        ).toISOString();
+      case "yesterday":
+        floorDate = new Date();
+        floorDate.setDate(floorDate.getDate() - 1);
+        floorDate.setHours(0, 0, 0, 0);
+        ceilDate = new Date();
+        ceilDate.setDate(ceilDate.getDate() - 1);
+        ceilDate.setHours(23, 59, 59, 999);
         break;
-      case "2":
-        timeFilter = new Date(
-          new Date().setDate(new Date().getDate() - 7),
-        ).toISOString();
+      case "7":
+        floorDate = new Date();
+        floorDate.setDate(floorDate.getDate() - 7);
+        floorDate.setHours(0, 0, 0, 0);
+        ceilDate = new Date();
+        ceilDate.setHours(23, 59, 59, 999);
         break;
-      case "3":
-        timeFilter = new Date(
-          new Date().setDate(new Date().getDate() - 30),
-        ).toISOString();
+      case "30":
+        floorDate = new Date();
+        floorDate.setDate(floorDate.getDate() - 30);
+        floorDate.setHours(0, 0, 0, 0);
+        ceilDate = new Date();
+        ceilDate.setHours(23, 59, 59, 999);
         break;
-      case "4":
-        timeFilter = new Date(
-          new Date().setDate(new Date().getDate() - 90),
-        ).toISOString();
+      case "90":
+        floorDate = new Date();
+        floorDate.setDate(floorDate.getDate() - 90);
+        floorDate.setHours(0, 0, 0, 0);
+        ceilDate = new Date();
+        ceilDate.setHours(23, 59, 59, 999);
         break;
-      case "5":
-        timeFilter = new Date(
-          new Date().setDate(new Date().getDate() - 365),
-        ).toISOString();
+      case "365":
+        floorDate = new Date();
+        floorDate.setDate(floorDate.getDate() - 365);
+        floorDate.setHours(0, 0, 0, 0);
+        ceilDate = new Date();
+        ceilDate.setHours(23, 59, 59, 999);
         break;
-      case "6":
-        timeFilter = new Date(new Date().setFullYear(1970)).toISOString();
+      case "all":
+        floorDate = new Date("2021-01-01");
+        ceilDate = new Date();
         break;
     }
     const { data, error } = await supabase
       .from("analytics")
       .select("*")
       .eq("id", params.slug)
-      .filter("added_time", "gt", timeFilter);
+      .lte("added_time", ceilDate?.toISOString())
+      .gte("added_time", floorDate?.toISOString());
+
     if (error) {
       console.error(error);
       setLoading(false);
@@ -99,7 +118,7 @@ const AnalyticsPage = ({
     .subscribe();
   useEffect(() => {
     fetchRecords();
-  }, [user, params, dateRange]);
+  }, [params, dateRange]);
 
   if (loading) {
     return (
@@ -142,8 +161,34 @@ const AnalyticsPage = ({
             {domain}
           </h1>
         )}
+        <div className="flex items-center space-x-2">
+          {public_url ? (
+            <Button variant={"outline"} size={"icon"} onClick={() => {
+              navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_SITE_URL}/shared/${params.slug}`);
+              toast.success("Public URL copied to clipboard");
+            }}>
+              <CopyIcon />
+            </Button>
+          ) : (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger className="cursor-not-allowed">
+                  <Button variant={"outline"} size={"icon"} disabled>
+                    <CopyIcon />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent className="text-center">
+                  Public URL Sharing is disabled
+                  <br />
+                  Enable it in settings from the dashboard
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
 
-        <SelectionToggle dateRange={dateRange} setDateRange={setDateRange} />
+          )}
+          <SelectionToggle dateRange={dateRange} setDateRange={setDateRange} />
+
+        </div>
       </div>
       <ViewsBarChart data={data} dateRange={dateRange} />
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -157,3 +202,41 @@ const AnalyticsPage = ({
 };
 
 export default AnalyticsPage;
+
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { CopyIcon } from "@radix-ui/react-icons";
+import { toast } from "sonner";
+const SelectionToggle = ({
+  dateRange,
+  setDateRange,
+}: {
+  dateRange: string;
+  setDateRange: (value: string) => void;
+}) => {
+  return (
+    <div>
+      <Select value={dateRange} onValueChange={setDateRange}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Last 7 days" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="today">Today</SelectItem>
+          <SelectItem value="yesterday">Yesterday</SelectItem>
+          <SelectItem value="7">Last 7 days</SelectItem>
+          <SelectItem value="30">Last 30 days</SelectItem>
+          <SelectItem value="90">Last 90 days</SelectItem>
+          <SelectItem value="365">Last 365 days</SelectItem>
+          <SelectItem value="all">All time</SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
+  );
+};

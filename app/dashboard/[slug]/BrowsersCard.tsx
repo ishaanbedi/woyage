@@ -52,16 +52,29 @@ const BrowsersCard = ({ data }: { data: Analytics[] }) => {
         name: browser.name,
         value: browser.value,
         icon: function Icon() {
-          return (
-            <img
-              alt={browser.name}
-              width="20"
-              height="20"
-              data-nimg="1"
-              className="mr-2.5"
-              src={`https://uaparser.js.org/images/browsers/${browser.name.toLowerCase()}.png`}
-            />
-          );
+          if (browser.name === "Samsung Internet") {
+            return (
+              <img
+                alt={browser.name}
+                width="20"
+                height="20"
+                data-nimg="1"
+                className="mr-2.5"
+                src="https://uaparser.js.org/images/browsers/samsung%20browser.png"
+              />
+            );
+          } else {
+            return (
+              <img
+                alt={browser.name}
+                width="20"
+                height="20"
+                data-nimg="1"
+                className="mr-2.5"
+                src={`https://uaparser.js.org/images/browsers/${browser.name.toLowerCase()}.png`}
+              />
+            );
+          }
         },
       };
     });

@@ -62,8 +62,8 @@ https://github.com/ishaanbedi/woyage/assets/39641326/eba7193f-4773-4f69-ba2d-3b7
 
 
 
-## Using Woyage.co
-The easiest way to use Woyage is to use the already deployed version at [woyage.co](https://woyage.co/). 
+## Using Woyage.app
+The easiest way to use Woyage is to use the already deployed version at [woyage.app](https://woyage.app/). 
 
 When you visit the website, you can sign up for an account and add your website to start tracking your visitors. You will be provided with a tracking code that you can add to your website to start tracking visitors.
 
@@ -162,7 +162,7 @@ git clone https://github.com/ishaanbedi/woyage
 NEXT_PUBLIC_SITE_NAME="Woyage"
 
 # URL of your website
-NEXT_PUBLIC_SITE_URL="https://woyage.co/" 
+NEXT_PUBLIC_SITE_URL="https://woyage.app/" 
 
 # Stage of your website (development/production) used to determine the environment
 NEXT_PUBLIC_STAGE="development"
@@ -182,7 +182,7 @@ NEXT_PUBLIC_SUPABASE_URL="https://project_id.supabase.co"
 RESEND_EMAIL="re_..."
  
 # Support email for your website, remove this if you don't plan to implement support
-NEXT_PUBLIC_SUPPORT_EMAIL="support@woyage.co"
+NEXT_PUBLIC_SUPPORT_EMAIL="support@woyage.app"
 
 # Woyage use Supabase Webhooks to email the admin whenever a new support request is created. You can set a webhook in your Supabase project settings:
 # https://supabase.com/docs/guides/database/webhooks

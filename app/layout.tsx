@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.woyage.co/og.png",
+        url: "https://www.woyage.app/og.png",
       }
     ],
   },

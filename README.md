@@ -1,6 +1,6 @@
-![Supalytics Logo](https://sdkjkskyuwkatrfdiwsx.supabase.co/storage/v1/object/public/assets/repo/og.png)
+![Woyage Logo](https://sdkjkskyuwkatrfdiwsx.supabase.co/storage/v1/object/public/assets/repo/og.png)
 
-Supalytics is an open-sourced website analytics tool designed to track websites. With Supalytics, you can gain a deeper understanding of your audience, their behavior, and the performance of your website.
+Woyage is an open-sourced website analytics tool designed to track websites. With Woyage, you can gain a deeper understanding of your audience, their behavior, and the performance of your website.
 
 ## Features
 
@@ -10,7 +10,7 @@ Supalytics is an open-sourced website analytics tool designed to track websites.
 - **Real-Time Data**: Monitor website activity as it happens.
 - **Traffic Sources**: Analyze referral, direct, and search traffic sources.
 - **Device Analytics**: Gain insights into visitors' devices, browsers, and operating systems.
-- **Supalytics Privacy**: Trust that your data and your visitors' information are kept safe and private.
+- **Woyage Privacy**: Trust that your data and your visitors' information are kept safe and private.
 - **No Cookies**: We don't store any cookies on visitors' devices.
 - **Privacy First**: No personal data is collected that could identify visitors.
 - **Performance**: Our technology ensures fast analytics without slowing down your website.
@@ -43,10 +43,10 @@ Supalytics is an open-sourced website analytics tool designed to track websites.
 ## Tech Stack
 
 - **[Supabase](https://supabase.com/)**: From authentication, to database, and realtime updates are powered by Supabase.
-- **[Next.js](https://nextjs.org/)**: Supalytics is built with Next.js 14 using the [app router](https://nextjs.org/docs/app).
+- **[Next.js](https://nextjs.org/)**: Woyage is built with Next.js 14 using the [app router](https://nextjs.org/docs/app).
 - **Styling & UI**: Built with amazing components from [shadcn/ui](https://ui.shadcn.com/), styled with [TailwindCSS](https://tailwindcss.com/) & [HyperUI](https://hyperui.dev/).
-- **[Vercel](https://vercel.com/)**: Supalytics is deployed on Vercel ▲
-- **[Tremor](https://tremor.so/)**: React components powering charts and dashboard on Supalytics
+- **[Vercel](https://vercel.com/)**: Woyage is deployed on Vercel ▲
+- **[Tremor](https://tremor.so/)**: React components powering charts and dashboard on Woyage
 - **[Resend](https://resend.com/)**: For sending and managing authentication & support related emails.
 
 ## Supabase Offerings Used:
@@ -58,17 +58,17 @@ Supalytics is an open-sourced website analytics tool designed to track websites.
 ## Check Out a Demo Video
 
 
-https://github.com/ishaanbedi/supalytics/assets/39641326/eba7193f-4773-4f69-ba2d-3b7c0daf603e
+https://github.com/ishaanbedi/woyage/assets/39641326/eba7193f-4773-4f69-ba2d-3b7c0daf603e
 
 
 
-## Using Supalytics.co
-The easiest way to use Supalytics is to use the already deployed version at [supalytics.co](https://supalytics.co/). 
+## Using Woyage.co
+The easiest way to use Woyage is to use the already deployed version at [woyage.co](https://woyage.co/). 
 
 When you visit the website, you can sign up for an account and add your website to start tracking your visitors. You will be provided with a tracking code that you can add to your website to start tracking visitors.
 
-## Running Supalytics Locally
-If you want to run Supalytics locally, you can follow the steps below:
+## Running Woyage Locally
+If you want to run Woyage locally, you can follow the steps below:
 
 Before you start, you need to setup a Supabase project. You can sign up for a free account at [Supabase](https://supabase.com/).
 
@@ -152,17 +152,17 @@ The `contacts` table is used to store the support requests from the visitors, an
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/ishaanbedi/supalytics
+git clone https://github.com/ishaanbedi/woyage
 ```
 
 2. Rename `.env.example` to `.env.local` and fill in the environment variables as per the following:
 ```bash
 
 # Name of your website
-NEXT_PUBLIC_SITE_NAME="Supalytics"
+NEXT_PUBLIC_SITE_NAME="Woyage"
 
 # URL of your website
-NEXT_PUBLIC_SITE_URL="https://supalytics.co/" 
+NEXT_PUBLIC_SITE_URL="https://woyage.co/" 
 
 # Stage of your website (development/production) used to determine the environment
 NEXT_PUBLIC_STAGE="development"
@@ -182,9 +182,9 @@ NEXT_PUBLIC_SUPABASE_URL="https://project_id.supabase.co"
 RESEND_EMAIL="re_..."
  
 # Support email for your website, remove this if you don't plan to implement support
-NEXT_PUBLIC_SUPPORT_EMAIL="support@supalytics.co"
+NEXT_PUBLIC_SUPPORT_EMAIL="support@woyage.co"
 
-# Supalytics use Supabase Webhooks to email the admin whenever a new support request is created. You can set a webhook in your Supabase project settings:
+# Woyage use Supabase Webhooks to email the admin whenever a new support request is created. You can set a webhook in your Supabase project settings:
 # https://supabase.com/docs/guides/database/webhooks
 
 # When you create a webhook, create a HEADER with a key as `supabase-verified` and a value that will be used to verify it, and set the following environment variable with the value you've set, in order to prevent unauthorized requests to your webhook
@@ -207,17 +207,17 @@ pnpm dev
 
 5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Deploying Supalytics
+## Deploying Woyage
 
-Deploying Supalytics is easy, just follow the steps mentioned in the [Running Supalytics Locally](#running-supalytics-locally) section to set up the Supabase database and environment variables.
+Deploying Woyage is easy, just follow the steps mentioned in the [Running Woyage Locally](#running-woyage-locally) section to set up the Supabase database and environment variables.
 
-After that, you can easily deploy Supalytics to Vercel by clicking the button below:
+After that, you can easily deploy Woyage to Vercel by clicking the button below:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fishaanbedi%2Fsupalytics%2F&env=NEXT_PUBLIC_SITE_NAME,NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_STAGE,NEXT_PUBLIC_SUPABASE_ANON_KEY,NEXT_PUBLIC_SUPABASE_URL,RESEND_EMAIL,NEXT_PUBLIC_SUPPORT_EMAIL,SUPABASE_WEBHOOK_HEADER_KEY,SUPPORT_RECIPIENT&project-name=supalytics&repository-name=supalytics)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fishaanbedi%2Fwoyage%2F&env=NEXT_PUBLIC_SITE_NAME,NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_STAGE,NEXT_PUBLIC_SUPABASE_ANON_KEY,NEXT_PUBLIC_SUPABASE_URL,RESEND_EMAIL,NEXT_PUBLIC_SUPPORT_EMAIL,SUPABASE_WEBHOOK_HEADER_KEY,SUPPORT_RECIPIENT&project-name=woyage&repository-name=woyage)
 
 ## Support Mechanism
 
-Supalytics has a built-in support mechanism that allows visitors to send support requests to the admin. The support requests are stored in the `contacts` table in the Supabase database, and the admin is notified via email whenever a new support request is created.
+Woyage has a built-in support mechanism that allows visitors to send support requests to the admin. The support requests are stored in the `contacts` table in the Supabase database, and the admin is notified via email whenever a new support request is created.
 
 Here's how the support mechanism works:
 
@@ -231,7 +231,7 @@ Here's how the support mechanism works:
 This ensures that the admin is notified whenever a new support request is created, and can respond to the visitor accordingly.
 
 ## Open Source License
-Supalytics is open-sourced under the MIT License. You can use it for personal or commercial projects.
+Woyage is open-sourced under the MIT License. You can use it for personal or commercial projects.
 
 ## Contributing
 Issues and PRs are welcome! Feel free to contribute to the project.

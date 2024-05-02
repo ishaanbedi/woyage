@@ -120,7 +120,7 @@ const Navbar = ({ user }: { user: User | null }) => {
                       </Link>
                       <Link
                         className="font-medium hover:underline hover:underline-offset-4 w-full"
-                        href="https://www.github.com/ishaanbedi/supalytics"
+                        href="https://www.github.com/ishaanbedi/woyage"
                       >
                         Source Code
                       </Link>

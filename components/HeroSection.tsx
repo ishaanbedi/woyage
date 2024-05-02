@@ -33,7 +33,7 @@ const HeroSection = ({ user }: { user: User | null }) => {
                 </Link>
               )}
               <Link
-                href="https://www.github.com/ishaanbedi/supalytics"
+                href="https://www.github.com/ishaanbedi/woyage"
                 target="_blank"
               >
                 <Button

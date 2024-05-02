@@ -22,7 +22,7 @@ export function OpenSourced() {
         <div className="flex space-x-2 justify-center items-center mt-6">
           <Button>
             <Link
-              href="https://www.github.com/ishaanbedi/supalytics"
+              href="https://www.github.com/ishaanbedi/woyage"
               target="_blank"
               className="flex items-center space-x-2"
             >

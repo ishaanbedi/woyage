@@ -8,27 +8,27 @@ import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/components/Footer";
 import Head from "next/head";
 export const metadata: Metadata = {
-  metadataBase: new URL(`https://supalytics.io`),
+  metadataBase: new URL(`https://woyage.io`),
   title: {
-    default: 'Supalytics',
-    template: 'Supalytics | %s',
+    default: 'Woyage',
+    template: 'Woyage | %s',
   },
   description: 'An open-sourced & privacy-focused analytics platform for your website.',
   openGraph: {
-    title: 'Supalytics',
+    title: 'Woyage',
     description: 'An open-sourced & privacy-focused analytics platform for your website.',
-    url: 'https://supalytics.io',
-    siteName: 'Supalytics',
+    url: 'https://woyage.io',
+    siteName: 'Woyage',
     locale: 'en_US',
     type: "website",
     images: [
       {
-        url: "https://www.supalytics.co/og.png",
+        url: "https://www.woyage.co/og.png",
       }
     ],
   },
   twitter: {
-    title: 'Supalytics',
+    title: 'Woyage',
     card: "summary_large_image",
   },
 };

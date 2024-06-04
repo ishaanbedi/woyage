@@ -108,7 +108,7 @@ const CountryCard = ({ data }: { data: Analytics[] }) => {
   }
 
   return (
-    <Card className="mt-2 h-96">
+    <Card className="mt-2 min-h-96">
       <p className="text-tremor-metric text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
         Countries & Languages
       </p>

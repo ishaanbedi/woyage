@@ -13,7 +13,7 @@ const Navbar = ({ user }: { user: User | null }) => {
         <Link href="/">
           <Button
             variant={"ghost"}
-            className={`flex items-center p-0.5 justify-center tracking-tight text-xl`}
+            className={"flex items-center p-0.5 justify-center tracking-tight text-xl"}
           >
             <span className="flex items-center space-x-2">
               <span>
@@ -56,7 +56,7 @@ const Navbar = ({ user }: { user: User | null }) => {
               </Link>
             </div>
           ) : (
-            <Link href={`/signup`}>
+            <Link href={"/signup"}>
               <Button size={"sm"}>Get Started Now</Button>
             </Link>
           )}

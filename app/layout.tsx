@@ -8,7 +8,7 @@ import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/components/Footer";
 import Head from "next/head";
 export const metadata: Metadata = {
-  metadataBase: new URL(`https://woyage.io`),
+  metadataBase: new URL("https://woyage.io"),
   title: {
     default: 'Woyage',
     template: 'Woyage | %s',

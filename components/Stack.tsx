@@ -82,10 +82,7 @@ const Stack = ({ user }: { user: User | null }) => {
               <Button>Get Started Now</Button>
             </Link>
           )}
-          <Link
-            href="https://www.github.com/ishaanbedi/woyage"
-            target="_blank"
-          >
+          <Link href="https://www.github.com/ishaanbedi/woyage" target="_blank">
             <Button variant="outline">
               <GitHubLogoIcon className="mr-2 h-4 w-4" /> Source Code
             </Button>

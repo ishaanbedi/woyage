@@ -6,8 +6,8 @@ import { OpenSourced } from "@/components/OpenSource";
 import { Divider } from "@tremor/react";
 import { type Metadata } from "next";
 export const metadata: Metadata = {
-  title: 'Features',
-  description: `Exlpore the features of ${process.env.NEXT_PUBLIC_SITE_NAME}.`
+  title: "Features",
+  description: `Exlpore the features of ${process.env.NEXT_PUBLIC_SITE_NAME}.`,
 };
 export default async function FeaturesPage() {
   const supabase = createClient();

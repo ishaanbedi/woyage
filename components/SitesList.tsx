@@ -42,12 +42,22 @@ import PublicURLSwitch from "@/components/PublicURLSwitch";
 
 const SitesList = ({ user }: { user: User }) => {
   const [sites, setSites] = useState<
-    { domain_name: string; website_id: string; added: string; public_url: boolean }[]
+    {
+      domain_name: string;
+      website_id: string;
+      added: string;
+      public_url: boolean;
+    }[]
   >([]);
   const [loading, setLoading] = useState(true);
   const [updatedSiteDomain, setUpdatedSiteDomain] = useState("");
   const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
-  const [selectedSiteSettings, setSelectedSiteSettings] = useState<{ domain_name: string; website_id: string; added: string; public_url: boolean } | null>(null);
+  const [selectedSiteSettings, setSelectedSiteSettings] = useState<{
+    domain_name: string;
+    website_id: string;
+    added: string;
+    public_url: boolean;
+  } | null>(null);
   const supabase = createClient();
   const fetchSites = async () => {
     setLoading(true);
@@ -199,7 +209,9 @@ const SitesList = ({ user }: { user: User }) => {
                                     <Settings size={16} />
                                   </Button>
                                 </DialogTrigger>
-                                <DialogContent onOpenAutoFocus={(e) => e.preventDefault()}>
+                                <DialogContent
+                                  onOpenAutoFocus={(e) => e.preventDefault()}
+                                >
                                   <DialogHeader>
                                     <DialogTitle>
                                       {site.domain_name}
@@ -298,13 +310,16 @@ const SitesList = ({ user }: { user: User }) => {
                                               </TooltipTrigger>
                                               <TooltipContent>
                                                 <p className="text-center">
-                                                  Anyone with the public URL can view your site's analytics.
+                                                  Anyone with the public URL can
+                                                  view your site's analytics.
                                                 </p>
                                               </TooltipContent>
                                             </Tooltip>
                                           </TooltipProvider>
                                         </span>
-                                        <PublicURLSwitch site={selectedSiteSettings} />
+                                        <PublicURLSwitch
+                                          site={selectedSiteSettings}
+                                        />
                                       </span>
                                       <span className="flex space-x-2 pt-4">
                                         <Button

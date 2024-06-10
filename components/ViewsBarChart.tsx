@@ -45,7 +45,14 @@ function ViewsBarChart({
           }
         }
         array.push({
-          name: i === 0 ? "12 AM" : i === 12 ? "12 PM" : i > 12 ? i - 12 + " PM" : i + " AM",
+          name:
+            i === 0
+              ? "12 AM"
+              : i === 12
+                ? "12 PM"
+                : i > 12
+                  ? i - 12 + " PM"
+                  : i + " AM",
           Views: count,
         });
       }
@@ -61,7 +68,10 @@ function ViewsBarChart({
         var count = 0;
         for (let j = 0; j < data.length; j++) {
           var added_time = new Date(data[j].added_time);
-          if (added_time >= yesterdayStartHour && added_time <= yesterdayEndHour) {
+          if (
+            added_time >= yesterdayStartHour &&
+            added_time <= yesterdayEndHour
+          ) {
             var added_hour = added_time.getHours();
             if (added_hour === i) {
               count++;
@@ -69,7 +79,14 @@ function ViewsBarChart({
           }
         }
         array.push({
-          name: i === 0 ? "12 AM" : i === 12 ? "12 PM" : i > 12 ? i - 12 + " PM" : i + " AM",
+          name:
+            i === 0
+              ? "12 AM"
+              : i === 12
+                ? "12 PM"
+                : i > 12
+                  ? i - 12 + " PM"
+                  : i + " AM",
           Views: count,
         });
       }
@@ -125,8 +142,8 @@ function ViewsBarChart({
         <BarChart
           data={generateDailyViews(data, dateRange)}
           index="name"
-          categories={['Views']}
-          colors={['blue']}
+          categories={["Views"]}
+          colors={["blue"]}
           yAxisWidth={48}
         />
       </Card>

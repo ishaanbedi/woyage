@@ -21,8 +21,8 @@ const ForgotPassword = () => {
     setLoading(true);
     const supabase = createClient();
     const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`
-    })
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
     if (error) {
       toast.error(error.message);
     }
@@ -30,7 +30,7 @@ const ForgotPassword = () => {
       toast.success("Reset link sent to your email");
     }
     setLoading(false);
-  }
+  };
   return (
     <div>
       <Dialog>
@@ -42,7 +42,11 @@ const ForgotPassword = () => {
           </DialogHeader>
           <div>
             <Label htmlFor="email">Email</Label>
-            <Input value={email} onChange={(e) => setEmail(e.target.value)} disabled={loading} />
+            <Input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={loading}
+            />
             <Button onClick={sendResetLink} className="mt-3" disabled={loading}>
               {loading ? "Sending..." : "Send Reset Link"}
             </Button>

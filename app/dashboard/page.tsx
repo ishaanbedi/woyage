@@ -4,7 +4,7 @@ import SitesList from "../../components/SitesList";
 import Navbar from "@/components/Navbar";
 import { type Metadata } from "next";
 export const metadata: Metadata = {
-  title: 'Dashboard',
+  title: "Dashboard",
 };
 export default async function SitesPage() {
   const supabase = createClient();

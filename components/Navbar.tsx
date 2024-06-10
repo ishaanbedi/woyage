@@ -16,12 +16,8 @@ const Navbar = ({ user }: { user: User | null }) => {
             className={`flex items-center p-0.5 justify-center tracking-tight text-xl`}
           >
             <span className="flex items-center space-x-2">
-              <span>
-                {process.env.NEXT_PUBLIC_SITE_NAME}
-              </span>
-              <Badge className="mt-0.5">
-                BETA
-              </Badge>
+              <span>{process.env.NEXT_PUBLIC_SITE_NAME}</span>
+              <Badge className="mt-0.5">BETA</Badge>
             </span>
           </Button>
         </Link>
@@ -72,12 +68,8 @@ const Navbar = ({ user }: { user: User | null }) => {
           <div className="p-6 flex flex-col justify-between items-center w-full  h-full">
             <div>
               <Link className=" flex flex-col items-center" href="/">
-                <span>
-                  {process.env.NEXT_PUBLIC_SITE_NAME}
-                </span>
-                <Badge className="mt-0.5">
-                  BETA
-                </Badge>
+                <span>{process.env.NEXT_PUBLIC_SITE_NAME}</span>
+                <Badge className="mt-0.5">BETA</Badge>
               </Link>
               <div className="justify-center text-center items-center flex flex-col">
                 <div className="flex flex-col gap-4 mt-12 w-full">
@@ -155,7 +147,7 @@ const Navbar = ({ user }: { user: User | null }) => {
           </div>
         </SheetContent>
       </Sheet>
-    </header >
+    </header>
   );
 };
 

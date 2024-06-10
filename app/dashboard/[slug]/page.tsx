@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { type Metadata } from "next";
 export const metadata: Metadata = {
-  title: 'Analytics',
+  title: "Analytics",
 };
 export default async function SitesDynamicPage({
   params,
@@ -59,7 +59,11 @@ export default async function SitesDynamicPage({
     return (
       <div>
         <Navbar user={user} />
-        <AnalyticsPage domain={data.domain_name} params={params} public_url={data.public_url} />  
+        <AnalyticsPage
+          domain={data.domain_name}
+          params={params}
+          public_url={data.public_url}
+        />
       </div>
     );
   }

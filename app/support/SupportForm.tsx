@@ -10,7 +10,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
 import {
   CardTitle,
   CardDescription,
@@ -35,9 +35,7 @@ import { toast } from "sonner";
 import { useEffect, useRef, useState } from "react";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 
-
 export default function SupportForm({ user }: { user: User | null }) {
-
   const supabase = createClient();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -93,7 +91,7 @@ export default function SupportForm({ user }: { user: User | null }) {
       setLoading(false);
       setShowCaptcha(false);
     }
-  }
+  };
   return (
     <div className="w-full max-w-md mx-auto">
       <Card>
@@ -164,21 +162,21 @@ export default function SupportForm({ user }: { user: User | null }) {
             </div>
           </CardContent>
           <CardFooter>
-            <Button
-              type="submit"
-              disabled={loading}
-            >
+            <Button type="submit" disabled={loading}>
               Submit
             </Button>
           </CardFooter>
         </form>
       </Card>
-      <AlertDialog open={showCaptcha} onOpenChange={() => { setShowCaptcha(!showCaptcha); }}>
+      <AlertDialog
+        open={showCaptcha}
+        onOpenChange={() => {
+          setShowCaptcha(!showCaptcha);
+        }}
+      >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>
-              Are you a robot?
-            </AlertDialogTitle>
+            <AlertDialogTitle>Are you a robot?</AlertDialogTitle>
           </AlertDialogHeader>
           <HCaptcha
             sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY!}
@@ -190,7 +188,6 @@ export default function SupportForm({ user }: { user: User | null }) {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-
     </div>
   );
 }

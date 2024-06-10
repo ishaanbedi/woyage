@@ -22,6 +22,6 @@ export const createClient = () => {
           } catch (error) {}
         },
       },
-    }
+    },
   );
 };

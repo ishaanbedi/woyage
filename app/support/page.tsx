@@ -3,7 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 import SupportForm from "./SupportForm";
 import { type Metadata } from "next";
 export const metadata: Metadata = {
-  title: 'Support',
+  title: "Support",
 };
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}/terms`

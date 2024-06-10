@@ -13,7 +13,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
+} from "@/components/ui/tooltip";
 
 interface Analytics {
   id: string;
@@ -32,7 +32,7 @@ interface Analytics {
 const AnalyticsPage = ({
   params,
   domain,
-  public_url
+  public_url,
 }: {
   params: { slug: string };
   domain: string;
@@ -163,10 +163,16 @@ const AnalyticsPage = ({
         )}
         <div className="flex items-center space-x-2">
           {public_url ? (
-            <Button variant={"outline"} size={"icon"} onClick={() => {
-              navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_SITE_URL}/shared/${params.slug}`);
-              toast.success("Public URL copied to clipboard");
-            }}>
+            <Button
+              variant={"outline"}
+              size={"icon"}
+              onClick={() => {
+                navigator.clipboard.writeText(
+                  `${process.env.NEXT_PUBLIC_SITE_URL}/shared/${params.slug}`,
+                );
+                toast.success("Public URL copied to clipboard");
+              }}
+            >
               <CopyIcon />
             </Button>
           ) : (
@@ -184,10 +190,8 @@ const AnalyticsPage = ({
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-
           )}
           <SelectionToggle dateRange={dateRange} setDateRange={setDateRange} />
-
         </div>
       </div>
       <ViewsBarChart data={data} dateRange={dateRange} />
@@ -202,7 +206,6 @@ const AnalyticsPage = ({
 };
 
 export default AnalyticsPage;
-
 
 import {
   Select,

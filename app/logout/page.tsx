@@ -6,7 +6,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { type Metadata } from "next";
 export const metadata: Metadata = {
-  title: 'Logout',
+  title: "Logout",
 };
 export default async function AuthButton() {
   const supabase = createClient();

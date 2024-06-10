@@ -4,7 +4,7 @@ const defaultUrl = process.env.VERCEL_URL
 
 import { type Metadata } from "next";
 export const metadata: Metadata = {
-  title: 'Terms of Service',
+  title: "Terms of Service",
 };
 const Terms = () => {
   const lastUpdated = "19 April 2024";

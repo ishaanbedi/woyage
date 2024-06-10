@@ -23,7 +23,6 @@ Woyage is an open-sourced website analytics tool designed to track websites. Wit
   </tr>
 </table>
 
-
 <table>
   <tr>
      <td> <img width="697" alt="Screenshot" src="https://sdkjkskyuwkatrfdiwsx.supabase.co/storage/v1/object/public/assets/repo/4.png"></td>
@@ -31,14 +30,12 @@ Woyage is an open-sourced website analytics tool designed to track websites. Wit
   </tr>
 </table>
 
-
 <table>
   <tr>
 <td> <img width="697" alt="Screenshot" src="https://sdkjkskyuwkatrfdiwsx.supabase.co/storage/v1/object/public/assets/repo/6.png"></td>
    <td> <img width="697" alt="Screenshot" src="https://sdkjkskyuwkatrfdiwsx.supabase.co/storage/v1/object/public/assets/repo/7.png"></td>
   </tr>
 </table>
-
 
 ## Tech Stack
 
@@ -50,6 +47,7 @@ Woyage is an open-sourced website analytics tool designed to track websites. Wit
 - **[Resend](https://resend.com/)**: For sending and managing authentication & support related emails.
 
 ## Supabase Offerings Used:
+
 - **Realtime**: Supabase Realtime is used to track and update visitor data in real-time.
 - **Database**: Supabase Database is used to store visitor data.
 - **Auth**: Supabase Auth is used for user authentication.
@@ -57,22 +55,22 @@ Woyage is an open-sourced website analytics tool designed to track websites. Wit
 
 ## Check Out a Demo Video
 
-
 https://github.com/ishaanbedi/woyage/assets/39641326/eba7193f-4773-4f69-ba2d-3b7c0daf603e
 
-
-
 ## Using Woyage.app
-The easiest way to use Woyage is to use the already deployed version at [woyage.app](https://woyage.app/). 
+
+The easiest way to use Woyage is to use the already deployed version at [woyage.app](https://woyage.app/).
 
 When you visit the website, you can sign up for an account and add your website to start tracking your visitors. You will be provided with a tracking code that you can add to your website to start tracking visitors.
 
 ## Running Woyage Locally
+
 If you want to run Woyage locally, you can follow the steps below:
 
 Before you start, you need to setup a Supabase project. You can sign up for a free account at [Supabase](https://supabase.com/).
 
 ### Supabase Schema
+
 There are three tables in the Supabase database to facilitate the tracking of visitors:
 
 1. **site_domains**: This table stores the domains of the websites that are being tracked, and has the following columns:
@@ -83,17 +81,19 @@ There are three tables in the Supabase database to facilitate the tracking of vi
    - **added_timestamp**: The timestamp when the domain was added, used for displaying in the dashboard in a sorted manner.
 
 Execute the following SQL query in Supabase's SQL editor to create the `site_domains` table:
-   ```sql
-   CREATE TABLE IF NOT EXISTS site_domains (
-     id SERIAL PRIMARY KEY,
-     domain_name text,
-     email varchar(250),
-     website_id uuid,
-     added_time timestamp with time zone
-   );
-   ```
 
-   2. **analytics**: This table stores the visitor data, and has the following columns:
+```sql
+CREATE TABLE IF NOT EXISTS site_domains (
+  id SERIAL PRIMARY KEY,
+  domain_name text,
+  email varchar(250),
+  website_id uuid,
+  added_time timestamp with time zone
+);
+```
+
+2.  **analytics**: This table stores the visitor data, and has the following columns:
+
     - **id**: The ID of the website, which is the same as the `website_id` in the `site_domains` table.
     - **path**: The path of the page visited by the visitor.
     - **browser**: The browser used by the visitor.
@@ -125,16 +125,16 @@ CREATE TABLE IF NOT EXISTS analytics (
 ```
 
 3. **contacts**: This table stores the support requests from the visitors, and has the following columns:
-    - **id**: Auto-incrementing ID.
-    - **name**: The name of the visitor.
-    - **email**: The email of the visitor.
-    - **query_type**: The type of query, like a bug report, feature request, etc.
-    - **message**: The message sent by the visitor.
-    - **created_at**: The timestamp when the support request was created.
+   - **id**: Auto-incrementing ID.
+   - **name**: The name of the visitor.
+   - **email**: The email of the visitor.
+   - **query_type**: The type of query, like a bug report, feature request, etc.
+   - **message**: The message sent by the visitor.
+   - **created_at**: The timestamp when the support request was created.
 
 Execute the following SQL query in Supabase's SQL editor to create the `contacts` table:
-    
-```sql  
+
+```sql
     CREATE TABLE IF NOT EXISTS contacts (
       id SERIAL PRIMARY KEY,
       name text,
@@ -148,27 +148,27 @@ Execute the following SQL query in Supabase's SQL editor to create the `contacts
 
 The `contacts` table is used to store the support requests from the visitors, and is used to send emails to the admin when a new support request is created. In case you don't want to implement support, you can ignore the `contacts` table and the related code in the Supabase functions, and the Supabase Webhooks.
 
-
-
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/ishaanbedi/woyage
 ```
 
 2. Rename `.env.example` to `.env.local` and fill in the environment variables as per the following:
+
 ```bash
 
 # Name of your website
 NEXT_PUBLIC_SITE_NAME="Woyage"
 
 # URL of your website
-NEXT_PUBLIC_SITE_URL="https://woyage.app/" 
+NEXT_PUBLIC_SITE_URL="https://woyage.app/"
 
 # Stage of your website (development/production) used to determine the environment
 NEXT_PUBLIC_STAGE="development"
 
 # Get this from your Supabase project settings
-NEXT_PUBLIC_SUPABASE_ANON_KEY="..." 
+NEXT_PUBLIC_SUPABASE_ANON_KEY="..."
 
  # Get this from your Supabase project settings
 NEXT_PUBLIC_SUPABASE_URL="https://project_id.supabase.co"
@@ -180,7 +180,7 @@ NEXT_PUBLIC_SUPABASE_URL="https://project_id.supabase.co"
 
 # After setting up the domain, set the RESEND_EMAIL variable
 RESEND_EMAIL="re_..."
- 
+
 # Support email for your website, remove this if you don't plan to implement support
 NEXT_PUBLIC_SUPPORT_EMAIL="support@woyage.app"
 
@@ -196,11 +196,13 @@ SUPPORT_RECIPIENT="hey@ishaanbedi.com"
 ```
 
 3. Install the dependencies:
+
 ```bash
 pnpm install
 ```
 
 4. Run the development server:
+
 ```bash
 pnpm dev
 ```
@@ -231,7 +233,9 @@ Here's how the support mechanism works:
 This ensures that the admin is notified whenever a new support request is created, and can respond to the visitor accordingly.
 
 ## Open Source License
+
 Woyage is open-sourced under the MIT License. You can use it for personal or commercial projects.
 
 ## Contributing
+
 Issues and PRs are welcome! Feel free to contribute to the project.

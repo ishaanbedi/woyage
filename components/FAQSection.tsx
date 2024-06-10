@@ -14,16 +14,19 @@ const FAQSection = () => {
     },
     {
       question: `What kind of data does ${appName} collect?`,
-      answer: "We have a lightweight script that runs on the visitor's browser and collects information, namely, country, user agent, path, language, referrer, title, and domain. Some information is parsed from the user agent string, on the server-side, to provide more insights. No kind of personal data is collected.",
+      answer:
+        "We have a lightweight script that runs on the visitor's browser and collects information, namely, country, user agent, path, language, referrer, title, and domain. Some information is parsed from the user agent string, on the server-side, to provide more insights. No kind of personal data is collected.",
     },
     {
       question: "Do you store any cookies on my visitor's computer?",
-      answer: "No, we do not store any cookies on your visitor's computer. Authentication related cookies (that too via Supabase) are stored on your (the website owner's) computer to keep you logged in when you use this site. If you have never created an account, then no cookies are stored on your computer, and the tracking script does not store any cookies on your visitor's computer.",
+      answer:
+        "No, we do not store any cookies on your visitor's computer. Authentication related cookies (that too via Supabase) are stored on your (the website owner's) computer to keep you logged in when you use this site. If you have never created an account, then no cookies are stored on your computer, and the tracking script does not store any cookies on your visitor's computer.",
     },
     {
       question:
         "I have some issue reports and feature requests. Where can I submit them?",
-      answer: "You can submit your issue reports and feature requests on our GitHub repository. If the issue is related to some serious bug or security vulnerability, please reach out to me at hey@ishaanbedi.com.",
+      answer:
+        "You can submit your issue reports and feature requests on our GitHub repository. If the issue is related to some serious bug or security vulnerability, please reach out to me at hey@ishaanbedi.com.",
     },
     {
       question: `Is ${appName} free to use?`,

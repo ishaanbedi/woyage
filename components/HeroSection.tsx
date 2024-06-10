@@ -28,7 +28,7 @@ const HeroSection = ({ user }: { user: User | null }) => {
                   <Button>Go to Dashboard</Button>
                 </Link>
               ) : (
-                <Link href={`/signup`}>
+                <Link href={"/signup"}>
                   <Button>Get Started Now</Button>
                 </Link>
               )}

@@ -16,7 +16,7 @@ const DemoSection = () => {
                         </div>
                         <Card className="p-4">
                             <div className="relative" style={{ paddingBottom: "56.25%" }}>
-                                <iframe className="absolute inset-0 w-full h-full" src="https://player.vimeo.com/video/937103792?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"></iframe>
+                                <iframe className="absolute inset-0 w-full h-full" src="https://player.vimeo.com/video/937103792?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" />
                             </div>
                         </Card>
                     </div>

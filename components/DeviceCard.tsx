@@ -55,7 +55,7 @@ const DeviceCard = ({ data }: { data: Analytics[] }) => {
               height="20"
               data-nimg="1"
               className="mr-2.5"
-              src={`https://uaparser.js.org/images/types/${device.name.toLowerCase() === "desktop" ? "default" : device.name.toLowerCase()}.png`}
+              src={`https://uaparser.dev/images/types/${device.name.toLowerCase() === "desktop" ? "default" : device.name.toLowerCase()}.png`}
             />
           );
         },

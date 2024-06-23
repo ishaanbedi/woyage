@@ -59,7 +59,7 @@ const OSCard = ({ data }: { data: Analytics[] }) => {
               height="20"
               data-nimg="1"
               className="mr-2.5"
-              src={`https://uaparser.js.org/images/os/${os.name.toLowerCase()}.png`}
+              src={`https://uaparser.dev/images/os/${os.name.toLowerCase()}.png`}
             />
           );
         },

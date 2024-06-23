@@ -60,7 +60,7 @@ const BrowsersCard = ({ data }: { data: Analytics[] }) => {
                 height="20"
                 data-nimg="1"
                 className="mr-2.5"
-                src="https://uaparser.js.org/images/browsers/samsung%20browser.png"
+                src="https://uaparser.dev/images/browsers/samsung%20browser.png"
               />
             );
           } else {

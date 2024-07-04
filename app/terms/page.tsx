@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'Terms of Service',
 };
 const Terms = () => {
-  const lastUpdated = "19 April 2024";
+  const lastUpdated = "4 July 2024";
   const appName = process.env.NEXT_PUBLIC_SITE_NAME;
   return (
     <div className="terms-page prose max-w-xl px-2 mx-auto py-3">
@@ -66,19 +66,28 @@ const Terms = () => {
         requirement, protect the rights, property, or safety of {appName} or
         others, or prevent illegal activity.
       </p>
-      <h2>8. Termination</h2>
+      <h2>8. Age Restriction</h2>
       <p>
-        We reserve the right to terminate or suspend your account and access to
-        {appName} at any time, with or without notice. A valid reason for such a
+        Our service is intended for users aged 13 and older. We do not knowingly
+        collect personal information from anyone under 13 years old.
+        <br />
+        If you find out that a child under 13 has provided us with any personal information,
+        please contact us, and we will take steps to remove such information and
+        terminate the child's account.
+      </p>
+      <h2>9. Termination</h2>
+      <p>
+        We reserve the right to terminate or suspend your account and access
+        to {appName} at any time, with or without notice. A valid reason for such a
         termination would be provided.
       </p>
-      <h2>9. What counts as a breach of terms?</h2>
+      <h2>10. What counts as a breach of terms?</h2>
       <p>
         A breach of terms would be considered if you use {appName} for any
         illegal or unauthorized purpose, or violate any laws in your
         jurisdiction.
       </p>
-      <h2>10. Payment & Expenses</h2>
+      <h2>11. Payment & Expenses</h2>
       <p>
         {appName} is a free service and does not require any payment. However,
         we reserve the right to introduce paid features in the future.
@@ -86,7 +95,7 @@ const Terms = () => {
         As of {lastUpdated}, {appName} is a free service and does not require
         any payment at all.
       </p>
-      <h2>11. Copyright and Intellectual Property</h2>
+      <h2>12. Copyright and Intellectual Property</h2>
       <p>
         All content on {appName}, including but not limited to text, graphics,
         logos, icons, images, audio clips, digital downloads, data compilations,
@@ -96,7 +105,7 @@ const Terms = () => {
         believe that any content on this website infringes on your copyright,
         please reach out to me and I will be happy to address.
       </p>
-      <h2>12. Developer Note</h2>
+      <h2>13. Developer Note</h2>
       <p>
         Phew, that was a lot of legal jargon! Obviously, that's not my forte.
         <br />I am an indie developer and I created {appName} as a side project.

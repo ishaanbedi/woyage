@@ -3,9 +3,9 @@ export const metadata: Metadata = {
   title: 'Privacy Policy',
 };
 const Privacy = () => {
-  const lastUpdated = "19 April 2024";
+  const lastUpdated = "4 July 2024";
   const appName = process.env.NEXT_PUBLIC_SITE_NAME;
-  
+
   return (
     <div className="terms-page prose max-w-xl px-2 mx-auto py-3">
       <h1>{appName} Privacy Policy</h1>
@@ -111,7 +111,17 @@ const Privacy = () => {
         hey@ishaanbedi.com as soon as possible.
       </p>
 
-      <h2>8. Changes to This Privacy Policy</h2>
+      <h2>8. Age Restriction</h2>
+      <p>
+        Our service is intended for users aged 13 and older. We do not knowingly
+        collect personal information from anyone under 13 years old.
+        <br />
+        If you find out that a child under 13 has provided us with any personal information,
+        please contact us, and we will take steps to remove such information and
+        terminate the child's account.
+      </p>
+
+      <h2>9. Changes to This Privacy Policy</h2>
       <p>
         We may update this Privacy Policy from time to time. We will notify you
         of any changes by posting the new Privacy Policy on this page.
@@ -119,7 +129,7 @@ const Privacy = () => {
         Last updated: {lastUpdated}
       </p>
 
-      <h2>9. Contact Us</h2>
+      <h2>10. Contact Us</h2>
       <p>
         If you have any questions or concerns about this Privacy Policy, please
         contact me at hey@ishaanbedi.com

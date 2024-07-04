@@ -1,6 +1,6 @@
 import { type Metadata } from "next";
 export const metadata: Metadata = {
-  title: 'Privacy Policy',
+  title: "Privacy Policy",
 };
 const Privacy = () => {
   const lastUpdated = "4 July 2024";
@@ -116,9 +116,9 @@ const Privacy = () => {
         Our service is intended for users aged 13 and older. We do not knowingly
         collect personal information from anyone under 13 years old.
         <br />
-        If you find out that a child under 13 has provided us with any personal information,
-        please contact us, and we will take steps to remove such information and
-        terminate the child's account.
+        If you find out that a child under 13 has provided us with any personal
+        information, please contact us, and we will take steps to remove such
+        information and terminate the child's account.
       </p>
 
       <h2>9. Changes to This Privacy Policy</h2>

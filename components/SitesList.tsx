@@ -53,8 +53,8 @@ const SitesList = ({ user }: { user: User }) => {
     setLoading(true);
     const { data, error } = await supabase
       .from("site_domains")
-      .select()
-      .eq("email", user.email)
+      .select("domain_name, website_id, added, public_url")
+      .eq("owner_id", user.id)
       .order("added", { ascending: false });
 
     if (error) {
@@ -70,7 +70,8 @@ const SitesList = ({ user }: { user: User }) => {
     const { error } = await supabase
       .from("site_domains")
       .delete()
-      .eq("domain_name", domain);
+      .eq("domain_name", domain)
+      .eq("owner_id", user.id);
     if (error) {
       setLoading(false);
       console.error("error deleting site:", error);
@@ -96,7 +97,8 @@ const SitesList = ({ user }: { user: User }) => {
     const { error } = await supabase
       .from("site_domains")
       .update({ domain_name: updatedSiteDomain })
-      .eq("domain_name", selectedSiteSettings?.domain_name);
+      .eq("domain_name", selectedSiteSettings?.domain_name)
+      .eq("owner_id", user.id);
     if (error) {
       if (error.code === "23505") {
         toast.error("Site already exists.");
@@ -286,7 +288,7 @@ const SitesList = ({ user }: { user: User }) => {
                                           disabled
                                         />
                                       </span>
-                                      <span className="flex justify-between items-center">
+                                      {/* <span className="flex justify-between items-center">
                                         <span className="flex items-center space-x-1 mt-2">
                                           <Label htmlFor="tracking-code">
                                             Enable Public URL
@@ -305,7 +307,7 @@ const SitesList = ({ user }: { user: User }) => {
                                           </TooltipProvider>
                                         </span>
                                         <PublicURLSwitch site={selectedSiteSettings} />
-                                      </span>
+                                      </span> */}
                                       <span className="flex space-x-2 pt-4">
                                         <Button
                                           disabled={!updatedSiteDomain}

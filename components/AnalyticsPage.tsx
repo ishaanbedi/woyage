@@ -32,7 +32,7 @@ interface Analytics {
 const AnalyticsPage = ({
   params,
   domain,
-  public_url
+  public_url,
 }: {
   params: { slug: string };
   domain: string;

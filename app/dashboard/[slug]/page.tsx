@@ -21,11 +21,14 @@ export default async function SitesDynamicPage({
     return redirect("/login");
   } else {
     const email = user.email;
+    console.log(params.slug)
     const { data, error } = await supabase
       .from("site_domains")
-      .select("*")
+      .select("domain_name, owner_id, public_url")
       .eq("website_id", params.slug)
-      .single();
+      .eq("owner_id", user.id)
+      .single()
+    console.log(data)
     if (error) {
       return (
         <div className="min-h-[92vh] flex flex-col space-y-3 items-center justify-center">
@@ -40,26 +43,21 @@ export default async function SitesDynamicPage({
         </div>
       );
     }
-    if (data.length === 0) {
+
+    if (data.owner_id !== user.id) {
       return (
         <div>
           <h1>Not Found</h1>
-          <p>Site not found</p>
-        </div>
-      );
-    }
-    if (data.email !== email) {
-      return (
-        <div>
-          <h1>Not Found</h1>
-          <p>Site not found</p>
+          <p>
+            Looks like you do not have access to this site.
+          </p>
         </div>
       );
     }
     return (
       <div>
         <Navbar user={user} />
-        <AnalyticsPage domain={data.domain_name} params={params} public_url={data.public_url} />  
+        <AnalyticsPage domain={data.domain_name} params={params} public_url={data.public_url} />
       </div>
     );
   }

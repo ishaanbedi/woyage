@@ -16,7 +16,7 @@ import { createClient } from "@/utils/supabase/client";
 import { type User } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/toaster";
-const NewSiteDialog = ({ user, fetchSites } : { user: User, fetchSites: () => void }) => {
+const NewSiteDialog = ({ user, fetchSites }: { user: User, fetchSites: () => void }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [domainName, setDomainName] = useState("");
   const supabase = createClient();
@@ -34,11 +34,12 @@ const NewSiteDialog = ({ user, fetchSites } : { user: User, fetchSites: () => vo
     }
     const { error } = await supabase
       .from("site_domains")
-      .insert([{ email: user.email, domain_name: domain }]);
+      .insert([{ domain_name: domain }]);
     if (error) {
       if (error.code === "23505") {
         toast.error("Site already exists.");
       } else {
+        console.log(`Error adding site: ${error.message}`);
         toast.error("Failed to add site");
       }
       return;

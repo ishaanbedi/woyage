@@ -38,7 +38,7 @@ const PublicURLSwitch = ({ site }: {
                     }
                 }}
             />
-            <div>
+            {/* <div>
                 {isChecked ? (
                     <Button variant={"ghost"} size={"icon"} onClick={() => {
                         navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_SITE_URL}/shared/${site!.website_id}`);
@@ -61,7 +61,7 @@ const PublicURLSwitch = ({ site }: {
                     </TooltipProvider>
 
                 )}
-            </div>
+            </div> */}
         </div>
     );
 }

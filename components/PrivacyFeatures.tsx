@@ -1,16 +1,35 @@
-import { CookieIcon, RocketIcon, StopwatchIcon } from "@radix-ui/react-icons";
-import {
-  GitBranch,
-  GlobeLock,
-  HeartHandshake,
-  LanguagesIcon,
-  MonitorSmartphoneIcon,
-  PinIcon,
-  TrafficCone,
-  UsersRound,
-} from "lucide-react";
+"use client";
+import { CookieIcon, RocketIcon } from "@radix-ui/react-icons";
+import { GlobeLock, HeartHandshake } from "lucide-react";
 import { Card } from "./ui/card";
+import { motion, useInView } from "motion/react";
+import { useRef } from "react";
+
 export function PrivacyFeatures() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { 
+    once: true,
+    amount: 0.5,
+    margin: "-100px"
+  });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
   const features: {
     title: string;
     description: string;
@@ -36,9 +55,14 @@ export function PrivacyFeatures() {
     },
   ];
   return (
-    <section className="w-full my-16">
+    <section className="w-full my-16" ref={ref}>
       <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-2 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-center justify-center space-y-2 text-center"
+        >
           <div className="space-y-2 flex flex-col justify-center items-center">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center">
               {process.env.NEXT_PUBLIC_SITE_NAME}{" "}
@@ -50,27 +74,33 @@ export function PrivacyFeatures() {
               kept private.
             </p>
           </div>
-        </div>
-        <div className="mx-auto grid max-w-3xl items-start min-[600px]:grid-cols-3 py-12 md:max-w-5xl lg:grid-cols-3 grid-cols-1 gap-2 lg:max-w-6xl">
+        </motion.div>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="mx-auto grid max-w-3xl items-start min-[600px]:grid-cols-3 py-12 md:max-w-5xl lg:grid-cols-3 grid-cols-1 gap-2 lg:max-w-6xl"
+        >
           {features.map((feature, index) => (
-            <Card
-              key={index}
-              className="flex flex-col items-center lg:md:sm:justify-center justify-normal space-y-2 p-3 min-h-52 shadow-none hover:border hover:shadow"
-            >
-              <div className="flex justify-center items-center flex-col">
-                <div className="flex items-center justify-center w-16 h-16 p-4 text-white bg-primary rounded-full">
-                  {feature.icon}
+            <motion.div key={index} variants={itemVariants}>
+              <Card
+                className="flex flex-col items-center lg:md:sm:justify-center justify-normal space-y-2 p-3 min-h-52 shadow-none hover:border hover:shadow"
+              >
+                <div className="flex justify-center items-center flex-col">
+                  <div className="flex items-center justify-center w-16 h-16 p-4 text-white bg-primary rounded-full">
+                    {feature.icon}
+                  </div>
+                  <h2 className="lg:md:sm:text-xl font-bold text-center">
+                    {feature.title}
+                  </h2>
                 </div>
-                <h2 className="lg:md:sm:text-xl font-bold text-center">
-                  {feature.title}
-                </h2>
-              </div>
-              <p className="text-primary/50 lg:md:sm:text-[1rem] text-sm text-center">
-                {feature.description}
-              </p>
-            </Card>
+                <p className="text-primary/50 lg:md:sm:text-[1rem] text-sm text-center">
+                  {feature.description}
+                </p>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

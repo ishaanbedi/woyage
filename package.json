@@ -53,6 +53,7 @@
     "is-valid-domain": "^0.1.6",
     "lucide-react": "^0.368.0",
     "moment-timezone": "^0.5.45",
+    "motion": "^11.15.0",
     "next": "latest",
     "next-themes": "^0.3.0",
     "nextjs-cors": "^2.2.0",

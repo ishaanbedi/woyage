@@ -24,8 +24,6 @@ export default async function Component() {
         <Divider />
         <Steps user={user} />
         <Divider />
-        <DemoSection />
-        <Divider />
         <Stack user={user} />
         <Divider />
         <FAQSection />

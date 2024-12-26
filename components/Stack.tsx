@@ -1,7 +1,9 @@
+"use client";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { type User } from "@supabase/supabase-js";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import { motion } from "motion/react";
 
 const Stack = ({ user }: { user: User | null }) => {
   const stack = [
@@ -42,8 +44,40 @@ const Stack = ({ user }: { user: User | null }) => {
       description: "For sending authentication-related emails.",
     },
   ];
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.3 }
+    }
+  };
+
   return (
-    <section className="w-full py-12">
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ 
+        once: true, 
+        amount: 0.4,
+        margin: "-100px"
+      }}
+      variants={containerVariants}
+      className="w-full py-12"
+    >
       <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
         <div className="space-y-3">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
@@ -58,17 +92,18 @@ const Stack = ({ user }: { user: User | null }) => {
         <div className="max-w-3xl mx-auto">
           <div className="grid gap-4 mt-8 lg:md:sm:grid-cols-3 grid-cols-2">
             {stack.map((item, index) => (
-              <Link
-                key={index}
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center justify-center p-4 space-y-2 transition-transform transform rounded-lg shadow-md hover:scale-[1.025]"
-              >
-                <img src={item.logo} alt={item.name} className="w-12 h-12" />
-                <h3 className="text-lg font-semibold">{item.name}</h3>
-                <p className="text-sm text-gray-500">{item.description}</p>
-              </Link>
+              <motion.div key={index} variants={itemVariants}>
+                <Link
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center justify-center p-4 space-y-2 transition-transform transform rounded-lg shadow-md hover:scale-[1.025]"
+                >
+                  <img src={item.logo} alt={item.name} className="w-12 h-12" />
+                  <h3 className="text-lg font-semibold">{item.name}</h3>
+                  <p className="text-sm text-gray-500">{item.description}</p>
+                </Link>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -101,7 +136,7 @@ const Stack = ({ user }: { user: User | null }) => {
           </Button>
         </Link>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

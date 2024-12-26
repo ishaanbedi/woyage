@@ -8,14 +8,17 @@ import { useRef } from "react";
 
 export function OpenSourced() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { 
+  const isInView = useInView(ref, {
     once: true,
     amount: 0.6,
-    margin: "-50px"
+    margin: "-50px",
   });
 
   return (
-    <section className="w-full lg:md:sm:min-h-[60vh] min-h-[35vh] flex flex-col justify-center items-center" ref={ref}>
+    <section
+      className="w-full lg:md:sm:min-h-[60vh] min-h-[35vh] flex flex-col justify-center items-center"
+      ref={ref}
+    >
       <div className="container px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

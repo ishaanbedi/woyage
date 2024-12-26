@@ -15,8 +15,8 @@ import { useRef } from "react";
 
 export function Features({ home }: { home: boolean }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { 
-    once: true, 
+  const isInView = useInView(ref, {
+    once: true,
     amount: 0.8,
   });
 
@@ -25,51 +25,51 @@ export function Features({ home }: { home: boolean }) {
     description: string;
     icon: React.ReactNode;
   }[] = [
-      {
-        title: "Visitors",
-        description:
-          "Track and analyze of your visitors and their behavior, in real-time.",
-        icon: <UsersRound className="w-12 h-12" />,
-      },
-      {
-        title: "Location",
-        description:
-          "See where your visitors are coming from, from all around the world.",
-        icon: <PinIcon className="w-12 h-12" />,
-      },
-      {
-        title: "Languages",
-        description:
-          "Analyze the languages your visitors speak, to tailor your content.",
-        icon: <LanguagesIcon className="w-12 h-12" />,
-      },
-      {
-        title: "Real-Time Data",
-        description: "See what's happening in real-time, as it happens.",
-        icon: <StopwatchIcon className="w-12 h-12" />,
-      },
-      {
-        title: "Traffic Sources",
-        description:
-          "Analyze referral, direct, and search traffic sources to your website.",
-        icon: <TrafficCone className="w-12 h-12" />,
-      },
-      {
-        title: "Device Analytics",
-        description:
-          "Analyze visitor's devices, browsers, and operating systems.",
-        icon: <MonitorSmartphoneIcon className="w-12 h-12" />,
-      },
-    ];
+    {
+      title: "Visitors",
+      description:
+        "Track and analyze of your visitors and their behavior, in real-time.",
+      icon: <UsersRound className="w-12 h-12" />,
+    },
+    {
+      title: "Location",
+      description:
+        "See where your visitors are coming from, from all around the world.",
+      icon: <PinIcon className="w-12 h-12" />,
+    },
+    {
+      title: "Languages",
+      description:
+        "Analyze the languages your visitors speak, to tailor your content.",
+      icon: <LanguagesIcon className="w-12 h-12" />,
+    },
+    {
+      title: "Real-Time Data",
+      description: "See what's happening in real-time, as it happens.",
+      icon: <StopwatchIcon className="w-12 h-12" />,
+    },
+    {
+      title: "Traffic Sources",
+      description:
+        "Analyze referral, direct, and search traffic sources to your website.",
+      icon: <TrafficCone className="w-12 h-12" />,
+    },
+    {
+      title: "Device Analytics",
+      description:
+        "Analyze visitor's devices, browsers, and operating systems.",
+      icon: <MonitorSmartphoneIcon className="w-12 h-12" />,
+    },
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const cardVariants = {
@@ -78,9 +78,9 @@ export function Features({ home }: { home: boolean }) {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5
-      }
-    }
+        duration: 0.5,
+      },
+    },
   };
 
   return (
@@ -114,9 +114,7 @@ export function Features({ home }: { home: boolean }) {
               variants={cardVariants}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <Card
-                className="flex flex-col items-center lg:md:sm:justify-center justify-normal space-y-2 p-3 min-h-52 shadow-none hover:border hover:shadow"
-              >
+              <Card className="flex flex-col items-center lg:md:sm:justify-center justify-normal space-y-2 p-3 min-h-52 shadow-none hover:border hover:shadow">
                 <div className="flex justify-center items-center flex-col">
                   <div className="flex items-center justify-center w-16 h-16 p-4 text-white bg-primary rounded-full">
                     {feature.icon}

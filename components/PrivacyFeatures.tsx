@@ -7,18 +7,18 @@ import { useRef } from "react";
 
 export function PrivacyFeatures() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { 
+  const isInView = useInView(ref, {
     once: true,
     amount: 0.5,
-    margin: "-100px"
+    margin: "-100px",
   });
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
+      transition: { staggerChildren: 0.1 },
+    },
   };
 
   const itemVariants = {
@@ -26,8 +26,8 @@ export function PrivacyFeatures() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 }
-    }
+      transition: { duration: 0.5 },
+    },
   };
 
   const features: {
@@ -83,9 +83,7 @@ export function PrivacyFeatures() {
         >
           {features.map((feature, index) => (
             <motion.div key={index} variants={itemVariants}>
-              <Card
-                className="flex flex-col items-center lg:md:sm:justify-center justify-normal space-y-2 p-3 min-h-52 shadow-none hover:border hover:shadow"
-              >
+              <Card className="flex flex-col items-center lg:md:sm:justify-center justify-normal space-y-2 p-3 min-h-52 shadow-none hover:border hover:shadow">
                 <div className="flex justify-center items-center flex-col">
                   <div className="flex items-center justify-center w-16 h-16 p-4 text-white bg-primary rounded-full">
                     {feature.icon}

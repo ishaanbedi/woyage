@@ -1,4 +1,10 @@
-![og-image](https://github.com/ishaanbedi/woyage/assets/39641326/9a1b8e7f-4150-4608-816b-59c02359c390)
+> ⚠️ **Archived**  
+> This project is no longer actively maintained.  
+> The website **woyage.app is no longer active**.  
+> Feel free to **fork** it or **download and use** it as you like!  
+> For any questions, reach out at **woyage@ishaanbedi.com**
+
+---
 
 Woyage is an open-sourced website analytics tool designed to track websites. With Woyage, you can gain a deeper understanding of your audience, their behavior, and the performance of your website.
 

@@ -28,7 +28,11 @@ export default async function Component() {
         <Divider />
         <FAQSection />
       </main>
-      <Script defer src="https://woyage.app/track.js" data-website-id="187fcd8e-96dc-42b5-9fa0-a17243a7bbd8"/>
+      <Script
+        defer
+        src="https://woyage.app/track.js"
+        data-website-id="187fcd8e-96dc-42b5-9fa0-a17243a7bbd8"
+      />
     </div>
   );
 }

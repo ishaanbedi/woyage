@@ -4,7 +4,7 @@ const defaultUrl = process.env.VERCEL_URL
 
 import { type Metadata } from "next";
 export const metadata: Metadata = {
-  title: 'Terms of Service',
+  title: "Terms of Service",
 };
 const Terms = () => {
   const lastUpdated = "4 July 2024";
@@ -71,14 +71,14 @@ const Terms = () => {
         Our service is intended for users aged 13 and older. We do not knowingly
         collect personal information from anyone under 13 years old.
         <br />
-        If you find out that a child under 13 has provided us with any personal information,
-        please contact us, and we will take steps to remove such information and
-        terminate the child's account.
+        If you find out that a child under 13 has provided us with any personal
+        information, please contact us, and we will take steps to remove such
+        information and terminate the child's account.
       </p>
       <h2>9. Termination</h2>
       <p>
-        We reserve the right to terminate or suspend your account and access
-        to {appName} at any time, with or without notice. A valid reason for such a
+        We reserve the right to terminate or suspend your account and access to{" "}
+        {appName} at any time, with or without notice. A valid reason for such a
         termination would be provided.
       </p>
       <h2>10. What counts as a breach of terms?</h2>

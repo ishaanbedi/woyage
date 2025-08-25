@@ -52,9 +52,9 @@ const Stack = ({ user }: { user: User | null }) => {
       y: 0,
       transition: {
         duration: 0.5,
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
@@ -62,18 +62,18 @@ const Stack = ({ user }: { user: User | null }) => {
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.3 }
-    }
+      transition: { duration: 0.3 },
+    },
   };
 
   return (
     <motion.section
       initial="hidden"
       whileInView="visible"
-      viewport={{ 
-        once: true, 
+      viewport={{
+        once: true,
         amount: 0.4,
-        margin: "-100px"
+        margin: "-100px",
       }}
       variants={containerVariants}
       className="w-full py-12"
@@ -117,10 +117,7 @@ const Stack = ({ user }: { user: User | null }) => {
               <Button>Get Started Now</Button>
             </Link>
           )}
-          <Link
-            href="https://www.github.com/ishaanbedi/woyage"
-            target="_blank"
-          >
+          <Link href="https://www.github.com/ishaanbedi/woyage" target="_blank">
             <Button variant="outline">
               <GitHubLogoIcon className="mr-2 h-4 w-4" /> Source Code
             </Button>

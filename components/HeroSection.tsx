@@ -53,8 +53,14 @@ const HeroSection = ({ user }: { user: User | null }) => {
                 </motion.div>
               )}
               <motion.div>
-                <Link href="https://www.github.com/ishaanbedi/woyage" target="_blank">
-                  <Button variant={"outline"} className="flex justify-center items-center">
+                <Link
+                  href="https://www.github.com/ishaanbedi/woyage"
+                  target="_blank"
+                >
+                  <Button
+                    variant={"outline"}
+                    className="flex justify-center items-center"
+                  >
                     <GitHubLogoIcon className="mr-2 h-4 w-4" />
                     <span>Source Code</span>
                   </Button>

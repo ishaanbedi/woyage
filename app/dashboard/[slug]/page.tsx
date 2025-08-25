@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { type Metadata } from "next";
 export const metadata: Metadata = {
-  title: 'Analytics',
+  title: "Analytics",
 };
 export default async function SitesDynamicPage({
   params,
@@ -21,14 +21,14 @@ export default async function SitesDynamicPage({
     return redirect("/login");
   } else {
     const email = user.email;
-    console.log(params.slug)
+    console.log(params.slug);
     const { data, error } = await supabase
       .from("site_domains")
       .select("domain_name, owner_id, public_url")
       .eq("website_id", params.slug)
       .eq("owner_id", user.id)
-      .single()
-    console.log(data)
+      .single();
+    console.log(data);
     if (error) {
       return (
         <div className="min-h-[92vh] flex flex-col space-y-3 items-center justify-center">
@@ -48,16 +48,18 @@ export default async function SitesDynamicPage({
       return (
         <div>
           <h1>Not Found</h1>
-          <p>
-            Looks like you do not have access to this site.
-          </p>
+          <p>Looks like you do not have access to this site.</p>
         </div>
       );
     }
     return (
       <div>
         <Navbar user={user} />
-        <AnalyticsPage domain={data.domain_name} params={params} public_url={data.public_url} />
+        <AnalyticsPage
+          domain={data.domain_name}
+          params={params}
+          public_url={data.public_url}
+        />
       </div>
     );
   }

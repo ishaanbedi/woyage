@@ -1,3 +1,11 @@
+UPDATE: As of March 2026, I am archiving this project due to a lack of time on my side to maintain it. 
+
+I recommend alternatives such as [umami](https://umami.is/) or [onedollarstats](https://onedollarstats.com/).
+
+I have a backup of the data. If you want to access your records or have them deleted, please reach out to me.
+
+---
+
 Woyage is an open-sourced website analytics tool designed to track websites. With Woyage, you can gain a deeper understanding of your audience, their behavior, and the performance of your website.
 
 ## Features

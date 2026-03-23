@@ -31,28 +31,28 @@ const Steps = ({ user }: { user: User | null }) => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
-      }
-    }
+        staggerChildren: 0.2,
+      },
+    },
   };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
-      opacity: 1
-    }
+      opacity: 1,
+    },
   };
 
   const lineVariants = {
     hidden: { scaleX: 0 },
-    visible: { 
+    visible: {
       scaleX: 1,
-      transition: { 
+      transition: {
         duration: 0.8,
-        ease: "easeInOut"
-      }
-    }
+        ease: "easeInOut",
+      },
+    },
   };
 
   return (
@@ -71,7 +71,7 @@ const Steps = ({ user }: { user: User | null }) => {
         </motion.div>
         <div>
           <div className="relative">
-            <motion.div 
+            <motion.div
               className="absolute inset-x-0 top-1/2 block h-0.5 -translate-y-1/2 rounded-lg bg-primary"
               variants={lineVariants}
               initial="hidden"
